@@ -1,0 +1,188 @@
+// Grid
+@mixin grid() {
+  display: flex;
+  flex-wrap: wrap;
+  // width: 100%;
+}
+
+// Row
+@mixin grid-row() {
+  flex-direction: row;
+}
+
+@mixin grid-row-reverse() {
+  flex-direction: row-reverse;
+}
+
+@mixin grid-column() {
+  flex-direction: column;
+}
+
+@mixin grid-column-reverse() {
+  flex-direction: column-reverse;
+}
+
+// Wrap
+@mixin grid-wrap() {
+  flex-wrap: wrap;
+}
+
+// Wrap Reverse
+@mixin grid-wrap-reverse() {
+  flex-wrap: wrap-reverse;
+}
+
+// Nowrap
+@mixin grid-nowrap() {
+  flex-wrap: nowrap;
+}
+
+// Align
+// Left
+@mixin grid-left() {
+  justify-content: flex-start;
+}
+
+// Right
+@mixin grid-right() {
+  justify-content: flex-end;
+}
+
+// Center
+@mixin grid-center() {
+  justify-content: center;
+}
+
+// Space Between
+@mixin grid-between() {
+  justify-content: space-between;
+}
+
+// Space Around
+@mixin grid-around() {
+  justify-content: space-around;
+}
+
+// $column Align
+// Top
+@mixin grid-va-top() {
+  align-items: flex-start;
+}
+
+// Bottom
+@mixin grid-va-bottom() {
+  align-items: flex-end;
+}
+
+// Center
+@mixin grid-va-center() {
+  align-items: center;
+}
+
+// Baseline
+@mixin grid-va-baseline() {
+  align-content: baseline;
+}
+
+// Stretch
+@mixin grid-va-stretch() {
+  align-items: stretch;
+}
+
+// Content Align
+// Stretch
+@mixin grid-ca-stretch() {
+  align-content: stretch;
+}
+
+// Top
+@mixin grid-ca-top() {
+  align-content: flex-start;
+}
+
+// Bottom
+@mixin grid-ca-bottom() {
+  align-content: flex-end;
+}
+
+// Center
+@mixin grid-ca-center() {
+  align-content: center;
+}
+
+// Space Around
+@mixin grid-ca-space-around() {
+  align-content: space-around;
+}
+
+// Space Between
+@mixin grid-ca-space-between() {
+  align-content: space-between;
+}
+
+@mixin basis($basis) {
+  flex-basis: $basis;
+}
+
+/* Definizione di classi composizione di proprietà flex */
+
+.sdk-flex-row {
+  @include grid;
+  @include grid-row;
+}
+
+.sdk-flex-column {
+  @include grid;
+  @include grid-column;
+}
+
+.sdk-flex-wrap {
+  @include grid;
+  @include grid-wrap;
+}
+
+.sdk-flex-nowrap {
+  @include grid;
+  @include grid-nowrap;
+}
+
+.sdk-flex-left {
+  @include grid;
+  @include grid-left;
+}
+
+.sdk-flex-center {
+  @include grid;
+  @include grid-center;
+}
+
+.sdk-flex-around {
+  @include grid;
+  @include grid-around;
+}
+
+.sdk-flex-right {
+  @include grid;
+  @include grid-right;
+}
+
+.sdk-flex-va-stretch {
+  @include grid;
+  @include grid-va-stretch;
+}
+
+.sdk-flex-va-center {
+  @include grid;
+  @include grid-va-center;
+}
+
+@mixin sdk-sticky() {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+@mixin flex() {
+  display: flex;
+}

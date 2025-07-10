@@ -1,0 +1,39 @@
+.breadcrumb-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+    min-height: 40px;
+    max-height: 50px;
+}
+
+.breadcbrumb-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    min-width: 50px;
+
+    >div {
+        margin: 0 0.5rem;
+    }
+}
+
+.breadcbrumb-item:hover {
+    border: 2px solid #DDD;
+}
+
+.breadcrumb-disabled {
+    .breadcbrumb-item {
+        cursor: default;
+    }
+
+    .breadcbrumb-item:hover {
+        border: 0;
+    }
+}

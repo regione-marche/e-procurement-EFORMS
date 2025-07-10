@@ -1,0 +1,24 @@
+# Server
+server:
+  port: ${SERVER_PORT:8181}
+
+# Spring
+spring:
+  webflux:
+    base-path: ${CONTEXT_PATH:/rest/m-eforms-ms}
+
+# Enable Swagger UI in dev
+springdoc:
+  api-docs:
+    enabled: true
+
+logging:
+  level:
+    it:
+      appaltiecontratti: ${LOG_LEVEL:DEBUG}
+
+application:
+  eforms:
+    sdk:
+      # Path to eForms SDK
+      path: @project.basedir@/sdk/eforms-sdk

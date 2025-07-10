@@ -1,0 +1,115 @@
+@import 'vars';
+
+.notice-element-container {
+  .input-label {
+    padding: 0 0.25rem;
+    > span {
+      font-size: 0.8rem;
+    }
+  }
+
+  &.notice-content-hidden {
+    display: none;
+  }
+
+  .header {
+    h2.label {
+      font-size: 1.75rem;
+      font-weight: 500;
+    }
+    h3.label {
+      font-size: 1.5rem;
+    }
+    h4.label,
+    h5.label,
+    h6.label {
+      font-size: 1.25rem;
+    }
+
+    // Es. [GR-Buyer]
+    .label > span {
+      font-size: 0.75rem;
+    }
+  }
+
+  .p-accordion .p-accordion-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  a.p-accordion-header-link {
+    text-decoration: none;
+    gap: 0.1rem;
+    color: map-get($blue-colors, baseBlue);
+
+    &:hover {
+      color: map-get($blue-colors, risaltoBlue);
+      border-color: map-get($blue-colors, layoutBorder);
+    }
+  }
+
+  select.form-control.combobox-element {
+    appearance: auto;
+  }
+
+  p-treeselectcustom {
+    width: 100%;
+    .form-control {
+      display: inline-flex;
+    }
+  }
+
+  // Form Control (EFORMS-80)
+  .form-control:disabled {
+    background-color: transparent;
+    border: none;
+  }
+
+  textarea.form-control:disabled {
+    resize: none;
+  }
+
+  select.form-control:disabled.combobox-element {
+    appearance: unset;
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Safari, Chrome, Opera */
+    -webkit-appearance: none;
+  }
+
+  p-treeselectcustom .form-control.p-disabled {
+    opacity: 1 !important;
+    border: 0;
+    .p-treeselect-trigger {
+      display: none;
+    }
+  }
+
+  p-dropdown {
+    .p-dropdown.p-component.p-inputwrapper.p-disabled {
+      border: 0;
+      opacity: 1 !important;
+      .p-dropdown-trigger {
+        display: none;
+      }
+    }
+  }
+}
+
+// app-accordion-item.active-item .accordion-item {
+//   background-color: #f0f0f0 !important;
+// }
+
+app-accordion-item.active-item .p-ripple.p-element.accordion-title {
+  background-color: #f0f0f0 !important;
+}
+
+// .clickable-item {
+//   background-color: #f0f0f0 !important;
+// }
+
+// EFORMS-80 (non piu' richiesta, la tengo nel caso si decida di reintrodurla)
+// app-dynamic-form-element:not(:last-child).input-field:not(.style-hidden) {
+//   display: block;
+//   border-bottom: 1px solid $enotice-form-field-divider;
+// }

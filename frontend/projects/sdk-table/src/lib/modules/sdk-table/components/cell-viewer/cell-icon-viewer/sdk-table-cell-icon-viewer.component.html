@@ -1,0 +1,3 @@
+<i *ngIf="selectedIcon != null && selectedIcon.label == null" [class]="iconClass(selectedIcon.icon, selectedIcon.classes)"></i>
+<i *ngIf="selectedIcon != null && selectedIcon.label != null" [class]="iconClass(selectedIcon.icon, selectedIcon.classes)"
+    [title]="selectedIcon.label"></i>

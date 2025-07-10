@@ -1,0 +1,19 @@
+{
+  "name": "integration-loader-page",
+  "title": "TITLE.INTEGRATION-LOADER-PAGE",
+  "layout": "home-layout",
+  "appName": "app-eforms-notice-editor",
+  "styleUrls": [],
+  "settings": {
+    "page": "integration-loader-page"
+  },
+  "sections": [
+    {
+      "id": "integration-loader-page-content-root-section",
+      "selector": "integration-loader-section",
+      "description": "Componente per il caricamento del tracciato di integrazione con altri applicativi (es. Appalti)",
+      "classNames": "index-section",
+      "settings": {}
+    }
+  ]
+}

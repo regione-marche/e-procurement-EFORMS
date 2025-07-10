@@ -1,0 +1,83 @@
+{
+  "name": "base-menu-tabs-layout",
+  "styleUrls": [],
+  "settings": {
+    "layout": "base-menu-tabs-layout"
+  },
+  "sections": [
+    {
+      "id": "base-menu-tabs-layout-root-section",
+      "selector": "sdk-layout-section",
+      "description": "Contenitore radice di tutte le sezioni del layout",
+      "classNames": "sdk-layout-root-section base-layout",
+      "settings": {
+        "section": "base-menu-tabs-layout-root-section"
+      }
+    },
+    {
+      "id": "base-menu-tabs-layout-header-top-section",
+      "parentId": "base-menu-tabs-layout-root-section",
+      "selector": "sdk-layout-header-top",
+      "description": "Sezione di layout per la parte alta dell'intestazione",
+      "classNames": "sdk-layout-header-top-section",
+      "settings": {
+        "logo": "assets/images/app/logo_aec.svg",
+        "logoDescription": "LOGO-DESCRIPTION"
+      }
+    },
+    {
+      "id": "base-menu-tabs-layout-container-section",
+      "parentId": "base-menu-tabs-layout-root-section",
+      "selector": "sdk-layout-section",
+      "description": "Contenitore per le sezioni del contenuto",
+      "classNames": "sdk-layout-container-section base-layout",
+      "settings": {
+        "section": "base-menu-tabs-layout-container-section"
+      }
+    },
+    {
+      "id": "base-menu-tabs-layout-breadcrumbs-section",
+      "parentId": "base-menu-tabs-layout-container-section",
+      "selector": "sdk-layout-breadcrumbs",
+      "description": "Contenitore per le briciole di pane",
+      "classNames": "sdk-layout-breadcrumbs-section",
+      "settings": {
+        "section": "base-menu-tabs-layout-breadcrumbs-section",
+        "collapseEnabled": true
+      }
+    },
+    {
+      "id": "base-menu-tabs-layout-container2-section",
+      "parentId": "base-menu-tabs-layout-container-section",
+      "selector": "sdk-layout-section",
+      "description": "Contenitore per le sezioni del contenuto 2",
+      "classNames": "sdk-layout-container2-section base-layout",
+      "settings": {
+        "section": "base-menu-tabs-layout-container2-section"
+      }
+    },
+    {
+      "id": "base-side-menu-tabs-layout-menu-tabs-section",
+      "parentId": "base-menu-tabs-layout-container2-section",
+      "selector": "layout-side-menu-tabs",
+      "description": "Contenitore per il side menu tabs",
+      "classNames": "layout-side-menu-tabs-section",
+      "settings": {
+        "section": "base-side-menu-tabs-layout-menu-tabs-section",
+        "sideMenu": {
+          "vertical": true
+        }
+      }
+    },
+    {
+      "id": "base-menu-tabs-layout-content-section",
+      "parentId": "base-menu-tabs-layout-container2-section",
+      "selector": "sdk-layout-content",
+      "description": "Contenitore per il contenuto di pagina",
+      "classNames": "sdk-layout-content-section element-tabs-container main-content with-tabs",
+      "settings": {
+        "section": "base-menu-tabs-layout-content-section"
+      }
+    }
+  ]
+}

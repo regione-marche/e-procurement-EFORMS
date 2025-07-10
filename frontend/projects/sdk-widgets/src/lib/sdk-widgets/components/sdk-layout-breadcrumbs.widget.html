@@ -1,0 +1,13 @@
+<div [class]="getClasses()">
+    <div class="breadcrumb-collapse-icon" *ngIf="config.collapseEnabled == true && !menuTabsState">
+        <i class="activator mgg-icons-action-hide-sidebar-left"
+            *ngIf="(breadcrumbsCollapseService.collapseObservable$ | async) == false" sdkClick
+            (aClick)="breadcrumbsCollapseService.collapse()" tabindex="0" role="navigation"
+            [attr.aria-label]="'BUTTON.COLLAPSE' | translate"></i>
+        <i class="activator mgg-icons-action-show-sidebar-left"
+            *ngIf="(breadcrumbsCollapseService.collapseObservable$ | async) == true" sdkClick
+            (aClick)="breadcrumbsCollapseService.expand()" tabindex="0" role="navigation"
+            [attr.aria-label]="'BUTTON.EXPAND' | translate"></i>
+    </div>
+    <sdk-breadcrumb [config]="configSub" (output)="onBreadcrumbClick($event)"></sdk-breadcrumb>
+</div>

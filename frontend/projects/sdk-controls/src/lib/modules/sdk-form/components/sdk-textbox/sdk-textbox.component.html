@@ -1,0 +1,41 @@
+<div *ngIf="isReady" class="sdk-input sdk-textbox">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label *ngIf="config.label" [class]="getClasses(true, 'textbox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+      <div *ngIf="config.showLabelHelp" class="help-label-icon" [title]="config.helpLabelDescription | translate"
+        [attr.aria-label]="config.helpLabelDescription | translate">
+        <i class="mgg-icons-help"></i>
+      </div>
+    </label>
+    <input *ngIf="config.unlockable !== true" type="text" [id]="componentRandomId" pInputText
+      [class]="getClasses(false, 'textbox-field', config.fieldClasses)"
+      [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [(ngModel)]="data"
+      (ngModelChange)="manageModelChange($event)" [maxlength]="config.maxLength"
+      [placeholder]="config.placeholder != null ? config.placeholder : ''" />
+    <div *ngIf="config.unlockable === true" class="textbox-group">
+      <input type="text" [id]="componentRandomId" pInputText
+        [class]="getClasses(false, 'textbox-field-in-group', config.fieldClasses)" [disabled]="config.disabled"
+        [(ngModel)]="data" (ngModelChange)="manageModelChange($event)" [maxlength]="config.maxLength"
+        [placeholder]="config.placeholder != null ? config.placeholder : ''" />
+      <p-confirmPopup *ngIf="config.disabled == true && config.unlockable == true"></p-confirmPopup>
+      <button *ngIf="config.disabled == true && config.unlockable == true" pButton class="unlock-button"
+        icon="mgg-icons-action-unlock" (click)="confirmUnlock($event)" [title]="'BUTTONS.UNLOCK-FIELD' | translate"
+        [attr.aria-label]="'BUTTONS.UNLOCK-FIELD' | translate"></button>
+    </div>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+
+  <div class="form-row" *ngIf="config.description != null">
+    <label [class]="getClasses(true, 'textbox-label', config.labelClasses, config.infoBox)"></label>
+    <div class="textbox-field">{{ config.description | translate }}</div>
+  </div>
+</div>

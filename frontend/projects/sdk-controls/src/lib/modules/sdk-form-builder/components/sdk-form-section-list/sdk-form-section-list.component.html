@@ -1,0 +1,38 @@
+<div [class]="getClasses(config)" [ngClass]="{'sdk-form-section-list': true, 'hidden': allFieldsHidden === true}"
+  *ngIf="config.visible !== false">
+  <div class="section-header" *ngIf="config.label">
+    <div class="title">{{config.label | translate:config.labelParams }}</div>
+    <div class="expand-div" *ngIf="config.collapse == true" sdkClick (aClick)="collapse()" tabindex="0" role="group">
+      <i *ngIf="collapsed==false" class="mgg-icons-paginator-next expand-icon"></i>
+      <i *ngIf="collapsed==true" class="mgg-icons-navigation-show expand-icon"></i>
+    </div>
+  </div>
+  <div class="section-content" #sectionContent>
+    <div *ngIf="config.description != null" class="section-description-container">
+      <div class="section-description">{{config.description | translate}}</div>
+    </div>
+    <div *ngIf="config.subDescription != null" class="section-description-container">
+      <div class="section-description">{{config.subDescription | translate}}</div>
+    </div>
+    <div class="extra-param-link-show" *ngIf="extraParam">
+      <div #extraparamSection>
+        <a *ngIf="extraParamCollapsed" href="javascript:void(0);" sdkClick (aClick)="showExtraparams()" tabindex="0"
+          role="group">{{'FORM_SECTION.SHOW_MORE' | translate}}</a>
+        <div [innerHTML]="extraParamText"></div>
+        <a *ngIf="!extraParamCollapsed" href="javascript:void(0);" sdkClick (aClick)="hideExtraparams()" tabindex="0"
+          role="group">{{'FORM_SECTION.SHOW_LESS' | translate}}</a>
+      </div>
+    </div>
+    <div *ngFor="let item of config.fieldSections; trackBy: trackByCode; let i = index"
+      [class]="getSectionClasses(config)">
+      <sdk-form-section *ngIf="item.visible !== false" [config]="getFormSectionObs(item)" [data]="getDataSubject(item)"
+        [inputBaseFilter]="getInputBaseFilterSubject(item)" (output)="manageFormSectionUpdate($event, i)"
+        (outputClick)="manageItemClick($event, i)" (outputField)="manageOutputField($event, i)"
+        (addPanel)="manageAddPanel($event)" (removePanel)="manageRemovePanel($event)"
+        (outputInfoBox)="manageOutputInfoBox($event)" (outputBaseFilter)="manageOutputBaseFilter($event, i)"
+        (outputAdvancedModalClose)="manageOutputAdvancedModalClose($event)" (onBlur)="manageOnBlur($event)"
+        (onFocus)="manageOnFocus($event)">
+      </sdk-form-section>
+    </div>
+  </div>
+</div>

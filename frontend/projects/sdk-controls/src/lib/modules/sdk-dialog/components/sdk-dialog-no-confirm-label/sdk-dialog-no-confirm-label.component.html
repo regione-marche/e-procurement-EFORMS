@@ -1,0 +1,22 @@
+<div tabindex="0" role="dialog" #dialog>
+    <p-confirmDialog [key]="config?.dialogId || 'dialogKey'" [acceptVisible]="!!config?.acceptLabel"
+        [rejectVisible]="!!config?.rejectLabel">
+        <ng-template pTemplate="message" let-message>
+            <div class="dialog-content">
+                <div class="label-title">{{ config.message }}</div>
+                <div class="message-container">
+                    <p class="label-message">{{ config.multiPurposeString }}</p>
+                    <button class="copy-button" title="Copia link" (click)="showMessage(config.multiPurposeString)"
+                        [disabled]="visible()">
+                        <i class="mgg-icons-action-copy"></i>
+                        Copia
+                    </button>
+                    <div *ngIf="visible()">
+                        <p-message class="success-message" severity="success"
+                            text="Link copiato correttamente"></p-message>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-confirmDialog>
+</div>

@@ -1,0 +1,63 @@
+@import 'vars';
+@import 'config/sdk-flex';
+
+sdk-element-loader.base-layout.sdk-layout-container2-section > div {
+  @include grid;
+  @include grid-nowrap;
+  @include grid-left;
+  @include grid-ca-stretch;
+  @include grid-va-stretch;
+}
+
+.layout-side-menu-tabs-section {
+  background-color: $background-menu-tabs-sidebar;
+
+  .layout-side-menu-tabs {
+    height: 100%;
+    display: block;
+
+    .layout-side-menu-tabs-container {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: calc(100vh - 150px - 0.5rem);
+
+      .layout-side-menu-tabs-content {
+        width: 20rem;
+        padding: 1rem 1rem 0 1rem;
+      }
+
+      .page-details {
+        padding: 1rem;
+        color: #033562;
+        font-weight: 700;
+        text-transform: none;
+        line-height: normal;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+      }
+
+      .page-content {
+        background-color: $background-sfondo-testo;
+        border-color: $border-sfondo-testo;
+        box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+        border-radius: $std-border-radius;
+        height: calc(100% - 6rem);
+      }
+    }
+  }
+
+  a.p-panelmenu-header-link {
+    color: $color-testo;
+  }
+}
+
+.sdk-layout-content-section.with-tabs {
+  width: 100%;
+  padding: 0 1rem;
+  @extend %layout-side-tabs-body-color;
+  height: calc(100vh - 150px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}

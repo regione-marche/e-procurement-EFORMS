@@ -1,0 +1,48 @@
+<div *ngIf="isReady" class="sdk-input sdk-document">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="document-title" *ngIf="withTitle === true">
+    <sdk-textbox [config]="titleConfigurationObs" [data]="titleInputObs" (output)="manageTitleChange($event)">
+    </sdk-textbox>
+  </div>
+  <div class="document-checkbox" *ngIf="config.onlyFile !== true && config.onlyUrl !== true">
+    <div class="document-label-container">
+      <div [ngClass]="{'document-label document-label-on': true, 'document-checked': fileSwitch == false}" tabindex="0"
+        role="button" [attr.aria-label]="switchUrlLabel | translate" sdkClick (aClick)="manageSwitchChange(false)">{{
+        switchUrlLabel | translate }}</div>
+      <div [ngClass]="{'document-label document-label-off': true, 'document-checked': fileSwitch == true}" tabindex="0"
+        role="button" [attr.aria-label]="switchFileLabel | translate" sdkClick (aClick)="manageSwitchChange(true)">{{
+        switchFileLabel | translate }}</div>
+    </div>
+  </div>
+  <div class="document-url"
+    *ngIf="config.onlyUrl === true || (!!config.onlyFile !== true && !!config.onlyUrl !== true && !!fileSwitch === false)">
+    <sdk-textbox [config]="urlConfigObs" [data]="urlInputObs" (output)="manageUrlChange($event)"></sdk-textbox>
+  </div>
+  <div class="document-file"
+    *ngIf="config.onlyFile === true || (!!config.onlyFile !== true && !!config.onlyUrl !== true && !!fileSwitch === true)">
+    <div class="form-row" *ngIf="config.onlyFile === true">
+      <label *ngIf="config.label" [class]="getClasses('document-label', config.labelClasses, config.infoBox)"
+        (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+        [for]="componentRandomId">{{ config.label
+        | translate:config.labelParams }}</label>
+        <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+          [attr.aria-label]="config.helpDescription | translate">
+          <i class="mgg-icons-help"></i>
+        </div>
+    </div>
+    <div *ngIf="fileInputLabel != null" class="document-file-label">{{ fileInputLabel | translate:fileInputLabelParams
+      }}</div>
+    <div class="document-file-input">
+      <div class="max-file-size" *ngIf="malformedMaxSize === false; else malformedBlock">
+        {{ 'MAX-FILE-SIZE' | translate }} {{maxFileSize}}
+      </div>
+      <ng-template #malformedBlock>
+        {{ 'MAX-FILE-SIZE-MALFORMED' | translate }}
+      </ng-template>
+      <input *ngIf="config.accept != null" [id]="componentRandomId" type="file" multiple="false"
+        [accept]="config.accept" [disabled]="malformedMaxSize === true" (change)="manageFileSelect($event)">
+      <input *ngIf="config.accept == null" [id]="componentRandomId" type="file" multiple="false"
+        [disabled]="malformedMaxSize === true" (change)="manageFileSelect($event)">
+    </div>
+  </div>
+</div>

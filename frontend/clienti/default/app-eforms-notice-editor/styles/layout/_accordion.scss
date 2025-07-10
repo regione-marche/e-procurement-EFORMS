@@ -1,0 +1,14 @@
+@import 'config/sdk-flex';
+
+.accordion-item .add-button {
+
+    @include grid();
+    @include grid-nowrap();
+    @include grid-row();
+    @include grid-right();
+
+    button {
+        border-radius: 50%;
+        padding: 0.25rem;
+    }
+}

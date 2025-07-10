@@ -1,0 +1,19 @@
+<div *ngIf="isReady" class="sdk-input sdk-radio">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses('radio-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div class="radio-container">
+      <div class="radio-item" *ngFor="let item of config.choices; trackBy: trackByCode">
+        <p-radioButton [name]="generatedName" [inputId]="item.code" [value]="item.code" [label]="getLabel(item)"
+          [(ngModel)]="data.code" (onClick)="manageModelChange($event, item)">
+        </p-radioButton>
+      </div>
+    </div>
+  </div>
+</div>

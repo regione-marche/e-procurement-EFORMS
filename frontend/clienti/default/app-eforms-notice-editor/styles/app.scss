@@ -1,0 +1,70 @@
+// Customizations
+@import 'customizations';
+
+// Plugins
+@import 'config/bootstrap';
+
+// Configurazione
+@import 'config/fonts';
+@import 'vars';
+
+// Layout
+@import 'layout/primeng';
+@import 'layout/accordion';
+@import 'layout/alerts';
+@import 'layout/baloon';
+@import 'layout/buttons';
+@import 'layout/footer';
+@import 'layout/forms';
+@import 'layout/header';
+@import 'layout/loader';
+@import 'layout/modal';
+@import 'layout/side_menu_tabs';
+
+// Pages
+@import 'pages/home-page';
+@import 'pages/enotice-selector-page';
+@import 'pages/new-enotice-page';
+@import 'pages/edit-enotice-page';
+
+// html,
+// body {
+//   width: 100%;
+// }
+
+body {
+  @extend %app-font;
+  margin: 0;
+  padding: 0;
+  background-color: $background-sfondo-pagina;
+
+  &.modal-open,
+  &.sidebar-open {
+    overflow: hidden;
+  }
+
+  .sdk-layout-content {
+    min-height: 500px;
+    display: block;
+  }
+}
+
+.delete-icon {
+  cursor: pointer !important;
+  width: fit-content !important;
+}
+
+.link-clickable {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+  width: fit-content;
+}
+
+.importo-cell {
+  text-align: right;
+}
+
+.clickable {
+  @include clickable();
+}

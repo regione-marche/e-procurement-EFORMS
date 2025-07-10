@@ -1,0 +1,66 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+applicationSuite: e-procurement GT-SUAM
+categories:
+  - procurement
+dependsOn:
+  open:
+    - name: Java
+      optional: false
+      version: Eclipse Temurin 21
+      versionMax: '21'
+      versionMin: '21'
+    - name: Netty
+      optional: false
+      version: 4.1.119
+      versionMax: '4'
+      versionMin: '4'
+description:
+  it:
+    features:
+      - Compilazione
+      - Generazione XML
+    genericName: e-procurement platform
+    longDescription: |
+      Compilazione dei dati e generazione del file XML eForms per la pubblicazione sul TED tramite ANAC
+    shortDescription: Modulo per la generazione di file XML eForms
+usedBy:
+  - Regione Marche
+developmentStatus: stable
+it:
+  conforme:
+    gdpr: false
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: true
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+  riuso:
+    codiceIPA: r_marche
+legal:
+  license: Apache-2.0
+  mainCopyrightOwner: Maggioli S.p.A.
+  repoOwner: Regione Marche
+localisation:
+  availableLanguages:
+    - it
+  localisationReady: false
+maintenance:
+  contractors:
+    - name: MAGGIOLI SPA
+      until: '2025-12-31'
+      website: 'https://www.maggioli.com'
+  type: contract
+name: DBScheduler
+platforms:
+  - web
+releaseDate: '2025-02-28'
+softwareType: standalone/web
+url: 'https://github.com/regione-marche/e-procurement-EFORMS.git'

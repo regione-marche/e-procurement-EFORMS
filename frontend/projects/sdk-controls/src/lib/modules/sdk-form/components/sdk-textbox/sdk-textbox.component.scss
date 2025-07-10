@@ -1,0 +1,19 @@
+.k-textbox-container {
+    padding-top: 0;
+    width: 100%;
+}
+
+.mandatory-box {
+    display: inline;
+    white-space: nowrap;
+}
+
+.textbox-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    .textbox-field-in-group {
+        width: 100%;
+    }
+}

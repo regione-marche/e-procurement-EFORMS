@@ -1,0 +1,48 @@
+<div class="accordion-item" [class.active]="isExpanded">
+    <div pRipple class="accordion-title">
+        <div class="accordion-item-main-block" (click)="onTitleClick()">
+            <span class="title-span">{{ title }}</span>
+            @if(items && id != 'GR-Lot') {
+            @if(isExpanded) {
+            <i class="mgg-icons-action-drop-up"></i>
+            } @else {
+            <i class="mgg-icons-action-drop-down"></i>
+            }
+            }
+        </div>
+        @if(lastLevel) {
+        <div class="accordion-item-delete-block" (click)="deleteElement()">
+            <i class="mgg-icons-crud-delete"></i>
+        </div>
+        }
+    </div>
+
+    @if(isExpanded) {
+    @if(items && id != 'GR-Lot') {
+    <div class="accordion-content">
+        <ng-content></ng-content> <!-- Per il contenuto personalizzato -->
+        <app-accordion>
+            @for(item of items; track $index) {
+            <app-accordion-item class="clickable-item" [ngClass]="{'active-item': item.isLastClicked}" [id]="item.id"
+                [title]="item.label" [items]="item.items" [index]="item.index" [lastLevel]="item.lastLevel ?? false"
+                [key]="item.key" (itemClick)="manageItemClick($event)" (addElement)="manageAddElementEvent($event)"
+                (removeElement)="manageRemoveElementEvent($event)">
+                @if(item.content) {
+                {{ item.content }}
+                }
+            </app-accordion-item>
+            }
+            @if (id != 'GR-Result') {
+            <div class="add-button">
+                <button class="p-ripple p-element p-button p-component" aria-label="Aggiungi"
+                    (click)="manageAddElementButtonClick($event)">
+                    <i class="mgg-icons-crud-create"></i>
+                </button>
+            </div>
+            }
+        </app-accordion>
+    </div>
+    }
+
+    }
+</div>

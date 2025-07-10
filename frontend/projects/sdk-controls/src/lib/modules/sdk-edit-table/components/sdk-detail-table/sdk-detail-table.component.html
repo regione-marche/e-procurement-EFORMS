@@ -1,0 +1,46 @@
+<div *ngIf="isReady" class="sdk-detail-table-container">
+    <table aria-label="edit-table" class="table-sdk-edit-table">
+        <thead *ngIf="config.columns != null && config.columns.length > 0">
+            <tr *ngIf="config.operation === true">
+                <td class="total-title">{{ 'LISTA-TABELLA-SOMMATORIE.TOTALI' | translate }}</td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">
+                    <span *ngIf="row.operation == 'sum'">{{ getSum(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                    <span *ngIf="row.operation == 'sub'">{{ getDiff(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                </td>
+                <td *ngIf="config.action != undefined"></td>
+            </tr>
+            <tr>   
+                <th scope="col" *ngIf="config.operation === true"></th>    
+                <ng-container *ngFor="let row of config.columns">  
+                    <th *ngIf="row.sortable === true" (click)="sort(row,'sort')" [class]="sortField === row.mappingInput ? 'active-sort sortable' : 'sortable'">{{ row.label | translate }} 
+                        <i *ngIf="sortField === row.mappingInput && sortDirection === 'asc'" class="mgg-icons-action-sort-asc sort-icon-active"></i>
+                        <i *ngIf="sortField === row.mappingInput && sortDirection === 'desc'" class="mgg-icons-action-sort-desc sort-icon-active"></i>
+                        <i *ngIf="sortField !== row.mappingInput" class="mgg-icons-action-sort-set sort-icon"></i>
+                    </th>
+                    <th *ngIf="row.sortable !== true">{{ row.label | translate }}</th>
+                </ng-container>
+                <th *ngIf="config.action != undefined"> {{ 'LISTA-TABELLA-SOMMATORIE.AZIONI.TITLE' | translate }} </th>
+            </tr>
+        </thead>
+        <tbody>            
+            <tr *ngFor="let cell of config.data" >
+                <td *ngIf="config.operation === true"></td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">
+                    {{ cell[row.mappingInput] }} <span *ngIf="row.currency == true && (cell[row.mappingInput] != null || cell[row.mappingInput] != undefined)">€</span>
+                </td>     
+                <td *ngIf="config.action != undefined">
+                    <div class="icon-container"><div class="icon-clickable" *ngFor="let act of config.action" (click)="onClick(cell,act.performer)"><i [class]="act.icon" [title]="act.label | translate"></i></div></div>
+                </td>           
+            </tr> 
+            <tr class="amount-total" *ngIf="config.operation === true">
+                <td class="total-title">{{ 'LISTA-TABELLA-SOMMATORIE.TOTALI' | translate }}</td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">
+                    <span *ngIf="row.operation == 'sum'">{{ getSum(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                    <span *ngIf="row.operation == 'sub'">{{ getDiff(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                    <span *ngIf="row.operation == 'depend'">{{ getDependOperation(row) }} <span *ngIf="row.currency == true ">€</span></span>
+                </td>
+                <td *ngIf="config.action != undefined"></td>
+            </tr>
+        </tbody>
+    </table>    
+</div>

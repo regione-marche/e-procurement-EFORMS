@@ -1,0 +1,26 @@
+{
+    "TITLE": {
+        "ULTIMI-ACCESSI-PAGE": "Accessi negli ultimi 30 giorni"
+    },
+    "BREADCRUMB": {
+
+    },
+    "MENU": {
+        "GESTIONE-UTENTI": "Gestione utenti",
+        "AMMINISTRAZIONE": "Amministrazione"
+    },
+    "SDK-COMMONS": {
+
+    },
+    "SDK-ULTIMI-ACCESSI": {
+        "HEADER": {
+            "N-EVENTO": "N. evento",
+            "DATA-EVENTO": "Data e ora evento",
+            "LIVELLO-EVENTO": "Livello evento",
+            "CODICE-EVENTO": "Codice evento",
+            "IP-EVENTO": "IP Evento",
+            "DESCRIZIONE-EVENTO": "Descrizione evento"
+        }
+    },
+    "noRecords": "Nessun elemento"
+}

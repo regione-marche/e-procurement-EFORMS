@@ -1,0 +1,24 @@
+<div *ngIf="isReady" class="sdk-input sdk-datepicker">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses('datepicker-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label | translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+
+    <p-calendar [inputId]="componentRandomId" [(ngModel)]="data"
+      [styleClass]="getClasses('datepicker-field', config.fieldClasses)" (onSelect)="manageModelChange($event)"
+      (onClearClick)="clear()" (onInput)="debounce.next($event)" (onShow)="manageShow()" [showIcon]="true"
+      [showButtonBar]="true" [disabled]="config.disabled" selectionMode="single" [minDate]="config.min"
+      [maxDate]="config.max" [dateFormat]="format" [yearNavigator]="true" [monthNavigator]="true"
+      [yearRange]="config.yearRange || '1900:2100'" sdkDateMask [customDateFormat]="format" [placeholder]="userFormat"
+      [appendTo]="'body'" [showTime]="showTime"
+      [iconAriaLabel]="config.iconAriaLabel != null ? (config.iconAriaLabel | translate) : ('primeng.openCalendar' | translate)"
+      todayButtonStyleClass="p-button-text p-calendar-today-button"
+      clearButtonStyleClass="p-button-text p-calendar-clear-button">
+    </p-calendar>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<div [class]="getClasses('sdk-menu-config', config)" *ngIf="isReady">
+    <p-menubar *ngIf="config.vertical !== true" [model]="menuItems"></p-menubar>
+    <sdk-panelMenu *ngIf="config.vertical === true" [model]="menuItems"></sdk-panelMenu>
+</div>

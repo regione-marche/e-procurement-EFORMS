@@ -1,0 +1,26 @@
+<div *ngIf="isReady" [class]="getClasses()">
+    <div class="sdk-layout-header-content">
+        <div class="sdk-layout-header-left">
+            <img class="img-logo responsive-img" [src]="logo" alt="logo">
+            <div class="titolo-container">
+                <div class="titolo">{{ titolo | translate }}</div>
+                <div class="sottotitolo">{{ sottotitolo | translate }}</div>
+            </div>
+        </div>
+
+        <div class="sdk-layout-header-right header-top-panel">
+
+            <div class="sdk-flex-column">
+                <div *ngIf="showSearchForm" class="header-search-panel">
+                    <div class="sdk-header-search">
+                        <sdk-simple-search [config]="searchFieldObs" [data]="searchData" (output)="onOutput($event)">
+                        </sdk-simple-search>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,6 @@
+<div class="sdk-panelbar-container" *ngIf="isReady">
+  <sdk-panelbar-tab *ngFor="let item of config.items" [config]="getConfigObs(item)"
+    [nuovoButtonConfig]="config.nuovoButton" [eliminaButtonConfig]="config.eliminaButton"
+    (onOpen)="manageOnOpen($event)" (onClose)="manageOnClose($event)" (output)="manageAccordionChildClick($event)">
+  </sdk-panelbar-tab>
+</div>

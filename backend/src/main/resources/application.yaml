@@ -1,0 +1,522 @@
+# Server
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    whitelabel:
+      enabled: false
+
+# Spring
+spring:
+  application:
+    name: M-Eforms
+  main:
+    banner-mode: off
+  codec:
+    max-in-memory-size: 104857600 # 100MB
+  webflux:
+    base-path: ${CONTEXT_PATH:/m-eforms-ms}
+  jackson:
+    time-zone: Europe/Rome
+  profiles:
+    active: prod  # Default profile
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui
+  # Disable Swagger UI
+  api-docs:
+    enabled: false
+
+logging:
+  level:
+    it:
+      appaltiecontratti: ${LOG_LEVEL:INFO}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} | %-5level | [M-Eforms] [%thread] %logger{1.} | MDC:[trace_id=%X{Trace-Id}] | %msg%n"
+
+management:
+  health:
+    defaults:
+      enabled: false
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+
+application:
+  enableProxy: ${PROXY_ENABLED:false}
+  ted:
+    apiKey: ${CVS_API_KEY}
+    attachmentSizeMB: 100
+    cvs:
+      url: ${CVS_API_URL:https://cvs.preview.ted.europa.eu}
+    render:
+      url: ${RENDER_API_URL:https://viewer.preview.ted.europa.eu}
+  eforms:
+    sdk:
+      # Path to eForms SDK
+      path: /opt/m-eforms-ms/eforms-sdk
+      # Comma-separated list of the supported major versions of eForms SDK
+      versions: 1.12
+    # Comma-separated list of the supported languages
+    supportedLanguages: it
+  xml:
+    generation:
+
+      # Generates extra XML attributes for human readability, but makes the XML invalid for eforms.
+      # It also generates additional files to help debug or understand the XML generation.
+      # It is recommended to initially set this to true in order to better understand the process.
+      debug: false
+
+      # Skips items if there is no value set.
+      # This can help reduce the noise (empty fields ...) in the generated items.
+      # This is especially useful with an empty form when setting only some values of interest.
+      # This simplifies the XML files and the conceptual .dot file (assuming debug = true).
+      skipIfEmpty: true
+
+      # This is related to the use of fields.json "xsdSequenceOrder" to order the XML elements.
+      # This is mainly used to deactivate the sorting for development purposes.
+      # It can be used to determine if the sorting is causing an issue or not.
+      sortXmlElements: true
+
+  standaloneUse: false
+  forbiddenSlugs: home-page, enotice-selector-page, enotice-version-selector-page, json-selector-page
+
+  configuration:
+    exclusion:
+      - groupName: GR-Procedure-CrossBorderLaw
+        fields:
+          - BT-09(b)-Procedure
+      - groupName: GR-Procedure-LocalLegalBasisNoID
+        fields:
+          - BT-01(f)-Procedure
+      - groupName: GR-Unpublish-BT-5421-Lot
+        fields:
+          - BT-196(BT-5421)-Lot
+          - BT-198(BT-5421)-Lot
+          - BT-197(BT-5421)-Lot
+      - groupName: GR-Unpublish-BT-541-Lot-FixedNumber
+        fields:
+          - BT-197(BT-541)-Lot-Fixed
+          - BT-198(BT-541)-Lot-Fixed
+          - BT-196(BT-541)-Lot-Fixed
+      - groupName: GR-Unpublish-BT-5422-Lot
+        fields:
+          - BT-196(BT-5422)-Lot
+          - BT-197(BT-5422)-Lot
+          - BT-198(BT-5422)-Lot
+      - groupName: GR-Unpublish-BT-105-Procedure
+        fields:
+          - BT-196(BT-105)-Procedure
+          - BT-198(BT-105)-Procedure
+          - BT-197(BT-105)-Procedure
+      - groupName: GR-Unpublish-BT-541-Lot-ThresholdNumber
+        fields:
+          - BT-196(BT-541)-Lot-Threshold
+          - BT-198(BT-541)-Lot-Threshold
+          - BT-197(BT-541)-Lot-Threshold
+      - groupName: GR-Unpublish-BT-5422-LotsGroup
+        fields:
+          - BT-198(BT-5422)-LotsGroup
+          - BT-197(BT-5422)-LotsGroup
+          - BT-196(BT-5422)-LotsGroup
+      - groupName: GR-Unpublish-BT-118
+        fields:
+          - BT-197(BT-118)-NoticeResult
+          - BT-198(BT-118)-NoticeResult
+          - BT-196(BT-118)-NoticeResult
+      - groupName: GR-Unpublish-BT-734-Lot
+        fields:
+          - BT-196(BT-734)-Lot
+          - BT-198(BT-734)-Lot
+          - BT-197(BT-734)-Lot
+      - groupName: GR-Unpublish-BT-539-Lot
+        fields:
+          - BT-197(BT-539)-Lot
+          - BT-198(BT-539)-Lot
+          - BT-196(BT-539)-Lot
+      - groupName: GR-Unpublish-BT-733-Lot
+        fields:
+          - BT-198(BT-733)-Lot
+          - BT-196(BT-733)-Lot
+          - BT-197(BT-733)-Lot
+      - groupName: GR-Unpublish-BT-553
+        fields:
+          - BT-196(BT-553)-Tender
+          - BT-198(BT-553)-Tender
+          - BT-197(BT-553)-Tender
+      - groupName: GR-Unpublish-BT-1252-Procedure
+        fields:
+          - BT-198(BT-1252)-Procedure
+          - BT-197(BT-1252)-Procedure
+          - BT-196(BT-1252)-Procedure
+      - groupName: GR-Unpublish-BT-156
+        fields:
+          - BT-198(BT-156)-NoticeResult
+          - BT-196(BT-156)-NoticeResult
+          - BT-197(BT-156)-NoticeResult
+      - groupName: GR-Unpublish-BT-730
+        fields:
+          - BT-197(BT-730)-Tender
+          - BT-196(BT-730)-Tender
+          - BT-198(BT-730)-Tender
+      - groupName: GR-Unpublish-BT-731
+        fields:
+          - BT-196(BT-731)-Tender
+          - BT-197(BT-731)-Tender
+          - BT-198(BT-731)-Tender
+      - groupName: GR-Unpublish-BT-541-LotsGroup-ThresholdNumber
+        fields:
+          - BT-196(BT-541)-LotsGroup-Threshold
+          - BT-198(BT-541)-LotsGroup-Threshold
+          - BT-197(BT-541)-LotsGroup-Threshold
+      - groupName: GR-Unpublish-BT-554
+        fields:
+          - BT-197(BT-554)-Tender
+          - BT-198(BT-554)-Tender
+          - BT-196(BT-554)-Tender
+      - groupName: GR-Unpublish-BT-543-LotsGroup
+        fields:
+          - BT-198(BT-543)-LotsGroup
+          - BT-197(BT-543)-LotsGroup
+          - BT-196(BT-543)-LotsGroup
+      - groupName: GR-Unpublish-BT-773
+        fields:
+          - BT-196(BT-773)-Tender
+          - BT-198(BT-773)-Tender
+          - BT-197(BT-773)-Tender
+      - groupName: GR-Unpublish-BT-539-LotsGroup
+        fields:
+          - BT-198(BT-539)-LotsGroup
+          - BT-196(BT-539)-LotsGroup
+          - BT-197(BT-539)-LotsGroup
+      - groupName: GR-Unpublish-BT-135-Procedure
+        fields:
+          - BT-198(BT-135)-Procedure
+          - BT-197(BT-135)-Procedure
+          - BT-196(BT-135)-Procedure
+      - groupName: GR-Unpublish-BT-733-LotsGroup
+        fields:
+          - BT-197(BT-733)-LotsGroup
+          - BT-196(BT-733)-LotsGroup
+          - BT-198(BT-733)-LotsGroup
+      - groupName: GR-Unpublish-BT-720
+        fields:
+          - BT-198(BT-720)-Tender
+          - BT-197(BT-720)-Tender
+          - BT-196(BT-720)-Tender
+      - groupName: GR-Unpublish-BT-1561-NoticeResult
+        fields:
+          - BT-197(BT-1561)-NoticeResult
+          - BT-196(BT-1561)-NoticeResult
+          - BT-198(BT-1561)-NoticeResult
+      - groupName: GR-Unpublish-BT-161
+        fields:
+          - BT-198(BT-161)-NoticeResult
+          - BT-197(BT-161)-NoticeResult
+          - BT-196(BT-161)-NoticeResult
+      - groupName: GR-Unpublish-BT-5421-LotsGroup
+        fields:
+          - BT-196(BT-5421)-LotsGroup
+          - BT-198(BT-5421)-LotsGroup
+          - BT-197(BT-5421)-LotsGroup
+      - groupName: GR-Unpublish-BT-5423-Lot
+        fields:
+          - BT-198(BT-5423)-Lot
+          - BT-196(BT-5423)-Lot
+          - BT-197(BT-5423)-Lot
+      - groupName: GR-Unpublish-BT-541-LotsGroup-WeightNumber
+        fields:
+          - BT-196(BT-541)-LotsGroup-Weight
+          - BT-197(BT-541)-LotsGroup-Weight
+          - BT-198(BT-541)-LotsGroup-Weight
+      - groupName: GR-Unpublish-BT-540-Lot
+        fields:
+          - BT-197(BT-540)-Lot
+          - BT-198(BT-540)-Lot
+          - BT-196(BT-540)-Lot
+      - groupName: GR-Unpublish-BT-540-LotsGroup
+        fields:
+          - BT-196(BT-540)-LotsGroup
+          - BT-198(BT-540)-LotsGroup
+          - BT-197(BT-540)-LotsGroup
+      - groupName: GR-Unpublish-BT-556
+        fields:
+          - BT-196(BT-556)-NoticeResult
+          - BT-198(BT-556)-NoticeResult
+          - BT-197(BT-556)-NoticeResult
+      - groupName: GR-Unpublish-BT-171
+        fields:
+          - BT-198(BT-171)-Tender
+          - BT-197(BT-171)-Tender
+          - BT-196(BT-171)-Tender
+      - groupName: GR-Unpublish-BT-734-LotsGroup
+        fields:
+          - BT-197(BT-734)-LotsGroup
+          - BT-196(BT-734)-LotsGroup
+          - BT-198(BT-734)-LotsGroup
+      - groupName: GR-Unpublish-BT-543-Lot
+        fields:
+          - BT-197(BT-543)-Lot
+          - BT-196(BT-543)-Lot
+          - BT-198(BT-543)-Lot
+      - groupName: GR-Unpublish-BT-709
+        fields:
+          - BT-196(BT-709)-LotResult
+          - BT-198(BT-709)-LotResult
+          - BT-197(BT-709)-LotResult
+      - groupName: GR-Unpublish-BT-1118
+        fields:
+          - BT-198(BT-1118)-NoticeResult
+          - BT-196(BT-1118)-NoticeResult
+          - BT-197(BT-1118)-NoticeResult
+      - groupName: GR-Unpublish-BT-541-Lot-WeightNumber
+        fields:
+          - BT-198(BT-541)-Lot-Weight
+          - BT-197(BT-541)-Lot-Weight
+          - BT-196(BT-541)-Lot-Weight
+      - groupName: GR-Unpublish-BT-660-LotResult
+        fields:
+          - BT-197(BT-660)-LotResult
+          - BT-196(BT-660)-LotResult
+          - BT-198(BT-660)-LotResult
+      - groupName: GR-Unpublish-BT-136-Procedure
+        fields:
+          - BT-198(BT-136)-Procedure
+          - BT-196(BT-136)-Procedure
+          - BT-197(BT-136)-Procedure
+      - groupName: GR-Unpublish-BT-541-LotsGroup-FixedNumber
+        fields:
+          - BT-198(BT-541)-LotsGroup-Fixed
+          - BT-196(BT-541)-LotsGroup-Fixed
+          - BT-197(BT-541)-LotsGroup-Fixed
+      - groupName: GR-Unpublish-BT-5423-LotsGroup
+        fields:
+          - BT-197(BT-5423)-LotsGroup
+          - BT-196(BT-5423)-LotsGroup
+          - BT-198(BT-5423)-LotsGroup
+      - groupName: GR-Unpublish-BT-555
+        fields:
+          - BT-196(BT-555)-Tender
+          - BT-198(BT-555)-Tender
+          - BT-197(BT-555)-Tender
+      - groupName: GR-Unpublish-BT-105
+        fields:
+          - BT-196(BT-105)-Procedure
+          - BT-198(BT-105)-Procedure
+          - BT-197(BT-105)-Procedure
+      - groupName: GR-Unpublish-BT-1252
+        fields:
+          - BT-198(BT-1252)-Procedure
+          - BT-197(BT-1252)-Procedure
+          - BT-196(BT-1252)-Procedure
+      - groupName: GR-Unpublish-BT-135
+        fields:
+          - BT-198(BT-135)-Procedure
+          - BT-197(BT-135)-Procedure
+          - BT-196(BT-135)-Procedure
+      - groupName: GR-Unpublish-BT-136
+        fields:
+          - BT-198(BT-136)-Procedure
+          - BT-196(BT-136)-Procedure
+          - BT-197(BT-136)-Procedure
+      - groupName: GR-Unpublish-BT-09
+        fields:
+          - BT-196(BT-09)-Procedure
+          - BT-197(BT-09)-Procedure
+          - BT-198(BT-09)-Procedure
+      - groupName: GR-Unpublish-BT-160
+        fields:
+          - BT-198(BT-160)-Tender
+          - BT-196(BT-160)-Tender
+          - BT-197(BT-160)-Tender
+      - groupName: GR-Unpublish-BT-163
+        fields:
+          - BT-197(BT-163)-Tender
+          - BT-198(BT-163)-Tender
+          - BT-196(BT-163)-Tender
+      - groupName: GR-Unpublish-BT-162
+        fields:
+          - BT-196(BT-162)-Tender
+          - BT-197(BT-162)-Tender
+          - BT-198(BT-162)-Tender
+      - groupName: GR-Unpublish-BT-1351-Procedure
+        fields:
+          - BT-196(BT-1351)-Procedure
+          - BT-198(BT-1351)-Procedure
+          - BT-197(BT-1351)-Procedure
+      - groupName: GR-Unpublish-BT-193
+        fields:
+          - BT-197(BT-193)-Tender
+          - BT-196(BT-193)-Tender
+          - BT-198(BT-193)-Tender
+      - groupName: GR-Unpublish-BT-106-Procedure
+        fields:
+          - BT-197(BT-106)-Procedure
+          - BT-198(BT-106)-Procedure
+          - BT-196(BT-106)-Procedure
+      - groupName: GR-Unpublish-BT-760
+        fields:
+          - BT-197(BT-760)-LotResult
+          - BT-196(BT-760)-LotResult
+          - BT-198(BT-760)-LotResult
+      - groupName: GR-Unpublish-BT-635-LotResult
+        fields:
+          - BT-197(BT-635)-LotResult
+          - BT-196(BT-635)-LotResult
+          - BT-198(BT-635)-LotResult
+      - groupName: GR-Unpublish-BT-636-LotResult
+        fields:
+          - BT-196(BT-636)-LotResult
+          - BT-198(BT-636)-LotResult
+          - BT-197(BT-636)-LotResult
+      - groupName: GR-Unpublish-BT-144
+        fields:
+          - BT-197(BT-144)-LotResult
+          - BT-196(BT-144)-LotResult
+          - BT-198(BT-144)-LotResult
+      - groupName: GR-Unpublish-BT-142
+        fields:
+          - BT-197(BT-142)-LotResult
+          - BT-198(BT-142)-LotResult
+          - BT-196(BT-142)-LotResult
+      - groupName: GR-Unpublish-BT-711
+        fields:
+          - BT-196(BT-711)-LotResult
+          - BT-198(BT-711)-LotResult
+          - BT-197(BT-711)-LotResult
+      - groupName: GR-Unpublish-BT-712
+        fields:
+          - BT-196(BT-712)-LotResult
+          - BT-197(BT-712)-LotResult
+          - BT-198(BT-712)-LotResult
+      - groupName: GR-Unpublish-BT-759
+        fields:
+          - BT-196(BT-759)-LotResult
+          - BT-198(BT-759)-LotResult
+          - BT-197(BT-759)-LotResult
+      - groupName: GR-Unpublish-BT-710
+        fields:
+          - BT-197(BT-710)-LotResult
+          - BT-196(BT-710)-LotResult
+          - BT-198(BT-710)-LotResult
+      - groupName: GR-Unpublish-BT-88-Procedure
+        fields:
+          - BT-198(BT-88)-Procedure
+          - BT-196(BT-88)-Procedure
+          - BT-197(BT-88)-Procedure
+      - groupName: GR-Unpublish-BT-191
+        fields:
+          - BT-198(BT-191)-Tender
+          - BT-196(BT-191)-Tender
+          - BT-197(BT-191)-Tender
+      - groupName: GR-Unpublish-BT-88
+        fields:
+          - BT-198(BT-88)-Procedure
+          - BT-196(BT-88)-Procedure
+          - BT-197(BT-88)-Procedure
+      - groupName: GR-Unpublish-BT-193-Tender
+        fields:
+          - BT-197(BT-193)-Tender
+          - BT-196(BT-193)-Tender
+          - BT-198(BT-193)-Tender
+      - groupName: GR-Unpublish-BT-760-LotResult
+        fields:
+          - BT-197(BT-760)-LotResult
+          - BT-196(BT-760)-LotResult
+          - BT-198(BT-760)-LotResult
+      - groupName: GR-Unpublish-BT-144-LotResult
+        fields:
+          - BT-197(BT-144)-LotResult
+          - BT-196(BT-144)-LotResult
+          - BT-198(BT-144)-LotResult
+      - groupName: GR-Unpublish-BT-142-LotResult
+        fields:
+          - BT-197(BT-142)-LotResult
+          - BT-198(BT-142)-LotResult
+          - BT-196(BT-142)-LotResult
+      - groupName: GR-Unpublish-BT-759-LotResult
+        fields:
+          - BT-196(BT-759)-LotResult
+          - BT-198(BT-759)-LotResult
+          - BT-197(BT-759)-LotResult
+      - groupName: GR-Unpublish-BT-171-Tender
+        fields:
+          - BT-198(BT-171)-Tender
+          - BT-197(BT-171)-Tender
+          - BT-196(BT-171)-Tender
+      - groupName: GR-Unpublish-BT-118-NoticeResult
+        fields:
+          - BT-197(BT-118)-NoticeResult
+          - BT-198(BT-118)-NoticeResult
+          - BT-196(BT-118)-NoticeResult
+      - groupName: GR-Unpublish-BT-553-Tender
+        fields:
+          - BT-196(BT-553)-Tender
+          - BT-198(BT-553)-Tender
+          - BT-197(BT-553)-Tender
+      - groupName: GR-Unpublish-BT-156-NoticeResult
+        fields:
+          - BT-198(BT-156)-NoticeResult
+          - BT-196(BT-156)-NoticeResult
+          - BT-197(BT-156)-NoticeResult
+      - groupName: GR-Unpublish-BT-730-Tender
+        fields:
+          - BT-197(BT-730)-Tender
+          - BT-196(BT-730)-Tender
+          - BT-198(BT-730)-Tender
+      - groupName: GR-Unpublish-BT-731-Tender
+        fields:
+          - BT-196(BT-731)-Tender
+          - BT-197(BT-731)-Tender
+          - BT-198(BT-731)-Tender
+      - groupName: GR-Unpublish-BT-554-Tender
+        fields:
+          - BT-197(BT-554)-Tender
+          - BT-198(BT-554)-Tender
+          - BT-196(BT-554)-Tender
+      - groupName: GR-Unpublish-BT-773-Tender
+        fields:
+          - BT-196(BT-773)-Tender
+          - BT-198(BT-773)-Tender
+          - BT-197(BT-773)-Tender
+      - groupName: GR-Unpublish-BT-720-Tender
+        fields:
+          - BT-198(BT-720)-Tender
+          - BT-197(BT-720)-Tender
+          - BT-196(BT-720)-Tender
+      - groupName: GR-Unpublish-BT-161-NoticeResult
+        fields:
+          - BT-198(BT-161)-NoticeResult
+          - BT-197(BT-161)-NoticeResult
+          - BT-196(BT-161)-NoticeResult
+      - groupName: GR-Unpublish-BT-556-NoticeResult
+        fields:
+          - BT-196(BT-556)-NoticeResult
+          - BT-198(BT-556)-NoticeResult
+          - BT-197(BT-556)-NoticeResult
+      - groupName: GR-Unpublish-BT-555-Tender
+        fields:
+          - BT-196(BT-555)-Tender
+          - BT-198(BT-555)-Tender
+          - BT-197(BT-555)-Tender
+      - groupName: GR-Unpublish-BT-160-Tender
+        fields:
+          - BT-198(BT-160)-Tender
+          - BT-196(BT-160)-Tender
+          - BT-197(BT-160)-Tender
+      - groupName: GR-Unpublish-BT-163-Tender
+        fields:
+          - BT-197(BT-163)-Tender
+          - BT-198(BT-163)-Tender
+          - BT-196(BT-163)-Tender
+      - groupName: GR-Unpublish-BT-162-Tender
+        fields:
+          - BT-196(BT-162)-Tender
+          - BT-197(BT-162)-Tender
+          - BT-198(BT-162)-Tender

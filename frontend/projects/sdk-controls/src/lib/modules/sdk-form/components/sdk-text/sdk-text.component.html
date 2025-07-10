@@ -1,0 +1,65 @@
+<div class="sdk-input sdk-text">
+  <div class="form-row">
+    <label *ngIf="config.label" [class]="getClasses('text-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [id]="componentRandomId">{{
+      config.label | translate:config.labelParams }}</label>
+
+    <!-- Testo normale -->
+    <div *ngIf="config.currency !== true && data != null && data != '' && config.link !== true && expand !== true"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)"
+      [innerHTML]="formatValue(data, config)" tabindex="0" role="textbox" [ngClass]="{'with-help': config.showHelp === true}">
+    </div>
+    <!-- Testo normale cliccabile -->
+    <div *ngIf="config.currency !== true && data != null && data != '' && config.link === true && expand !== true"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" sdkClick
+      (aClick)="manageClick($event)" [innerHTML]="formatValue(data, config)" tabindex="0" role="textbox"></div>
+    <!-- Currency normale -->
+    <div *ngIf="config.currency === true && config.link !== true && customSymbol == null"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" tabindex="0"
+      role="textbox">
+      {{ sdkNumberFormatService.formatCurrencyString(numberData, locale, currency, 2, decimals) }}
+    </div>
+    <!-- Currency cliccabile -->
+    <div *ngIf="config.currency === true && config.link === true && customSymbol == null"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" sdkClick
+      (aClick)="manageClick($event)" tabindex="0" role="textbox">
+      {{ sdkNumberFormatService.formatCurrencyString(numberData, locale, currency, 2, decimals) }}
+    </div>
+    <!-- Currency normale con custom symbol -->
+    <div *ngIf="config.currency === true && config.link !== true && customSymbol != null && numberData != null"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" tabindex="0"
+      role="textbox">
+      {{ sdkNumberFormatService.formatCurrencyString(numberData, locale, currency, 2, decimals) }}/{{ customSymbol }}
+    </div>
+    <!-- Currency cliccabile con custom symbol  -->
+    <div *ngIf="config.currency === true && config.link === true && customSymbol != null && numberData != null"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" sdkClick
+      (aClick)="manageClick($event)" tabindex="0" role="textbox">
+      {{ sdkNumberFormatService.formatCurrencyString(numberData, locale, currency, 2, decimals) }}/{{ customSymbol }}
+    </div>
+    <!-- expand truncate value -->
+    <div *ngIf="config.currency !== true && data != null && data != '' && config.link !== true && expand === true"
+      [attr.aria-labelledby]="componentRandomId" [class]="getValueClasses('text-value', config)" tabindex="0"
+      role="textbox">
+      <div class="truncate" *ngIf="truncate === true">
+        {{ truncateData }}
+        <div class="icon-clickable">
+          <i class="mgg-icons-navigation-show" sdkClick (aClick)="changeTruncateVisible()" tabindex="0" role="button"
+            [attr.aria-label]="'BUTTONS.EXPAND' | translate"></i>
+        </div>
+      </div>
+      <div class="truncate" *ngIf="truncate !== true">
+        {{ data }}
+        <div class="icon-clickable">
+          <i class="mgg-icons-navigation-hide" sdkClick (aClick)="changeTruncateVisible()" tabindex="0" role="button"
+            [attr.aria-label]="'BUTTONS.COLLAPSE' | translate"></i>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="isReady" class="sdk-input sdk-textbox-matrix">
+  <div class="form-row">
+    <table aria-label="textbox-matrix">
+      <thead>
+        <tr *ngFor="let row of config.header" [id]="row.code">
+          <th *ngFor="let head of row.cells; trackBy: trackByHeaderCode" [attr.colspan]="head.colspan"
+            [attr.rowspan]="head.rowspan" scope="col" [id]="head.code">
+            {{ head.label | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of config.rows" [id]="row.code">
+          <td [ngClass]="{'cell-description': true, 'hidden': row.hidden === true}">
+            <!-- cella descrittiva -->
+            {{ row.label | translate }}
+          </td>
+          <td *ngFor="let cell of row.cells" [ngClass]="{'cell-value': true, 'hidden': row.hidden === true}"
+            [id]="cell.code">
+            <div class="cell-text-value" *ngIf="cell.type === 'TEXT'">
+              {{ sdkNumberFormatService.formatCurrencyString(cell.value, locale, currency) }}
+              <input type="hidden" [value]="cell.value" (change)="textboxChange(row.code, cell.code, $event)">
+            </div>
+            <div *ngIf="cell.type === 'TEXTBOX'">
+              <sdk-numeric-textbox [config]="getConfig(cell)" [data]="getValue(cell)"
+                (output)="debounce.next({rowCode: row.code, cellCode: cell.code, value: $event})"></sdk-numeric-textbox>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

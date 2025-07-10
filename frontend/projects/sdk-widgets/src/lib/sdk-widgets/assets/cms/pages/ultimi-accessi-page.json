@@ -1,0 +1,46 @@
+{
+    "name": "ultimi-accessi-page",
+    "title": "TITLE.ULTIMI-ACCESSI-PAGE",
+    "layout": "base-layout",
+    "appName": "<APP-NAME>",
+    "styleUrls": [],
+    "settings": {
+        "page": "ultimi-accessi-page",
+        "breadcrumbs": [
+            {
+                "code": "home-page",
+                "label": "BREADCRUMB.HOME",
+                "slug": "home-page"
+            },
+            {
+                "code": "ultimi-accessi-page",
+                "label": "BREADCRUMB.ULTIMI-ACCESSI",
+                "slug": "ultimi-accessi-page"
+            }
+        ]
+    },
+    "sections": [
+        {
+            "id": "ultimi-accessi-page-content-root-section",
+            "selector": "sdk-ultimi-accessi-section",
+            "description": "Pagina di visualizzazione degli accessi avvenuti negli ultimi 30 giorni",
+            "classNames": "ultimi-accessi-section",
+            "settings": {
+                "classNames": "ultimi-accessi-index",
+                "sectionTitle": "TITLE.ULTIMI-ACCESSI-PAGE",
+                "homeSlug": "home-page",
+                "body": {
+                    "buttons": [
+                        {
+                            "code": "back",
+                            "label": "BUTTONS.BACK",
+                            "icon": "mgg-icons-paginator-previous",
+                            "provider": "SDK_ULTIMI_ACCESSI",
+                            "type": "cancel"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

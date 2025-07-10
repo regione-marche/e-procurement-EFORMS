@@ -1,0 +1,24 @@
+.sdk-autocomplete-advanced-modal-container {
+    padding: 1rem;
+
+    .sdk-autocomplete-advanced-modal-paginator-info {
+        padding: 1rem 0;
+    }
+    
+    .actions-col {
+        width: 50px;
+    }
+    
+    .actions-cell {
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .handle-whitespaces {
+        white-space: pre-wrap;
+    }
+
+    .textarea-style {
+        width: 100%;
+    }
+}

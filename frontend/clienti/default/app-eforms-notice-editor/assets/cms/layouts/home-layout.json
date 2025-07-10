@@ -1,0 +1,92 @@
+{
+  "name": "home-layout",
+  "styleUrls": [],
+  "settings": {
+    "layout": "home-layout"
+  },
+  "sections": [
+    {
+      "id": "home-layout-root-section",
+      "selector": "sdk-layout-section",
+      "description": "Contenitore radice di tutte le sezioni del layout",
+      "classNames": "sdk-layout-root-section base-layout home-layout-root-section",
+      "settings": {
+        "section": "home-layout-root-section"
+      }
+    },
+    {
+      "id": "home-layout-header-top-section",
+      "parentId": "home-layout-root-section",
+      "selector": "sdk-layout-header-top",
+      "description": "Sezione di layout per la parte alta dell'intestazione",
+      "classNames": "sdk-layout-header-top-section",
+      "settings": {
+        "logo": "assets/images/app/logo_aec.svg",
+        "logoDescription": "LOGO-DESCRIPTION"
+      }
+    },
+    {
+      "id": "home-layout-title-section",
+      "parentId": "home-layout-root-section",
+      "selector": "sdk-layout-title",
+      "description": "Sezione di layout per il titolo dell'applicazione",
+      "classNames": "sdk-layout-title-section",
+      "settings": {
+        "section": "home-layout-title-section",
+        "title": "HOME-PAGE.HEADER-TITLE-CONTENT",
+        "body": "HOME-PAGE.HEADER-DESCRIPTION"
+      }
+    },
+    {
+      "id": "home-layout-content-section",
+      "parentId": "home-layout-root-section",
+      "selector": "sdk-layout-content",
+      "description": "Contenitore per il contenuto di pagina",
+      "classNames": "sdk-layout-content-section element-container main-content",
+      "settings": {
+        "section": "home-layout-content-section"
+      }
+    },
+    {
+      "id": "home-layout-footer-section",
+      "parentId": "home-layout-root-section",
+      "selector": "sdk-layout-footer",
+      "description": "Sezione di layout per il footer",
+      "classNames": "sdk-layout-footer-section",
+      "settings": {
+        "section": "home-layout-footer-section",
+        "logoFooter": "assets/images/app/logo-white-maggioli.png",
+        "footerSitenameTitle": "FOOTER.SITENAME-TITLE",
+        "footerSitenameSubtitle": "FOOTER.SITENAME-SUBTITLE",
+        "footerSitenameDescription": "FOOTER.SITENAME-DESCRIPTION",
+        "footerContactsTitle": "FOOTER.CONTACTS-TITLE",
+        "footerVerticalLinksTitle": "FOOTER.VERTICAL-LINKS-TITLE",
+        "links": [
+          {
+            "code": "link-privacy",
+            "label": "FOOTER.LINK-PRIVACY",
+            "url": "http://www.maggioli.it/"
+          },
+          {
+            "code": "link-note",
+            "label": "FOOTER.LINK-NOTE",
+            "url": "http://www.maggioli.it/"
+          },
+          {
+            "code": "link-contatti",
+            "label": "FOOTER.LINK-CONTATTI",
+            "url": "http://www.maggioli.it/"
+          }
+        ],
+        "footerContacts": [
+          {
+            "code": "address",
+            "label": "",
+            "value": "Via del Carpino, 8  - 47822 Santarcangelo di Romagna (RN) - Italia",
+            "url": "http://www.maggioli.it/"
+          }
+        ]
+      }
+    }
+  ]
+}

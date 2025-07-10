@@ -1,0 +1,15 @@
+<div *ngIf="isReady" [class]="getClasses('simple-search-container', config)">
+  <sdk-textbox *ngIf="config.inline == null || config.inline == false" [config]="sdkTextboxConfig"
+    [data]="sdkTextboxInput" (output)="manageSearchChange($event)"></sdk-textbox>
+  <sdk-basic-button *ngIf="config.inline == null || config.inline == false" [config]="sdkBasicButtonConfig"
+    (output)="onClick($event)"></sdk-basic-button>
+
+  <div class="pi-inputgroup search-inline" *ngIf="config.inline == true">
+    <input type="text" pInputText
+      [placeholder]="config.label != null ? (config.label | translate:config.labelParams) : ''" [(ngModel)]="data">
+    <button pButton type="button" [icon]="'mgg-icons-data-search'" [title]="buttonTitle | translate" sdkClick
+      (aClick)="manageInlineClick($event)"></button>
+    <p-dropdown *ngIf="config.filtered == true" [options]="filterList" [(ngModel)]="selectedFilter" [showClear]="false"
+      emptyMessage="Nessun record trovato"></p-dropdown>
+  </div>
+</div>

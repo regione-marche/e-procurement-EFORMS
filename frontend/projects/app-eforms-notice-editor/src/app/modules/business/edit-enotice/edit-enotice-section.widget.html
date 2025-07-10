@@ -1,0 +1,333 @@
+<div [class]="config.classNames" *ngIf="isReady">
+
+  <div class="messages-box" #messages></div>
+
+  <h1 *ngIf="config.title != null" [class]="config.title.classNames">{{config.title.label | translate}}</h1>
+
+  <div *ngIf="config.body != null" [class]="config.body.classNames">{{config.body.label | translate}}</div>
+
+  <div class="container-fluid">
+    <div class="edit-page-table">
+      <!-- TABELLA DATI INIZIALI -->
+      <table role="table">
+        <thead>
+          <tr>
+            <th tabindex="0" role="columnheader">{{ 'ENOTICE.NOTICE-UUID' | translate }}</th>
+            <th tabindex="0" role="columnheader">{{ 'ENOTICE.METADATI-TABELLA' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr role="row">
+            <td tabindex="0" role="cell" [attr.data-label]="'ENOTICE.NOTICE-UUID'">{{noticeInfo?.uuid}}</td>
+            <td tabindex="0" role="cell" [attr.data-label]="'ENOTICE.METADATI-TABELLA' | translate">
+              <i [pTooltip]="tooltipContent" [autoHide]="false" tooltipPosition="bottom" tabindex="0" role="cell"
+                class="mgg-icons-status-info"> </i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- FINE TABELLA DATI INIZIALI -->
+    @if (_currentSelectedId != 'GR-Lot' && _currentSelectedId != 'GR-Result') {
+    <div class="enotice-crud-container row">
+      <div class="col col-12 px-0">
+        <!-- Metadata -->
+        <!-- <app-dynamic-form-element [content]="firstMetadata" [form]="metadataFormGroup"
+        [level]="1"></app-dynamic-form-element> -->
+        <!-- Form Notices -->
+        @if(formReady && firstElementPartial != null) {
+        <!-- Livello 1 perche' il primo e' il menu' laterale -->
+        <app-dynamic-form-element [content]="firstElementPartial" [form]="formGroup"
+          [originalFormReactiveContent]="formReactiveContentOriginalPassed"
+          [editorCount]="currentGroupIndex != -1 ? currentGroupIndex - 1 : 0" [level]="1"></app-dynamic-form-element>
+        } @else {
+        @if(isLoading) {
+        <div class="progress-loader">
+          <p-progressSpinner ariaLabel="loading" />
+        </div>
+        } @else {
+        <div class="info-message" role="alert">
+          <div>
+            {{ 'ENOTICE.SELEZIONA-VOCE' | translate }}
+          </div>
+        </div>
+        }
+        }
+      </div>
+    </div>
+    }
+    @else {
+    @switch (_currentSelectedId) {
+    <!-- GR-Lot - Tabella con l'elenco di lotti -->
+    @case ('GR-Lot') {
+    <div class="table-container">
+      <p-table [value]="_lotsTableService.lotsItems" [tableStyle]="{ 'min-width': '30rem' }"
+        [showCurrentPageReport]="true" [paginator]="true" [rows]="_lotsTableService.rows"
+        [rowsPerPageOptions]="[25, 50, 100]" paginatorPosition="top"
+        currentPageReportTemplate="Visualizzate da {first} a {last} di {totalRecords} righe" [scrollable]="true"
+        (onPage)="onPageChangeLot($event)" [first]="_lotsTableService.first">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" pSortableColumn="numero">Numero lotto <p-sortIcon field="numero" /></th>
+            <th scope="col" pSortableColumn="oggetto">Oggetto del lotto <p-sortIcon field="oggetto" /></th>
+            <th scope="col">Tipologia dell'appalto</th>
+            <th scope="col" pSortableColumn="importoComplessivo">Importo complessivo appalto <p-sortIcon
+                field="importoComplessivo" /></th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <div (click)="dettaglioLotto(item)" class="link-clickable" aria-label="Dettaglio lotto" tabindex="0">
+                {{ item.label }}
+              </div>
+            </td>
+            <td>{{ item.oggetto }}</td>
+            <td>{{ formatTipologiaAppalto(item.tipologiaAppalto) }}</td>
+            <td class="importo-cell">{{ formatCurrency(item.importoComplessivo) }}</td>
+            <td>
+              <div (click)="deleteLotto(item)" class="delete-icon" aria-label="Elimina lotto" tabindex="0">
+                <i class="mgg-icons-crud-delete"></i>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">{{ 'noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    <!-- GR-Result - Tabella con l'elenco dei risultati (tranne GR-NoticeResult-Section) -->
+    @case ('GR-Result') {
+    @switch (_currentSelectedLabelId) {
+    <!-- Risultati -->
+    @case ('GR-NoticeResult-Section') {
+    <div class="enotice-crud-container row">
+      <div class="col col-12 px-0">
+        <!-- Metadata -->
+        <!-- <app-dynamic-form-element [content]="firstMetadata" [form]="metadataFormGroup"
+                [level]="1"></app-dynamic-form-element> -->
+        <!-- Form Notices -->
+        @if(formReady && firstElementPartial != null) {
+        <!-- Livello 1 perche' il primo e' il menu' laterale -->
+        <app-dynamic-form-element [content]="firstElementPartial" [form]="formGroup"
+          [editorCount]="currentGroupIndex != -1 ? currentGroupIndex - 1 : 0" [level]="1"></app-dynamic-form-element>
+        } @else {
+        @if(isLoading) {
+        <div class="progress-loader">
+          <p-progressSpinner ariaLabel="loading" />
+        </div>
+        } @else {
+        <div class="info-message" role="alert">
+          <div>
+            {{ 'ENOTICE.SELEZIONA-VOCE' | translate }}
+          </div>
+        </div>
+        }
+        }
+      </div>
+    </div>
+    }
+    <!-- Parti offerenti -->
+    @case ('GR-TenderingParty-Section') {
+    <div class="table-container">
+      <p-table [value]="_resultsTableService.partiOfferentiItems" [tableStyle]="{ 'min-width': '30rem' }"
+        [showCurrentPageReport]="true" [paginator]="true" [rows]="_resultsTableService.rowsPartiOfferenti"
+        [rowsPerPageOptions]="[25, 50, 100]" paginatorPosition="top"
+        currentPageReportTemplate="Visualizzate da {first} a {last} di {totalRecords} righe" [scrollable]="true"
+        (onPage)="onPageChangePartiOfferenti($event)" [first]="_resultsTableService.firstPartiOfferenti">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" pSortableColumn="id">ID <p-sortIcon field="id" /></th>
+            <th scope="col" pSortableColumn="nome">Nome <p-sortIcon field="nome" /></th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <div (click)="dettaglioParteOfferente(item)" class="link-clickable" aria-label="Dettaglio parte offerente"
+                tabindex="0">
+                {{ item.id }}
+              </div>
+            </td>
+            <td>{{ item.nome }}</td>
+            <td>
+              <div (click)="deleteParteOfferente(item)" class="delete-icon" aria-label="Elimina parte offerente"
+                tabindex="0">
+                <i class="mgg-icons-crud-delete"></i>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">{{ 'noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    <!-- Appalti -->
+    @case ('GR-SettledContract-Section') {
+    <div class="table-container">
+      <p-table [value]="_resultsTableService.appaltiItems" [tableStyle]="{ 'min-width': '30rem' }"
+        [showCurrentPageReport]="true" [paginator]="true" [rows]="_resultsTableService.rowsAppalti"
+        [rowsPerPageOptions]="[25, 50, 100]" paginatorPosition="top"
+        currentPageReportTemplate="Visualizzate da {first} a {last} di {totalRecords} righe" [scrollable]="true"
+        (onPage)="onPageChangeAppalti($event)" [first]="_resultsTableService.firstAppalti">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" pSortableColumn="id">ID <p-sortIcon field="id" /></th>
+            <th scope="col" pSortableColumn="identificativo">Identificativo <p-sortIcon field="identificativo" /></th>
+            <th scope="col" pSortableColumn="titolo">Titolo <p-sortIcon field="titolo" /></th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <div (click)="dettaglioAppalto(item)" class="link-clickable" aria-label="Dettaglio appalto" tabindex="0">
+                {{ item.id }}
+              </div>
+            </td>
+            <td>{{ item.identificativo }}</td>
+            <td>{{ item.titolo }}</td>
+            <td>
+              <div (click)="deleteAppalto(item)" class="delete-icon" aria-label="Elimina appalto" tabindex="0">
+                <i class="mgg-icons-crud-delete"></i>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">{{ 'noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    <!-- Offerte -->
+    @case ('GR-LotTender-Section') {
+    <div class="table-container">
+      <p-table [value]="_resultsTableService.offerteItems" [tableStyle]="{ 'min-width': '30rem' }"
+        [showCurrentPageReport]="true" [paginator]="true" [rows]="_resultsTableService.rowsOfferte"
+        [rowsPerPageOptions]="[25, 50, 100]" paginatorPosition="top"
+        currentPageReportTemplate="Visualizzate da {first} a {last} di {totalRecords} righe" [scrollable]="true"
+        (onPage)="onPageChangeOfferte($event)" [first]="_resultsTableService.firstOfferte">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" pSortableColumn="id">ID <p-sortIcon field="id" /></th>
+            <th scope="col" pSortableColumn="identificativo">Identificativo <p-sortIcon field="identificativo" /></th>
+            <th scope="col" pSortableColumn="valore">Valore <p-sortIcon field="valore" /></th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <div (click)="dettaglioOfferta(item)" class="link-clickable" aria-label="Dettaglio offerta" tabindex="0">
+                {{ item.id }}
+              </div>
+            </td>
+            <td>{{ item.identificativo }}</td>
+            <td class="importo-cell">{{ formatCurrency(item.valore) }}</td>
+            <td>
+              <div (click)="deleteOfferta(item)" class="delete-icon" aria-label="Elimina offerta" tabindex="0">
+                <i class="mgg-icons-crud-delete"></i>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">{{ 'noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    <!-- Risultati dei lotti -->
+    @case ('GR-LotResult-Section') {
+    <div class="table-container">
+      <p-table [value]="_resultsTableService.risultatiDeiLottiItems" [tableStyle]="{ 'min-width': '30rem' }"
+        [showCurrentPageReport]="true" [paginator]="true" [rows]="_resultsTableService.rowsRisultatiDeiLotti"
+        [rowsPerPageOptions]="[25, 50, 100]" paginatorPosition="top"
+        currentPageReportTemplate="Visualizzate da {first} a {last} di {totalRecords} righe" [scrollable]="true"
+        (onPage)="onPageChangeRisultatiLotti($event)" [first]="_resultsTableService.firstRisultatiDeiLotti">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" pSortableColumn="id">ID <p-sortIcon field="id" /></th>
+            <th scope="col" pSortableColumn="identificativo">Identificativo <p-sortIcon field="identificativo" /></th>
+            <th scope="col">Azioni</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <div (click)="dettaglioRisultatoDelLotto(item)" class="link-clickable"
+                aria-label="Dettaglio risultato del lotto" tabindex="0">
+                {{ item.id }}
+              </div>
+            </td>
+            <td>{{ item.identificativo }}</td>
+            <td>
+              <div (click)="deleteRisultatoDelLotto(item)" class="delete-icon" aria-label="Elimina risultato del lotto"
+                tabindex="0">
+                <i class="mgg-icons-crud-delete"></i>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">{{ 'noRecords' | translate }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    }
+    }
+    <!-- END switch per _currentSelectedLabelId -->
+    }
+    }
+    <!-- END switch per _currentSelectedId -->
+    }
+  </div>
+  <sdk-dialog [config]="dialogConfigObs"></sdk-dialog>
+  <div class="buttons-row">
+    <sdk-button-group [config]="buttonsSubj" (output)="onButtonClick($event)"></sdk-button-group>
+  </div>
+  <sdk-modal [config]="modalConfigObs"></sdk-modal>
+  <sdk-modal [config]="modalConfigCvsValidationObs"></sdk-modal>
+  <sdk-sidebar [config]="sidebarConfigObs"></sdk-sidebar>
+</div>
+<ng-template #tooltipContent class="tooltipContent">
+  <div role="list">
+    <div role="listitem" class="tooltip-div">
+      <span class="left">{{ 'ENOTICE.NUMERO-EFORM' | translate }}:</span>
+      <span class="right">{{noticeInfo?.subTypeId}}</span>
+    </div>
+    <div role="listitem" class="tooltip-div">
+      <span class="left">{{ 'ENOTICE.DESCRIZIONE' | translate }}:</span>
+      <span class="right">{{noticeInfo?.description}}</span>
+    </div>
+    <div role="listitem" class="tooltip-div">
+      <span class="left">{{ 'ENOTICE.NOTICE-UUID' | translate }}:</span>
+      <span class="right">{{noticeInfo?.uuid}}</span>
+    </div>
+    <div role="listitem" class="tooltip-div">
+      <span class="left">{{ 'ENOTICE.VERSIONE-SDK' | translate }}:</span>
+      <span class="right">{{noticeInfo?.sdkVersion}}</span>
+    </div>
+    <div role="listitem" class="tooltip-div">
+      <span class="left">{{ 'ENOTICE.VERSIONE-AVVISO' | translate }}:</span>
+      <span class="right">{{noticeInfo?.noticeVersion}}</span>
+    </div>
+  </div>
+</ng-template>

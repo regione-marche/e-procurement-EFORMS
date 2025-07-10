@@ -1,0 +1,23 @@
+<p-dialog *ngIf="isReady" [(visible)]="isOpen" [modal]="true" [baseZIndex]="10000" [header]="config.header" [focusOnShow]="false"
+    styleClass="datepicker-dialog">
+    <div class="datepicker-text">
+        {{config.message}}
+    </div>
+    <div class="datepicker-container">
+        <label class="datepicker-label">
+            {{ config.dataDialogLabel }}
+        </label>
+        <p-calendar 
+            appendTo="body" 
+            class="custom-calendar" 
+            [(ngModel)]="data" 
+            dateFormat="dd/mm/yy"
+            [showTime]="true"
+            [minDate]="minSelectableDate ?? undefined"
+        />
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" sdkClick (aClick)="reject()" [label]="config.rejectLabel"></button>
+        <button type="button" pButton icon="pi pi-check" sdkClick (aClick)="accept()" [label]="config.acceptLabel"></button>
+    </p-footer>
+</p-dialog>

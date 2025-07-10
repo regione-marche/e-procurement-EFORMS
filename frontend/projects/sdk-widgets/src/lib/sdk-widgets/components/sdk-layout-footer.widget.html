@@ -1,0 +1,105 @@
+<footer [class]="getClasses()">
+    <div *ngIf="profileDivVisible" class="profile-div">{{profile}} {{ currentEnte ? ' | ' + currentEnte : '' }}</div>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-mid">
+                <div class="footer-site" *ngIf="!footerLogoHidden">
+                    <div class="footer-logo" *ngIf="logo != null">
+                        <img alt="logo" [src]="logo">
+                    </div>
+                    <div class="footer-sitename">
+                        <p class="footer-sitename-title">{{ footerSitenameTitle | translate }}</p>
+                        <p class="footer-sitename-subtitle">{{ footerSitenameSubtitle | translate }}</p>
+                        <p class="footer-sitename-desc">{{ footerSitenameDescription | translate }}</p>
+                    </div>
+                </div>
+
+                <div class="footer-contacts" *ngIf="footerContacts">
+                    <div class="title">
+                        {{ footerContactsTitle | translate }}
+                    </div>
+                    <div class="footer-contacts-item" *ngFor="let item of footerContacts; trackBy: trackByCode">
+                        <p *ngIf="item.label" [ngClass]="getContactsItemClassList(item)">
+                            {{ item.label | translate }}
+                        </p>
+                        <p class="footer-contacts-item-link" *ngIf="item.url === undefined">
+                            <i *ngIf="item.icon" [class]="item.icon"></i>{{ item.value }}
+                        </p>
+                        <a *ngIf="item.url" class="footer-contacts-item-link" [href]="item.url">{{ item.value }}</a>
+                    </div>
+                </div>
+
+
+                <div class="footer-contacts" *ngIf="footerAssistance">
+                    <div class="title">
+                        {{ footerAssistanceTitle | translate }}
+                    </div>
+                    <div class="footer-contacts-item" *ngFor="let item of footerAssistance; trackBy: trackByCode">
+                        <p *ngIf="item.label" [ngClass]="getContactsItemClassList(item)">
+                            {{ item.label | translate }}
+                        </p>
+                        <p class="footer-contacts-item-link" *ngIf="item.url === undefined">
+                            <i *ngIf="item.icon" [class]="item.icon"></i>{{ item.value }}
+                        </p>
+                        <a *ngIf="item.url" class="footer-contacts-item-link" [href]="item.url">{{ item.value }}</a>
+                    </div>
+                </div>
+
+                <div class="footer-vertical-links" *ngIf="footerVerticalLinks">
+                    <div class="title">
+                        {{ footerVerticalLinksTitle | translate }}
+                    </div>
+                    <div class="footer-vertical-links-item"
+                        *ngFor="let item of footerVerticalLinks; trackBy: trackByCode">
+                        <p *ngIf="item.label && item.url == null" class="footer-vertical-links-label">
+                            {{ item.label | translate }}
+                        </p>
+                        <a *ngIf="item.url && (item.internal != undefined || item.internal == true)" target="_blank"
+                            class="footer-vertical-links-item-link" sdkClick (aClick)="goTo(item)" tabindex="0"
+                            role="navigation" [attr.aria-label]="item.label | translate">{{ item.label |
+                            translate }}</a>
+
+                        <a *ngIf="item.url && (item.internal == undefined || item.internal == false)" target="_blank"
+                            class="footer-vertical-links-item-link" [href]="item.url" tabindex="0" role="navigation"
+                            [attr.aria-label]="item.label | translate">{{
+                            item.label | translate }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-images" *ngIf="images">
+                <a *ngFor="let item of images; trackBy: trackByCode" [href]="item.url">
+                    <img class="footer-image" [src]="item.src">
+                  </a>                               
+            </div>
+
+            <div class="white-row"></div>
+
+            <div class="footer-links" *ngIf="links">
+                <a *ngFor="let item of links; trackBy: trackByCode" target="_blank" class="footer-link"
+                    [href]="item.url">{{ item.label | translate }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom" *ngIf="bottomLinks">
+        <div class="footer-bottom-links">
+            <a *ngFor="let item of bottomLinks; trackBy: trackByCode" target="_blank" class="footer-bottom-link"
+                [href]="item.url">{{ item.label | translate }}</a>
+        </div>
+        <div class="footer-bottom-label" *ngIf="footerBottomLabel">
+            <div>{{ footerBottomLabel | translate }}</div>
+        </div>
+    </div>
+
+    <div class="go-to-top" [title]="'go-to-top' | translate" [attr.aria-label]="'go-to-top' | translate" tabindex="0"
+        role="button" sdkClick (aClick)="executeScrollToTop()" #scrollToTop>
+        <i class="mgg-icons-navigation-hide icon-18"></i>
+    </div>
+
+    <div class="go-to-bottom go-to-show" [title]="'go-to-bottom' | translate"
+        [attr.aria-label]="'go-to-top' | translate" tabindex="0" role="button" sdkClick
+        (aClick)="executeScrollToBottom()" #scrollToBottom>
+        <i class="mgg-icons-navigation-show icon-18"></i>
+    </div>
+
+</footer>

@@ -1,0 +1,346 @@
+@import 'vars';
+@import 'config/sdk-flex';
+@import 'config/sdk-utility';
+
+.sdk-layout-header {
+  @include media-breakpoint-down(md) {
+    padding: 0;
+  }
+
+  // Disabilita il cursor pointer nel logo se sono in modalita' di modifica
+  &.sdk-layout-header-top.disabled
+    > .sdk-layout-header-content
+    .sdk-layout-header-left
+    .img-logo.img-logo-clickable {
+    cursor: default;
+  }
+
+  > .sdk-layout-header-content {
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+    @include grid-va-center;
+
+    @include media-breakpoint-down(md) {
+      @include grid-column;
+    }
+
+    .sdk-layout-header-left {
+      @include grid;
+      @include grid-left;
+      @include grid-nowrap;
+      @include basis(70%);
+      @include grid-va-center;
+      height: 100px;
+
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
+
+      .titolo-modulo,
+      .sottotitolo-modulo {
+        margin: 0;
+        white-space: break-spaces;
+      }
+
+      @include media-breakpoint-only(lg) {
+        .sottotitolo-modulo {
+          display: none;
+        }
+      }
+
+      .img-logo {
+        max-width: 100%;
+        height: auto;
+        max-height: 100px;
+        padding: 0.5rem;
+
+        &.img-logo-clickable {
+          @include clickable(none);
+        }
+      }
+
+      .titolo-container-top {
+        padding-left: 1rem;
+
+        .titolo {
+          font-size: 2.5rem;
+          text-transform: uppercase;
+          font-weight: bold;
+          letter-spacing: 0.05rem;
+        }
+
+        .sottotitolo {
+          font-size: 1.5rem;
+          font-style: italic;
+          letter-spacing: 0.05rem;
+          color: $color-sfondo-testo;
+        }
+      }
+    }
+
+    .sdk-layout-header-right {
+      @include grid;
+      @include grid-nowrap;
+      @include grid-right;
+      @include basis(30%);
+      padding: 0 1rem;
+
+      @include media-breakpoint-down(md) {
+        @include grid-center;
+      }
+
+      .ente-selezionato {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .message-button {
+        padding-right: 1rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .sdk-button-outline.p-splitbutton
+        .p-button:not(.p-splitbutton-menubutton) {
+        cursor: default;
+
+        &:hover {
+          background: transparent;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        .p-splitbutton-defaultbutton.p-button.p-component {
+          padding: 0;
+        }
+      }
+
+      .utente {
+        width: 250px;
+
+        .p-splitbutton .p-splitbutton-defaultbutton {
+          flex: none;
+
+          .p-button-label {
+            flex: none;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sdk-layout-header-top,
+.sdk-layout-header-mid,
+.sdk-layout-header-bottom {
+  @extend %sdk-layout-header-text-color;
+
+  a {
+    @extend %sdk-layout-header-text-color;
+  }
+}
+
+.sdk-layout-header-top {
+  @extend %sdk-layout-header-top-background;
+  height: 100px;
+}
+
+.sdk-layout-header-mid {
+  @extend %sdk-layout-header-mid-background;
+  border-top: 1px solid map-get($blue-colors, layoutBorder);
+  border-bottom: 1px solid map-get($blue-colors, layoutBorder);
+
+  .sdk-layout-header-left {
+    padding: 0.5rem;
+  }
+}
+
+.sdk-layout-header-bottom {
+  @extend %sdk-layout-header-bottom-background;
+
+  .header-flag-container {
+    width: 95%;
+    margin: 0 auto;
+    height: 8px;
+
+    .green {
+      @extend %green-background;
+      width: 33.3%;
+      float: left;
+      height: 8px;
+    }
+
+    .white {
+      @extend %white-flag-background;
+      width: 33.3%;
+      float: left;
+      height: 8px;
+    }
+
+    .red {
+      @extend %red-background;
+      width: 33.3%;
+      float: left;
+      height: 8px;
+    }
+  }
+}
+
+.sdk-layout-breadcrumbs {
+  .sdk-layout-breadcrumbs-container {
+    @extend %sdk-layout-breadcrumbs-background;
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+    @include grid-left;
+    @include grid-ca-center;
+    @include grid-va-center;
+    height: 50px;
+
+    .breadcrumb-collapse-icon {
+      padding: 1rem;
+    }
+
+    .sdk-breadcrumb {
+      display: block;
+      width: 98%;
+
+      .breadcrumb-container {
+        padding: 0.5rem 1rem;
+        border: 1px solid;
+        @extend %transparent-border;
+        border-radius: 3px;
+
+        a {
+          color: $color-sfondo-pagina;
+        }
+      }
+    }
+  }
+}
+
+.sdk-header-followus,
+.sdk-header-search {
+  margin: 0.5rem;
+  width: auto;
+
+  sdk-textbox {
+    width: 100%;
+
+    .p-inputtext {
+      width: 100%;
+    }
+  }
+
+  .p-button.sdk-button-flat {
+    color: $color-sfondo-testo;
+  }
+}
+
+.sdk-header-radio {
+  p-radiobutton {
+    padding: 0 0.5rem;
+  }
+
+  .p-radiobutton {
+    .p-radiobutton-box.p-highlight {
+      border-color: $border-sfondo-testo;
+      background-color: $background-sfondo-testo;
+      @extend %checkbox-color;
+
+      .p-radiobutton-icon {
+        @extend %checkbox-background-color;
+      }
+    }
+
+    .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+      .p-radiobutton-icon {
+        background-color: $background-sfondo-testo;
+      }
+    }
+  }
+}
+
+.sdk-header-followus {
+  .sdk-header-followus-title {
+    margin: 0.5rem;
+  }
+
+  .sdk-header-followus-social {
+    margin: 0.5rem;
+  }
+}
+
+.sdk-header-sticky {
+  @include sdk-sticky;
+  @extend %sdk-header-sticky-background;
+  padding: 0;
+
+  .header-menu {
+    @include grid-va-center;
+
+    .container-left {
+      .logo-small {
+        display: block !important;
+      }
+    }
+
+    .container-right {
+      display: block !important;
+
+      .sdk-layout-header-right {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.menu-sidebar {
+  @extend %menu-sidebar-background;
+}
+
+.sdk-layout-header-bottom-section.no-menu .blue-band {
+  padding: 1rem;
+}
+
+.header-search-panel {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid white;
+}
+
+.sdk-layout-title {
+  background-color: $background-sfondo-titolo;
+
+  .app-title {
+    padding: 4rem 2rem 1rem 2rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
+    color: $color-titolo;
+  }
+
+  .app-body {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1rem;
+    color: $color-testo;
+  }
+}
+
+.sdk-layout-header-top-section {
+  height: 100px;
+}
+
+.ente-selezionato {
+  padding: 0 1rem 0.429rem 1rem;
+  font-size: 0.9rem;
+}

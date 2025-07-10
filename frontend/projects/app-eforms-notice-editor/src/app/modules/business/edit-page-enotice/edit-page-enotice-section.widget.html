@@ -1,0 +1,87 @@
+<div [class]="config.classNames" *ngIf="isReady">
+
+    <div class="messages-box" #messages></div>
+
+    <h1 *ngIf="config.title != null" [class]="config.title.classNames">{{config.title.label | translate}}</h1>
+
+    <div *ngIf="config.body != null" [class]="config.body.classNames">{{config.body.label | translate}}</div>
+
+    <div class="container-fluid">
+        <div class="new-page-table">
+            <!-- TABELLA DATI INIZIALI -->
+            <table role="table">
+                <thead>
+                    <tr>
+                        <th tabindex="0" role="columnheader">{{ 'ENOTICE.NOTICE-UUID' | translate }}</th>
+                        <th tabindex="0" role="columnheader">{{ 'ENOTICE.METADATI-TABELLA' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr role="row">
+                        <td tabindex="0" role="cell" [attr.data-label]="'ENOTICE.NOTICE-UUID'">{{noticeInfo?.uuid}}</td>
+                        <td tabindex="0" role="cell" [attr.data-label]="'ENOTICE.METADATI-TABELLA' | translate">
+                            <i [pTooltip]="tooltipContent" [autoHide]="false" tooltipPosition="bottom" tabindex="0"
+                                role="cell" class="mgg-icons-status-info"> </i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--FINE TABELLA DATI INIZIALI -->
+        <div class="enotice-crud-container row">
+            <div class="col col-12 px-0">
+                <!-- Metadata -->
+                <!-- <app-dynamic-form-element [content]="firstMetadata" [form]="metadataFormGroup"
+          [level]="1"></app-dynamic-form-element> -->
+                <!-- Form Notices -->
+                @if(formReady && firstElementPartial != null) {
+                <!-- Livello 1 perche' il primo e' il menu' laterale -->
+                <app-dynamic-form-element [content]="firstElementPartial" [form]="formGroup"
+                    [originalFormReactiveContent]="formReactiveContentOriginalPassed"
+                    [editorCount]="currentGroupIndex != -1 ? currentGroupIndex - 1 : 0"
+                    [level]="1"></app-dynamic-form-element>
+                } @else {
+                @if(isLoading) {
+                <div class="progress-loader">
+                    <p-progressSpinner ariaLabel="loading" />
+                </div>
+                } @else {
+                <div class="info-message" role="alert">
+                    <div>
+                        {{ 'ENOTICE.SELEZIONA-VOCE' | translate }}
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+    <sdk-dialog [config]="dialogConfigObs"></sdk-dialog>
+    <div class="buttons-row">
+        <sdk-button-group [config]="buttonsSubj" (output)="onButtonClick($event)"></sdk-button-group>
+    </div>
+</div>
+<ng-template #tooltipContent class="tooltipContent">
+    <div role="list">
+        <div role="listitem" class="tooltip-div">
+            <span class="left">{{ 'ENOTICE.NUMERO-EFORM' | translate }}:</span>
+            <span class="right">{{noticeInfo?.subTypeId}}</span>
+        </div>
+        <div role="listitem" class="tooltip-div">
+            <span class="left">{{ 'ENOTICE.DESCRIZIONE' | translate }}:</span>
+            <span class="right">{{noticeInfo?.description}}</span>
+        </div>
+        <div role="listitem" class="tooltip-div">
+            <span class="left">{{ 'ENOTICE.NOTICE-UUID' | translate }}:</span>
+            <span class="right">{{noticeInfo?.uuid}}</span>
+        </div>
+        <div role="listitem" class="tooltip-div">
+            <span class="left">{{ 'ENOTICE.VERSIONE-SDK' | translate }}:</span>
+            <span class="right">{{noticeInfo?.sdkVersion}}</span>
+        </div>
+        <div role="listitem" class="tooltip-div">
+            <span class="left">{{ 'ENOTICE.VERSIONE-AVVISO' | translate }}:</span>
+            <span class="right">{{noticeInfo?.noticeVersion}}</span>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,9 @@
+<div class="link-clickable" sdkClick (aClick)="clickHandler($event, action)" tabindex="0" role="button">
+    {{fieldValue.value}}
+</div>
+<ul class="children" *ngIf="fieldValue.children != null && fieldValue.children.length > 0">
+    <li class="child-item link-clickable" *ngFor="let child of fieldValue.children" sdkClick
+        (aClick)="clickHandler($event, action, child._key)" tabindex="0" role="button">
+        {{child.value}}
+    </li>
+</ul>

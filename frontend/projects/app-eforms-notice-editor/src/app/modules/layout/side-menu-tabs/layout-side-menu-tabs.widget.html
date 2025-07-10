@@ -1,0 +1,21 @@
+<div class="layout-side-menu-tabs-container">
+    <div class="layout-side-menu-tabs-content"
+        [@tabsContent]="selected ? {value: 'visible', params: {transitionParams: transitionOptions}} : {value: 'hidden', params: {transitionParams: transitionOptions}}"
+        (@tabsContent.done)="onToggleDone($event)">
+        <h1 class="page-title">{{menuTitle}}</h1>
+        <div class="page-content">
+            @if(items != null) {
+            <app-accordion>
+                @for(item of items; track $index) {
+                <app-accordion-item [ngClass]="{'active-item': item.isLastClicked}" [id]="item.id" [title]="item.label"
+                    [items]="item.items" [index]="item.index" [key]="item.key"
+                    (itemClick)="manageFirstLevelItemToggle($event)" (addElement)="manageAddElementEvent($event)"
+                    (removeElement)="manageRemoveElementEvent($event)">
+                </app-accordion-item>
+                }
+            </app-accordion>
+            }
+        </div>
+    </div>
+</div>
+<sdk-dialog [config]="deleteDialogConfigObs"></sdk-dialog>

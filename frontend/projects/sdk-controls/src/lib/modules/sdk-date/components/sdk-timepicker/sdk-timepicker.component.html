@@ -1,0 +1,12 @@
+<div *ngIf="isReady">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <label>{{ config.label | translate:config.labelParams }}
+    <div class="mandatory-box" *ngIf="mandatory">
+      ( * )
+    </div>
+  </label>
+
+  <p-calendar [(ngModel)]="data" (onSelect)="manageModelChange($event)" [showIcon]="true" [disabled]="config.disabled"
+    selectionMode="single" [timeOnly]="true">
+  </p-calendar>
+</div>

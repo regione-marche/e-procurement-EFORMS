@@ -1,0 +1,16 @@
+.mandatory-box {
+    display: inline;
+    white-space: nowrap;
+}
+
+.switch-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+
+    >div {
+        padding: 0 1rem;
+    }
+}

@@ -1,0 +1,35 @@
+<div *ngIf="isReady" class="sdk-input sdk-checkbox">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label *ngIf="config.title == null"
+      [class]="getClasses(true, 'checkbox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams" [innerHTML]="config.label |
+      translate:config.labelParams">
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <label *ngIf="config.title != null"
+      [class]="getClasses(true, 'checkbox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.title | translate" [innerHTML]="config.label |
+      translate:config.labelParams">
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div [class]="getClasses(false, 'checkbox-field', config.fieldClasses)">
+      <div *ngFor="let item of data" class="checkbox-item">
+        <input type="checkbox" class="p-checkbox" [name]="item.code" [id]="item.code" role="checkbox"
+          [checked]="item.checked === true" [disabled]="config.disabled === true"
+          (change)="manageModelChange(item.code, $event)">
+
+        <p [innerHtml]="item.label | translate"></p>
+      </div>
+    </div>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+
+</div>

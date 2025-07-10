@@ -1,0 +1,51 @@
+<div *ngIf="isReady" class="sdk-layout-header sdk-layout-header-top" [ngClass]="{'disabled': canBeFocused == false}">
+    <div class="sdk-layout-header-content">
+        <div class="sdk-layout-header-left">
+            <div *ngIf="menuVisible" class="sdk-layout-header-responsive-menu">
+                <i class="mgg-icons-menu-main" tabIndex="0" [attr.aria-label]="'TODO' | translate" sdkClick (aClick)="openSidebar()"></i>
+            </div>
+            <!-- Gestione logo e headerLogoSmall-->
+            <div *ngIf="logo != null && headerLogoSmall != null; else logoOnlyBlock">
+                <img *ngIf="logo != null" [ngClass]="{'img-logo responsive-img logoBig': true, 'img-logo-clickable': isLogoSlug }"
+                [src]="logo" [alt]="logoDescription | translate" sdkClick (aClick)="onLogoClick()"
+                [tabindex]="canBeFocused == true ?  '0' : '-1'" role="img">
+
+                <img *ngIf="headerLogoSmall != null" [ngClass]="{'img-logo responsive-img logoSmall': true, 'img-logo-clickable': isLogoSlug }"
+                [src]="headerLogoSmall" [alt]="logoDescription | translate" sdkClick (aClick)="onLogoClick()"
+                [tabindex]="canBeFocused == true ?  '0' : '-1'" role="img">
+            </div>
+            <ng-template #logoOnlyBlock>
+                <img *ngIf="logo != null" [ngClass]="{'img-logo responsive-img': true, 'img-logo-clickable': isLogoSlug }"
+                [src]="logo" [alt]="logoDescription | translate" sdkClick (aClick)="onLogoClick()"
+                [tabindex]="canBeFocused == true ?  '0' : '-1'" role="img">
+            </ng-template>
+            
+            <div class="titolo-container-top">
+                <p class="titolo titolo-modulo">{{ titoloApplicativo ? (titoloApplicativo | translate) : ''}}</p>
+                <p class="sottotitolo sottotitolo-modulo">{{ titoloModulo ? (titoloModulo | translate) : ''}}</p>
+            </div>
+            <div class="header-search-panel" *ngIf="advancedSearchConfigSubj">
+                <div class="sdk-header-search">
+                    <sdk-advanced-search [config]="advancedSearchConfigSubj">
+                    </sdk-advanced-search>
+                </div>
+            </div>
+        </div>
+
+        <div class="sdk-layout-header-right header-top-panel">
+            <div class="message-button">
+                <sdk-modal [config]="modalConfigObs"></sdk-modal>
+                <sdk-overlay-panel [config]="overlayConfigSub"></sdk-overlay-panel>
+            </div>
+            <div class="utente">
+                <sdk-dropdown-button *ngIf="dropdownConfigVisible" [config]="profileSub"
+                    (output)="onProfileClick($event)">
+                </sdk-dropdown-button>
+                <div class="ente-selezionato" *ngIf="currentEnte != null" [title]="currentEnte">
+                    {{ currentEnte ? getShortEnte(currentEnte) : '' }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<sdk-sidebar [config]="sidebarConfigObs" (output)="onSidebarOutput($event)"></sdk-sidebar>

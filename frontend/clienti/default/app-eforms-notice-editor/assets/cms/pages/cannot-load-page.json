@@ -1,0 +1,21 @@
+{
+  "name": "cannot-load-page",
+  "title": "TITLE.CANNOT-LOAD-PAGE",
+  "layout": "home-layout",
+  "appName": "app-eforms-notice-editor",
+  "styleUrls": [],
+  "settings": {
+    "page": "cannot-load-page"
+  },
+  "sections": [
+    {
+      "id": "cannot-load-page-content-root-section",
+      "selector": "cannot-load-section",
+      "description": "Componente per bloccare il caricamento diretto dell'applicazione",
+      "classNames": "cannot-load-section",
+      "settings": {
+        "classNames": "app-eforms-notice-editor-cannot-load"
+      }
+    }
+  ]
+}

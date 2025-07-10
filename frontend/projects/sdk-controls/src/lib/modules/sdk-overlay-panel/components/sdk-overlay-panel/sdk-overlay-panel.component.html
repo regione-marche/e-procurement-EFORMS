@@ -1,0 +1,17 @@
+<div class="sdk-overlay-panel" *ngIf="isReady">
+
+  <button pButton type="button" *ngIf="config.status == null || config.status == false" sdkClick
+    (aClick)="toggle($event)" [disabled]="openButton.disabled" [class]="getButtonClasses(openButton)"
+    [icon]="getButtonIcon(openButton)" [label]="getButtonTranslatedLabel(openButton.label, openButton.labelParams)"
+    [title]="getButtonTranslatedTitle(openButton.title, openButton.label, openButton.labelParams)"></button>
+
+  <button pButton type="button" *ngIf="config.status == true" sdkClick (aClick)="toggle($event)"
+    [disabled]="openButton.disabled" [class]="getButtonClasses(openButton, true)" [icon]="getButtonIcon(openButton)"
+    [label]="config.statusValue"
+    [title]="getButtonTranslatedTitle(openButton.title, openButton.label, openButton.labelParams)"></button>
+
+  <p-overlayPanel #op [style]="getStyle()" (onShow)="onShowPanel()" (onHide)="onHidePanel()">
+    <div #panel></div>
+  </p-overlayPanel>
+
+</div>

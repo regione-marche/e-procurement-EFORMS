@@ -1,0 +1,40 @@
+<div *ngIf="isReady" [class]="getClasses('advanced-search-container sdk-input', config)">
+  <div class="form-row advanced-search-content">
+    <span class="p-input-icon-left advanced-search-input-icon-left">
+      <i class="mgg-icons-data-search advanced-search-input-icon"></i>
+      <input type="text" pInputText [tabindex]="canBeFocused == true ?  '0' : '-1'"
+        [placeholder]="config.label | translate" #inputElem />
+    </span>
+    <div class="advanced-search-dropdown" *ngIf="overlayVisible$ | async" #overlayElem>
+      <div class="advanced-search-dropdown-content">
+        <div class="advanced-search-categories-container">
+          <div
+            [ngClass]="{'advanced-search-category-item': true, 'advanced-search-category-item-selected': category.selected}"
+            *ngFor="let category of config.categories; let i = index" sdkClick
+            (aClick)="manageCategoryClick(category, i)" [tabindex]="canBeFocused == true ?  '0' : '-1'" role="group">
+            <div class="advanced-search-category-item-label">{{ category.label | translate }}</div>
+          </div>
+        </div>
+        <div class="advanced-search-selected-category" *ngIf="selectedCategory != null">
+          {{ selectedCategory.label | translate }} ({{ searchedData != null ? searchedData.length : 0 }})
+        </div>
+        <div class="advanced-search-result-container" *ngIf="searchedData != null && searchedData.length > 0">
+          <div
+            [ngClass]="{'advanced-search-result-item': true, 'advanced-search-result-item-last': i == searchedData.length - 1}"
+            *ngFor="let resultItem of searchedData; let i = index" sdkClick (aClick)="clickItem(resultItem)"
+            [tabindex]="canBeFocused == true ?  '0' : '-1'" role="article">
+            {{ resultItem.label }}
+            <i class="mgg-icons-paginator-next"></i>
+          </div>
+        </div>
+        <div class="advanced-search-no-result"
+          *ngIf="searchedData == null || (searchedData != null && searchedData.length == 0)">
+          {{ 'advancedSearchNoResult' | translate }}
+        </div>
+        <div class="advanced-search-result-loader" *ngIf="isSearching">
+          <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

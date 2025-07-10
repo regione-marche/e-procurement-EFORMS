@@ -1,0 +1,17 @@
+<div class="rdbis" #dropdown tabindex="0" role="listbox">
+    <ng-container *ngFor="let item of dropdownButtons">
+        <div *ngIf="item.disabled === true" class="rdbi rdbi-disabled" [title]="item.titleTradotto">
+            <p>{{item.labelTradotta}}</p>
+            <div class="rdbid" *ngIf="item.lastItemOfGroup === true">
+                <!-- Divider -->
+            </div>
+        </div>
+        <div *ngIf="item.disabled !== true" class="rdbi" [title]="item.titleTradotto" sdkClick (aClick)="itemClick(item)"
+            tabindex="0" role="option">
+            <p>{{item.labelTradotta}}</p>
+            <div class="rdbid" *ngIf="item.lastItemOfGroup === true">
+                <!-- Divider -->
+            </div>
+        </div>
+    </ng-container>
+</div>

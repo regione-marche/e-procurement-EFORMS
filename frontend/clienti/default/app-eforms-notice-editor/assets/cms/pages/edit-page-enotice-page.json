@@ -1,0 +1,47 @@
+{
+  "name": "edit-page-enotice-page",
+  "title": "TITLE.NEW-ENOTICE-PAGE",
+  "layout": "base-menu-tabs-layout",
+  "appName": "app-eforms-notice-editor",
+  "styleUrls": [],
+  "settings": {
+    "page": "edit-page-enotice-page"
+  },
+  "sections": [
+    {
+      "id": "edit-page-enotice-page-content-root-section",
+      "selector": "edit-page-enotice-section",
+      "description": "Componente per la modifica di una enotice",
+      "classNames": "edit-page-enotice-section",
+      "settings": {
+        "classNames": "app-eforms-notice-editor-edit-page-enotice",
+        "body": {
+          "buttons": [
+            {
+              "code": "cancel-pagina",
+              "label": "BUTTONS.CANCEL",
+              "icon": "mgg-icons-crud-cancel",
+              "type": "cancel"
+            },
+            {
+              "code": "toggle-visibility",
+              "label": "BUTTONS.SHOW-OPTIONAL-FIELDS",
+              "icon": "mgg-icons-view-side-by-side",
+              "type": "cancel"
+            },
+            {
+              "code": "modifica-pagina",
+              "label": "BUTTONS.MODIFICA-PAGINA",
+              "icon": "mgg-icons-crud-edit"
+            },
+            {
+              "code": "save-pagina",
+              "label": "BUTTONS.SAVE-PAGINA",
+              "icon": "mgg-icons-crud-save"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<div *ngIf="isReady" class="sdk-input sdk-multiselect">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'multiselect-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div style="display:table">
+      <div style="display:flex">
+        <p-multiSelect [inputId]="componentRandomId"
+          [class]="getClasses(false, 'multiselect-field', config.fieldClasses)" [options]="listItems"
+          [disabled]="config.disabled === true" [(ngModel)]="data" [showHeader]="true"
+          (onChange)="manageModelChange($event)"></p-multiSelect>
+        <a class="btn btn-default btn-lg" href="javascript:void(0)" role="button" sdkClick (aClick)="handleDiv()">
+          <i [class]="getButtonClass()"></i>
+        </a>
+      </div>
+      <div *ngIf="showDiv" style="display: flex;width:100%;padding-left: .4em;padding-top: .2em;">
+        <div class="textbox-field multiselect-value-div">{{selectedData | translate }}</div>
+        <div class="text-expand" *ngIf="showOnlyNRecords" sdkClick (aClick)="expand()">{{'MULTISELECT.ESPANDI' |
+          translate}}</div>
+        <div class="text-expand" *ngIf="showExpandMessage" sdkClick (aClick)="reduce()">{{'MULTISELECT.RIDUCI' |
+          translate}}</div>
+      </div>
+    </div>
+  </div>
+</div>

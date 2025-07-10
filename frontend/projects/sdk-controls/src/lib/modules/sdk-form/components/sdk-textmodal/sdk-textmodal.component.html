@@ -1,0 +1,18 @@
+<div class="sdk-input sdk-text">
+  <div class="form-row">
+    <label *ngIf="config.label" [class]="getClasses('text-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams">{{ config.label |
+      translate:config.labelParams }}</label>
+    <div class="text-value">
+      <div class="textmodal-input" *ngIf="showCleanButton">
+        {{data}}
+      </div>
+      <sdk-basic-button [config]="infoModalButtonConfigObs" (output)="manageButtonClick($event)">
+      </sdk-basic-button>
+      <sdk-basic-button *ngIf="showCleanButton" [config]="cleanModalButtonConfigObs"
+        (output)="manageButtonClick($event)">
+      </sdk-basic-button>
+    </div>
+  </div>
+  <sdk-modal [config]="modalConfigObs" (output)="manageModalOutput($event)"></sdk-modal>
+</div>

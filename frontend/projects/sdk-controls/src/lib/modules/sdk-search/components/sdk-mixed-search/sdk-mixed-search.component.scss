@@ -1,0 +1,45 @@
+.sdk-mixed-search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: stretch;
+    position: relative;
+
+    .sdk-mixed-search-panel {
+        display: flex;
+
+        input.p-component.p-inputtext {
+            flex: 1 1 calc(100% - 80px);
+            width: calc(100% - 80px);
+        }
+
+        button.p-component.p-button.sdk-mixed-search-button,
+        button.p-component.p-button.sdk-mixed-search-dropdown-button {
+            flex: 1 0 40px;
+        }
+    }
+
+    .sdk-mixed-search-dropdown-panel {
+        z-index: 1001;
+        border-radius: 3px;
+        max-height: 200px;
+        overflow: auto;
+        position: absolute;
+        width: 100%;
+
+        .sdk-mixed-search-dropdown-items {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+
+            .sdk-mixed-search-dropdown-item {
+                padding: 0.5rem 1rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

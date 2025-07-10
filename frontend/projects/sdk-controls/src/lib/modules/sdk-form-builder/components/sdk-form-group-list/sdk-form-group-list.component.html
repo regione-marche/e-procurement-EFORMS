@@ -1,0 +1,35 @@
+<div [class]="getGroupClasses(config, true)"
+  *ngIf="isReady && config.emptyGroupMessage != null && (config.fieldGroups == null || config.fieldGroups?.length === 0)">
+  {{ config.emptyGroupMessage | translate }}
+</div>
+<div [class]="getGroupClasses(config)" *ngIf="isReady"
+  [ngClass]="{'hidden': config.fieldGroups?.length === 0 && config.maxGroupsNumber===-1}">
+  <div class="form-group-title" *ngIf="isReady && config.label != null">
+    {{ config.label | translate }}
+  </div>
+  <div *ngFor="let item of config.fieldGroups; trackBy: trackByCode; let i = index">
+    <div class="pulsantiera">
+      <div
+        *ngIf="(config.maxGroupsNumber > -1 && config.fieldGroups.length > config.minGroupsNumber)||(config.showFirst)"
+        class="remove-button" sdkClick (aClick)="removePanel(i)" [title]="'FORM-GROUP.ELIMINA' | translate" tabindex="0"
+        role="group">
+        <i class="mgg-icons-crud-delete"></i>
+        {{ 'FORM-GROUP.ELIMINA' | translate }}
+      </div>
+    </div>
+    <sdk-form-group [config]="getFormGroupObs(item)" [data]="subjMap[item.code]" [dataAll]="subjMap['all']"
+      (output)="manageFormGroupUpdate($event, i)" (outputClick)="manageFormGroupItemClick($event, i)"
+      (outputField)="manageOutputField($event, i)" (outputInfoBox)="manageOutputInfoBox($event)"
+      (outputAdvancedModalClose)="manageOutputAdvancedModalClose($event, i)" (onBlur)="manageOnBlur($event, i)"
+      (onFocus)="manageOnFocus($event, i)"></sdk-form-group>
+    <div class="form-group-divider" *ngIf="i + 1 < config.fieldGroups.length"></div>
+  </div>
+  <div class="add-button-container"
+    *ngIf="(config.maxGroupsNumber === 0 || config.maxGroupsNumber > config.fieldGroups.length)||(config.showFirst)">
+    <div class="add-button" sdkClick (aClick)="addPanel()" [title]="'FORM-GROUP.AGGIUNGI' | translate" tabindex="0"
+      role="group">
+      <i class="mgg-icons-crud-create"></i>
+      {{ 'FORM-GROUP.AGGIUNGI' | translate }}
+    </div>
+  </div>
+</div>

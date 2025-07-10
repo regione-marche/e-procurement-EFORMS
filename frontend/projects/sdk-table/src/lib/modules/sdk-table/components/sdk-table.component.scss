@@ -1,0 +1,24 @@
+.sdk-table-frame {
+
+    .p-datatable {
+        .p-datatable-wrapper {
+            // overflow-x: auto;
+
+            >table {
+                table-layout: initial;
+
+            }
+        }
+
+        .p-paginator .p-paginator-current {
+            float: left;
+            margin-left: 0;
+        }
+
+    }
+
+    .sdk-table-paginator-info {
+        padding: 1rem 0;
+        text-align: right;
+    }
+}

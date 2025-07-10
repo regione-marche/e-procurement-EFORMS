@@ -1,0 +1,18 @@
+.motivazione-dialog {
+    width: 50vw;
+}
+
+.motivazione-text,
+.motivazione-container {
+    padding: 0.5rem 1rem;
+}
+
+.motivazione-label {
+    padding-right: 0.5rem;
+}
+
+@media screen and (max-width: 40em) {
+    .motivazione-dialog {
+        width: 75vw;
+    }
+}

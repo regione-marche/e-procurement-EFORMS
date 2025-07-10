@@ -1,0 +1,22 @@
+<div *ngIf="isReady" class="sdk-input sdk-switch">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="switch-container">
+    <label [class]="getClasses(true, 'switch-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div>
+      {{config.offLabel}}
+    </div>
+    <p-inputSwitch [inputId]="componentRandomId" [styleClass]="getClasses(false, 'switch-field', config.fieldClasses)"
+      [disabled]="config.disabled" [(ngModel)]="data" (onChange)="manageModelChange($event)"></p-inputSwitch>
+    <div>
+      {{config.onLabel}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+<!-- Titolo -->
+<div class="section-title-detail">
+    {{ 'CHECK-VISUAL-MODEL.CHECK-TITLE' | translate }}
+</div>
+
+<!-- Numero errori di validazione -->
+<div class="check-panel-row">
+    <label class="check-panel-label">
+        <b>{{'CHECK-VISUAL-MODEL.CHECK-VALIDATION-ERRORS' | translate }}</b>
+    </label>
+    {{validationErrorsNum}}
+</div> 
+
+<!-- Dettaglio errori di validazione -->
+<table class="check-validazioni-table" *ngIf="checkValidationErrors"
+    [attr.aria-label]="'CHECK-VISUAL-MODEL.CHECK-TITLE' | translate">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">{{ 'CHECK-VISUAL-MODEL.CHECK-DESC' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let error of validationErrors; let i = index"
+            [ngClass]="{'check-validazioni-table-divider': i < validationErrors.length - 1 }">
+            <td><i class="mgg-icons-status-error check-validazione-error"></i></td>
+            <td>{{error}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Nessun errore di validazione -->
+<div *ngIf="!checkValidationErrors" class="alert-success">
+    <span>{{ 'CHECK-VISUAL-MODEL.CHECK-SUCCESS' | translate }}</span>
+    <span>{{ checkSuccessActionDescr | translate}}</span>
+</div>

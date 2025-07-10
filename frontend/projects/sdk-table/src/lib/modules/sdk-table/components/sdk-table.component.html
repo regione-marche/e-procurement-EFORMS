@@ -1,0 +1,47 @@
+<div class="sdk-table-frame" *ngIf="config">
+    <!-- Sezione di filtro -->
+    <div class="filter-section">
+        <sdk-table-filter *ngIf="filterable(config)" [config]="filterConfigSub" [messages]="messages"
+            (output)="manageFilterOutput($event)">
+        </sdk-table-filter>
+    </div>
+    <div #tableContainerRef></div>
+    <div id="table-dropdown-append"></div>
+    <div class="sdk-table-paginator-info" *ngIf="showCurrentRecordsReport">
+        {{ currentRecordStatus | async }}
+    </div>
+    <!-- Sezione tabella -->
+    <p-table [columns]="columns" [value]="dataItems" [sortField]="sortField" [sortOrder]="sortOrder"
+        [currentPageReportTemplate]="currentPageReport | translate" [defaultSortOrder]="sortOrder" sortMode="single"
+        [lazy]="true" (onLazyLoad)="loadPage($event)" [paginator]="paginationEnabled(config)"
+        [showJumpToPageDropdown]="true" [rows]="pageSize(config)" [rowsPerPageOptions]="pageSizes(config)"
+        [totalRecords]="totalRecords" [loading]="loading" [scrollable]="true" #table>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns; trackBy: trackByField"
+                    [pSortableColumn]="col.sortable === true ? col.field : undefined"
+                    [style.minWidth.px]="col.width != null ? col.width : 'auto'" scope="col" alignFrozen="right"
+                    pFrozenColumn [frozen]="checkFrozenEnable(col)">
+                    {{ col.title | translate }}
+                    <p-sortIcon *ngIf="col.sortable === true" [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex>
+            <tr>
+                <td *ngFor="let col of columns" [class]="getColClass(col, rowData)" alignFrozen="right" pFrozenColumn
+                    [frozen]="checkFrozenEnable(col)">
+                    <sdk-table-cell-factory-viewer [dataItem]="rowData" [rowIndex]="rowIndex" [columnConfig]="col">
+                    </sdk-table-cell-factory-viewer>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length">
+                    {{ messages?.noRecords | translate }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,8 @@
+<div class="sdk-menu-tabs-config" *ngIf="isReady">
+    <div class="father">
+        <p-tabMenu [model]="menuItems" [activeItem]="activeItem"></p-tabMenu>
+    </div>
+    <div class="sdk-menu-tabs-children" *ngIf="hasChildren">
+        <p-tabMenu [model]="childrenMenuItems" [activeItem]="childActiveItem"></p-tabMenu>
+    </div>
+</div>

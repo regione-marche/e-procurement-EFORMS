@@ -1,0 +1,397 @@
+//
+// Variables
+// -----------------------------------------
+
+// $baloon-bg: fade-out(#101010, 0.05) !default;
+$baloon-bg: #f8f8f8 !default;
+$baloon-base-size: 16px !default;
+$baloon-arrow-size: 5px !default;
+$baloon-move: 4px !default;
+// $baloon-text-color: #fff;
+$baloon-text-color: #212121;
+
+//
+// Mixins
+// -----------------------------------------
+
+$ARROW_DIRECTIONS: (
+  down: top,
+  up: bottom,
+  left: right,
+  right: left,
+);
+
+@mixin arrow($direction) {
+  @if not map-has-key($ARROW_DIRECTIONS, $direction) {
+    @error '[baloon] The $direction parameter must be one of: `#{map-keys($DIRECTIONS)}, `#{$direction}` was given.';
+  }
+
+  width: 0;
+  height: 0;
+  border: $baloon-arrow-size solid transparent;
+  border-#{map-get($ARROW_DIRECTIONS, $direction)}-color: var(--baloon-color);
+
+}
+
+@mixin base-effects() {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  // transition: all 0.18s ease-out 0.18s;
+  transition: all 0.5s;
+}
+
+@mixin no-effects() {
+  transition: none;
+}
+
+@mixin normalized-text() {
+  text-indent: 0;
+  font-family: inherit;
+  font-weight: normal;
+  font-style: normal;
+  text-shadow: none;
+  font-size: var(--baloon-font-size);
+}
+
+//
+// Styles
+// -----------------------------------------
+
+// Variabili che si possono sovrascrivere per regolare 
+// la visualizzazione del baloon
+:root {
+  --baloon-border-radius: 2px;
+  --baloon-color: #{$baloon-bg};
+  --baloon-text-color: #{$baloon-text-color};
+  --baloon-font-size: #{$baloon-base-size};
+  --baloon-move: #{$baloon-move};
+}
+
+// IE 11 button bugfix
+[aria-data-baloon] {
+  &[data-baloon-pos] {
+    overflow: visible;
+  }
+}
+
+[data-baloon-html] {
+  display: none;
+}
+
+[data-baloon] {
+  &[data-baloon-pos] {
+
+    //display: inline-block; // serve per posizionare correttamente
+    position: relative; // in alternativa absolute o fixed
+
+    // Fixing iOS Safari event issue.
+    // More info at: https://goo.gl/w8JF4W
+    //cursor: pointer;
+
+    // contenuto del baloon
+    [data-baloon-html] {
+      @include base-effects();
+      @include normalized-text();
+
+      background: var(--baloon-color);
+      color: var(--baloon-text-color);
+      border-radius: var(--baloon-border-radius);
+
+      // content preso dall'attributo aria-label (solo testo)
+      // content: attr(aria-label);
+      // padding: .5em 1em;
+
+      position: absolute;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    // freccetta del baloon
+    &:before {
+      @include arrow(down);
+      @include base-effects();
+
+      content: "";
+      position: absolute;
+      z-index: 10;
+    }
+
+    /* &[data-baloon-back] {
+      [data-baloon-blocker] {
+        display: none;
+      }
+
+      [data-baloon-blocker] {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: ' ';
+        background: rgba(0, 0, 0, .5);
+        z-index: 1000000;
+      }
+    } */
+
+    // da capire se aggiungere uno spinner a livello di baloon
+    // [data-baloon-spinner] {  }
+
+    [data-baloon-html] {
+      display: inline-block;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+
+    &[data-baloon-visible],
+    &:not([data-baloon-nofocus]):focus {
+
+      /* &[data-baloon-back] {
+        [data-baloon-blocker] {
+          display: inline-block;
+        }
+      } */
+
+      &:before,
+      [data-baloon-html] {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        z-index: 1000001;
+      }
+    }
+
+    &.font-awesome:after {
+      font-family: FontAwesome, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    &[data-baloon-break] {
+      [data-baloon-html] {
+        white-space: pre;
+      }
+
+      &[data-baloon-dim] {
+        [data-baloon-html] {
+          white-space: pre-line;
+          word-break: break-word;
+        }
+      }
+    }
+
+    &[data-baloon-pos="up"],
+    &[data-baloon-pos="down"] {
+
+      &:hover,
+      &[data-baloon-visible] {
+        [data-baloon-html] {
+          transform: translate(-50%, 0);
+        }
+
+        &:before {
+          transform: translate(-50%, 0);
+        }
+      }
+    }
+
+    &[data-baloon-pos*="-left"] {
+      [data-baloon-html] {
+        left: 0;
+      }
+
+      &:before {
+        left: 5px;
+      }
+    }
+
+    &[data-baloon-pos*="-right"] {
+      [data-baloon-html] {
+        right: 0;
+      }
+
+      &:before {
+        right: 5px;
+      }
+    }
+
+    &[data-baloon-po*="-left"],
+    &[data-baloon-pos*="-right"] {
+
+      &:hover,
+      &[data-baloon-visible] {
+        [data-baloon-html] {
+          transform: translate(0, 0);
+        }
+
+        &:before {
+          transform: translate(0, 0);
+        }
+      }
+    }
+
+    &[data-baloon-pos^="up"] {
+
+      &:before,
+      [data-baloon-html] {
+        bottom: 100%;
+        transform-origin: top;
+        transform: translate(0, var(--baloon-move));
+      }
+
+      [data-baloon-html] {
+        margin-bottom: $baloon-arrow-size + 5px;
+      }
+    }
+
+    &[data-baloon-pos="up"] {
+
+      &:before,
+      [data-baloon-html] {
+        left: 50%;
+        transform: translate(-50%, var(--baloon-move));
+      }
+    }
+
+    &[data-baloon-pos^="down"] {
+
+      &:before,
+      [data-baloon-html] {
+        top: 100%;
+        transform: translate(0, calc(var(--baloon-move) * -1));
+      }
+
+      [data-baloon-html] {
+        margin-top: $baloon-arrow-size + 5px;
+      }
+
+      &:before {
+        @include arrow(up);
+      }
+    }
+
+    &[data-baloon-pos="down"] {
+
+      [data-baloon-html],
+      &:before {
+        left: 50%;
+        transform: translate(-50%, calc(var(--baloon-move) * -1));
+      }
+    }
+
+    &[data-baloon-pos="left"],
+    &[data-baloon-pos="right"] {
+
+      &:hover,
+      &[data-baloon-visible] {
+        [data-baloon-html] {
+          transform: translate(0, -50%);
+        }
+
+        &:before {
+          transform: translate(0, -50%);
+        }
+      }
+    }
+
+    &[data-baloon-pos="left"] {
+
+      [data-baloon-html],
+      &:before {
+        right: 100%;
+        top: 50%;
+        transform: translate(var(--baloon-move), -50%);
+      }
+
+      [data-baloon-html] {
+        margin-right: $baloon-arrow-size + 5px;
+      }
+
+      &:before {
+        @include arrow(right);
+      }
+    }
+
+    &[data-baloon-pos="right"] {
+
+      [data-baloon-html],
+      &:before {
+        left: 100%;
+        top: 50%;
+        transform: translate(calc(var(--baloon-move) * -1), -50%);
+      }
+
+      [data-baloon-html] {
+        margin-left: $baloon-arrow-size + 5px;
+      }
+
+      &:before {
+        @include arrow(left);
+      }
+    }
+
+    &[data-baloon-dim] {
+      [data-baloon-html] {
+        white-space: normal;
+      }
+    }
+
+    &[data-baloon-dim="small"] {
+      [data-baloon-html] {
+        width: 80px;
+        max-height: 80px;
+      }
+    }
+
+    &[data-baloon-dim="medium"] {
+      [data-baloon-html] {
+        width: 150px;
+        max-height: 150px;
+        overflow: hidden;
+      }
+    }
+
+    &[data-baloon-dim="large"] {
+      [data-baloon-html] {
+        width: 260px;
+        max-height: 260px;
+        overflow: hidden;
+      }
+    }
+
+    &[data-baloon-dim="xlarge"] {
+      [data-baloon-html] {
+        width: 380px;
+        max-height: 380px;
+        overflow: hidden;
+
+        @media screen and (max-width: 768px) {
+          width: 90vw;
+        }
+      }
+    }
+
+    &[data-baloon-dim="fit"] {
+      [data-baloon-html] {
+        width: 100%;
+        max-height: 380px;
+        overflow: hidden;
+      }
+    }
+
+    &[data-baloon-dim] {
+      [data-baloon-html] {
+        &[data-baloon-fit] {
+          max-height: 50vh;
+        }
+      }
+    }
+
+    &[data-baloon-dim] {
+      [data-baloon-html] {
+        &[data-baloon-scroll] {
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+}

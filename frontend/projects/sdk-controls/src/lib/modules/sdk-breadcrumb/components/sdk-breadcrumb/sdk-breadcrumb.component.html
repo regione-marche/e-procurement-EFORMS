@@ -1,0 +1,14 @@
+<div *ngIf="isReady && config?.items?.length != 0"
+  [ngClass]="{'breadcrumb-container': true, 'breadcrumb-disabled': config.disabled === true }">
+  <div *ngFor="let item of config.items; let i = index" class="breadcbrumb-item">
+    <div *ngIf="i !== 0">/</div>
+    <div *ngIf="canBeFocused == false" tabindex="-1" role="navigation"
+      [attr.aria-label]="item.label | translate:item.labelParams">
+      {{ item.label | translate:item.labelParams }}
+    </div>
+    <div *ngIf="canBeFocused == true" sdkClick (aClick)="onClick($event, item)" tabindex="0" role="navigation"
+      [attr.aria-label]="item.label | translate:item.labelParams">
+      {{ item.label | translate:item.labelParams }}
+    </div>
+  </div>
+</div>

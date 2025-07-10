@@ -1,0 +1,16 @@
+<div class="sdk-sidebar" *ngIf="sidebarOpened">
+  <sdk-backdrop (onClick)="backdropClick()"></sdk-backdrop>
+  <div [class]="classList(config, position)" [style.width.px]="width" #sidebar>
+    <div class="sdk-sidebar-content">
+      <div class="sdk-sidebar-close-button" sdkClick (aClick)="backdropClick()" [title]="'BUTTONS.CLOSE' | translate"
+        [attr.aria-label]="'BUTTONS.CLOSE' | translate" tabindex="0" role="button">
+        <i class="mgg-icons-crud-cancel"></i>
+      </div>
+      <div class="sidebar-header-image">
+        <img *ngIf="config.headerImage" class="responsive-img" [src]="config.headerImage" alt="Header Image">
+      </div>
+      <div #sidebarContent tabindex="0" role="dialog">
+      </div>
+    </div>
+  </div>
+</div>

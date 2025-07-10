@@ -1,0 +1,22 @@
+<div *ngIf="isReady" [class]="getClasses('sdk-mixed-search-container', config)">
+  <div class="sdk-mixed-search-panel" #inputElem>
+    <input type="text" pInputText
+      [placeholder]="config.label != null ? (config.label | translate:config.labelParams) : ''" [(ngModel)]="data">
+    <button pButton type="button" class="sdk-mixed-search-button" [icon]="'mgg-icons-data-search'"
+      [title]="searchButtonTitle | translate" sdkClick (aClick)="manageClick($event)"></button>
+    <button pButton type="button" class="sdk-mixed-search-dropdown-button"
+      [icon]="(overlayVisible$ | async) ? 'pi pi-chevron-up' : 'pi pi-chevron-down'" sdkClick
+      (aClick)="manageDropdown($event)" [attr.aria-label]="config.opzioniLabel | translate"></button>
+  </div>
+  <div class="sdk-mixed-search-dropdown-panel" *ngIf="overlayVisible$ | async"
+    [@overlayAnimation]="{value: 'visible', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}"
+    (@overlayAnimation.start)="onOverlayAnimationStart($event)" #overlayElem>
+    <ul class="sdk-mixed-search-dropdown-items" role="listbox">
+      <li *ngFor="let item of filterList" sdkClick (aClick)="onOptionClick($event, item)" tabindex="0" role="option"
+        pRipple [attr.aria-label]="item.label" [attr.aria-selected]="item.value === selectedFilter"
+        [ngClass]="{'sdk-mixed-search-dropdown-item': true, 'selected': item.value === selectedFilter}">
+        <span>{{ item.label || 'empty' }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

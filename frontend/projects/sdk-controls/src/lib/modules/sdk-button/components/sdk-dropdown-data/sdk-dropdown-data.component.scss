@@ -1,0 +1,12 @@
+.rdbi {
+    cursor: pointer;
+
+    &.rdbi-disabled {
+        cursor: default;
+    }
+
+    >p {
+        margin: 0;
+        padding: 1rem;
+    }
+}

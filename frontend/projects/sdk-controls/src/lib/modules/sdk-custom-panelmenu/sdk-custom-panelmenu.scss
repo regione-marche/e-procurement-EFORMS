@@ -1,0 +1,34 @@
+.p-panelmenu {
+    .p-panelmenu-header-link {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        position: relative;
+        text-decoration: none;
+        padding: .857rem 1rem;
+        font-weight: 700;
+
+        &:focus {
+            z-index: 1;
+        }
+    }
+
+    .p-submenu-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .p-menuitem-link {
+        display: flex;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .p-menuitem-text {
+        line-height: 1;
+    }
+}

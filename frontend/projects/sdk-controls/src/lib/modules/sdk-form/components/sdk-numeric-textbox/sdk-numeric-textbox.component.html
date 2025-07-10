@@ -1,0 +1,55 @@
+<div *ngIf="isReady" class="sdk-input sdk-numeric-textbox">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'numeric-textbox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <!-- Caso normale -->
+    <input *ngIf="currencyEnabled !== true && customSymbol == null" type="text" [id]="componentRandomId"
+      [class]="getClasses(false, 'numeric-textbox-field p-inputtext ui-corner-all p-component', config.fieldClasses)"
+      [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [value]="data" #elem />
+    <!-- Caso normale con simbolo custom -->
+    <div *ngIf="currencyEnabled === false && customSymbol != null" class="numeric-textbox-field currency-group">
+      <input type="text" [id]="componentRandomId"
+        [class]="getClasses(false, 'p-inputtext ui-corner-all p-component', config.fieldClasses)"
+        [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [value]="data" #elem />
+      <div class="currency-symbol"
+        *ngIf="!!config.disabled == false || (!!config.disabled == true && data != null && data != '')">
+        {{ customSymbol }}
+      </div>
+    </div>
+    <!-- Caso currency normale -->
+    <div *ngIf="currencyEnabled === true && customSymbol == null" class="numeric-textbox-field currency-group">
+      <input type="text" [id]="componentRandomId"
+        [class]="getClasses(false, 'p-inputtext ui-corner-all p-component', config.fieldClasses)"
+        [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [value]="data" #elem />
+      <div class="currency-symbol"
+        *ngIf="!!config.disabled == false || (!!config.disabled == true && data != null && data != '')">
+        {{ sdkNumberFormatService.getCurrencySymbol(locale, currency) }}
+      </div>
+    </div>
+    <!-- Caso currency con simbolo custom -->
+    <div *ngIf="currencyEnabled === true && customSymbol != null" class="numeric-textbox-field currency-group">
+      <input type="text" [id]="componentRandomId"
+        [class]="getClasses(false, 'p-inputtext ui-corner-all p-component', config.fieldClasses)"
+        [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [value]="data" #elem />
+      <div class="currency-symbol"
+        *ngIf="!!config.disabled == false || (!!config.disabled == true && data != null && data != '')">
+        {{ sdkNumberFormatService.getCurrencySymbol(locale, currency) }}/{{ customSymbol }}
+      </div>
+    </div>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="config.description != null">
+    <label [class]="getClasses(true, 'numeric-textbox-label', config.labelClasses, config.infoBox)"></label>
+    <div class="numeric-textbox-field">{{ config.description | translate }}</div>
+  </div>
+</div>

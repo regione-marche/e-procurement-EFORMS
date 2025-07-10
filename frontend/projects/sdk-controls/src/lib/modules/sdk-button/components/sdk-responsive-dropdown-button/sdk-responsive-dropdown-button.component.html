@@ -1,0 +1,20 @@
+<div *ngIf="isReady">
+  <!-- Desktop -->
+  <div [ngClass]="getClasses(config)" [title]="getTranslatedTitle(config.title, config.label, config.labelParams)"
+    [sdkBaloon]="{ pos: baloonPos, dim: baloonDim, html: baloonComponent(), 
+    disabled: baloonDisabled(config.disabled), input: baloonInput(), 
+    output: baloonOutput(), frameTop: baloonFrameTop, 
+    frameBottom: baloonFrameBottom, responsive: baloonResponsive }" tabindex="0" role="navigation"
+    [attr.aria-label]="getTranslatedTitle(config.title, config.label, config.labelParams)">
+    <i [class]="getIcon(config)"></i>
+  </div>
+  <!-- Mobile -->
+  <div [ngClass]="getClasses(config, true)" [title]="getTranslatedTitle(config.title, config.label, config.labelParams)"
+    [sdkBaloon]="{ pos: baloonPos, dim: baloonDim, html: baloonComponent(), 
+    disabled: baloonDisabled(config.disabled), input: baloonInput(), 
+    output: baloonOutput(), frameTop: baloonFrameTop, 
+    frameBottom: baloonFrameBottom, responsive: baloonResponsive }" tabindex="0" role="navigation"
+    [attr.aria-label]="getTranslatedTitle(config.title, config.label, config.labelParams)">
+    <i [class]="getIcon(config)"></i>
+  </div>
+</div>

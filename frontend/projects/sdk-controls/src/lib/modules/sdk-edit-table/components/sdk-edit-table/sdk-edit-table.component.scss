@@ -1,0 +1,107 @@
+.sdk-edit-table-container{
+    th {
+        color: #fff;
+        padding-bottom: 12px;
+        padding-top: 12px;
+        text-align: left;
+    }
+    
+    thead{
+        tr,th {
+            text-align: left;
+            font-weight: 700;
+            color: rgb(51, 51, 51);
+            padding: 0.571rem 0.857rem;    
+            border-style: solid;
+            border-color: rgb(200, 200, 200);
+            border-image: initial;
+            border-width: 1px;
+            background: rgb(244, 244, 244);
+            transition: background-color 0.2s ease 0s, box-shadow 0.2s ease 0s;           
+        }
+    }
+    .amount-total {
+        text-align: left;
+        font-weight: 700;
+        color: rgb(51, 51, 51);
+        padding: 0.571rem 0.857rem;    
+        border-style: solid;
+        border-color: rgb(200, 200, 200);
+        border-image: initial;
+        border-width: 1px;
+        background: rgb(244, 244, 244);
+        transition: background-color 0.2s ease 0s, box-shadow 0.2s ease 0s;           
+    }
+    td {
+        border: 1px solid #ddd;      
+        padding: 8px;
+    }
+    .table-sdk-edit-table {
+        border: 1px solid;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+   
+
+    .amount{
+        text-align: end;
+    }
+
+    .icon-clickable {
+        cursor: pointer;
+        padding: 0 0.5rem;
+        color: #06c;
+    }
+
+    .icon-container{
+        display: flex;
+    }         
+
+    input{
+        font-size: 18px;
+        font-family: "Titillium Web", sans-serif;
+        width: 100%;
+        color: #333333;
+        background: #ffffff;
+        padding: 0.429rem 0.429rem;
+        border: 1px solid #a6a6a6;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;       
+        appearance: none;
+        border-radius: 3px;
+    }
+
+    select{
+        font-size: 18px;
+        font-family: "Titillium Web", sans-serif;
+        width: 100%;
+        color: #333333;
+        background: #ffffff;
+        padding: 0.429rem 0.429rem;
+        border: 1px solid #a6a6a6;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;               
+        border-radius: 3px;
+    }
+
+    .total-title{
+        width: 130px; 
+     }
+
+    .delete-icon,.add-icon{
+        color: #06c!important;
+        cursor: pointer;
+    }
+
+    .add-icon-container{
+        color: #06c!important;
+        cursor: pointer;
+        display: flex;
+    }
+
+
+}
+
+
+
+
+

@@ -1,0 +1,49 @@
+.validation-internal-sidebar {
+    background-color: rgb(0, 102, 204) !important;
+    color: rgb(255, 255, 255);
+    max-width: 500px;
+
+    .output-validation-internal-sidebar {
+        .section-title-detail {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 1rem 0;
+        }
+
+        .check-panel-row {
+            padding: 1rem 0;
+        }
+
+        .check-validazioni-table {
+            margin: 1rem 0;
+
+            th {
+                background-color: rgb(0, 89, 179);
+            }
+
+            td {
+                font-size: 18px;
+                padding: 0.5rem;
+            }
+
+            .check-validazioni-table-divider {
+                border-bottom: 1px solid grey;
+            }
+
+            tbody tr td {
+                word-break: normal
+            }
+        }
+    }
+}
+
+.check-validazione-error {
+    color: #e85050;
+}
+
+@media screen and (max-width: 499px) {
+    .validation-internal-sidebar {
+        width: 100% !important;
+    }
+}

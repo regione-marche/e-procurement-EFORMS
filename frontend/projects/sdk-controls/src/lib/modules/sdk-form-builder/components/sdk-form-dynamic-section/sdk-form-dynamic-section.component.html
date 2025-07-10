@@ -1,0 +1,38 @@
+<div [ngClass]="{'sdk-form-dynamic-section': true}" *ngIf="config.visible !== false && checkReadonlyCombo() === false">
+  <div class="section-header" *ngIf="config.label">
+    <div class="title">{{config.label | translate:config.labelParams }}</div>
+  </div>
+  <div class="section-content">
+    <div class="empty" *ngIf="config.dynamicFieldValues == null || config.dynamicFieldValues.length == 0">
+      {{ config.emptyDynamicSectionMessage | translate }}
+    </div>
+    <div
+      *ngIf="(config.dynamicReadonly == null || config.dynamicReadonly === false) && config.dynamicFieldValues != null && config.dynamicFieldValues.length > 0">
+      <div *ngFor="let combo of combosList; trackBy: trackByComboId; let i = index" class="dynamic-item form-row">
+        <label class="combobox-label">
+          {{ config.dynamicMultipleLabel | translate:{ value: i + 1 } }}
+        </label>
+        <select class="p-component p-dropdown combobox-field" (change)="manageModelChange(combo, $event)">
+          <option value="" tabindex="0">-</option>
+          <option *ngFor="let item of availableItems" [value]="item.value" [disabled]="item.disabled"
+            [tabindex]="item.disabled ? -1 : 0" [selected]="combo.data === item.value ? 'selected' : null">
+            {{item.label}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      *ngIf="config.dynamicReadonly === true && config.dynamicFieldValues != null && config.dynamicFieldValues.length > 0">
+      <div *ngFor="let combo of getReadonlyValues(); let i = index">
+        <div *ngIf="combo.value == DEFAULT_SI" class="dynamic-item form-row">
+          <div class="dynamic-label">
+            {{config.dynamicMultipleLabel | translate:{ value: i + 1 } }}
+          </div>
+          <div class="dynamic-field">
+            {{combo.descrizione}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

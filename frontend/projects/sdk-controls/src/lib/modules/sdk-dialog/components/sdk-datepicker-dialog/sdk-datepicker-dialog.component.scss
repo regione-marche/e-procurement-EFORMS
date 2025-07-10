@@ -1,0 +1,23 @@
+.datepicker-dialog {
+    width: 50vw;
+}
+
+.datepicker-text,
+.datepicker-container {
+    padding: 0.5rem 1rem;
+}
+
+.datepicker-label {
+    padding-right: 0.5rem;
+}
+
+@media screen and (max-width: 40em) {
+    .datepicker-dialog {
+        width: 75vw;
+    }
+}
+
+label.datepicker-label{
+    color: #007ad9;
+    font-weight: bold;
+}

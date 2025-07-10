@@ -1,0 +1,17 @@
+.clickable {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.textmodal-input {
+    padding-right: 1rem;
+}
+
+.text-value {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+}

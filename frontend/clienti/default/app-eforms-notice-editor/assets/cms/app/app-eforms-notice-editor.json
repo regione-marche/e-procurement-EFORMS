@@ -1,0 +1,15 @@
+{
+  "name": "@maggioli/app-eforms-notice-editor",
+  "styleUrls": ["styles/app.css"],
+  "settings": {
+    "app": "app-eforms-notice-editor",
+    "locale": {
+      "langCode": "it",
+      "dateFormat": "dd/MM/yyyy",
+      "timeFormat": "LTS",
+      "dateTimeFormat": "L LTS",
+      "currencyCode": "EUR"
+    },
+    "loadRemoteTitle": true
+  }
+}

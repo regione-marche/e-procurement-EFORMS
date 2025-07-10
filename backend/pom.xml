@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>it.appaltiecontratti</groupId>
+	<artifactId>m-eforms-ms</artifactId>
+	<version>6.2.0</version>
+	<name>M-Eforms MS</name>
+	<description>Progetto per la generazione degli XML eForms del TED</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Java compiler -->
+		<java.version>21</java.version>
+
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<!-- Versions - eForms -->
+		<version.eforms-core>1.4.0</version.eforms-core>
+
+		<!-- Versions - Third-party libraries -->
+		<version.commons-io>2.19.0</version.commons-io>
+		<version.commons-lang3>3.17.0</version.commons-lang3>
+		<version.jackson>2.18.3</version.jackson>
+		<version.jackson-databind>2.18.3</version.jackson-databind>
+		<version.jackson-dataformat-xml>2.18.3</version.jackson-dataformat-xml>
+		<version.ph-genericode>7.1.3</version.ph-genericode>
+		<version.ph-commons>11.2.1</version.ph-commons>
+		<version.xml.bind-api>4.0.2</version.xml.bind-api>
+		<version.jakarta.servlet-api>6.1.0</version.jakarta.servlet-api>
+		<version.jaxb-impl>4.0.5</version.jaxb-impl>
+		<version.jsr305>3.0.2</version.jsr305>
+		<version.reactor-netty>1.0.4</version.reactor-netty>
+	</properties>
+	<dependencies>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- OpenAPI -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+		<!-- eForms -->
+		<dependency>
+			<groupId>eu.europa.ted.eforms</groupId>
+			<artifactId>eforms-core-java</artifactId>
+			<version>${version.eforms-core}</version>
+		</dependency>
+
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${version.commons-io}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${version.commons-lang3}</version>
+		</dependency>
+
+		<!-- Saxon -->
+		<dependency>
+			<!-- Used for namespace aware xpath. -->
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>12.5</version>
+			<exclusions>
+				<!-- To avoid issues with the org.w3c.dom package. -->
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${version.jackson}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${version.jackson}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${version.jackson-databind}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>${version.jackson-dataformat-xml}</version>
+		</dependency>
+
+		<!-- PH -->
+		<dependency>
+			<!-- Helger lib to read codelist genericode (.gc) files. -->
+			<groupId>com.helger</groupId>
+			<artifactId>ph-genericode</artifactId>
+			<version>${version.ph-genericode}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.helger.commons</groupId>
+			<artifactId>ph-commons</artifactId>
+			<version>${version.ph-commons}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.helger.commons</groupId>
+			<artifactId>ph-jaxb</artifactId>
+			<version>${version.ph-commons}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.helger.commons</groupId>
+			<artifactId>ph-xml</artifactId>
+			<version>${version.ph-commons}</version>
+		</dependency>
+
+		<!-- Other -->
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${version.jaxb-impl}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>${version.jakarta.servlet-api}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${version.xml.bind-api}</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>io.projectreactor.netty</groupId>-->
+<!--			<artifactId>reactor-netty-http</artifactId>-->
+<!--			<version>${version.reactor-netty}</version>-->
+<!--		</dependency>-->
+
+		<!-- Tests -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>m-eforms-ms</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

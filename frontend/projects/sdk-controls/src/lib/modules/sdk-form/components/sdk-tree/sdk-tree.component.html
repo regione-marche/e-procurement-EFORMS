@@ -1,0 +1,3 @@
+<p-tree *ngIf="isReady" [value]="config.items" selectionMode="single" (onNodeSelect)="handleNodeClick($event)"
+    (output)="treeOutput($event)" [(selection)]="selectedValue">
+</p-tree>

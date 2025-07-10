@@ -1,0 +1,11 @@
+<div *ngFor="let act of actions; trackBy: trackByActionCode" 
+    sdkClick (aClick)="clickHandler($event, act)"
+    class="icon-clickable"
+    [class.no-pointer]="disablePointer"
+    tabindex="0" 
+    role="button" 
+    [title]="act.label" 
+    [attr.aria-label]="act.label"
+>
+    <i *ngIf="act?.icon && act.hidden !== true" [class]="iconClass(act.icon)"></i>
+</div>

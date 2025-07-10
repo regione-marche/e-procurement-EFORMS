@@ -1,0 +1,145 @@
+{
+  "HOME-PAGE": {
+    "HEADER-TITLE-CONTENT": "M-eForms",
+    "HEADER-DESCRIPTION": "M-eForms permette di compilare e creare file digitali (XML eForms) necessari per pubblicare avvisi di gare d'appalto europee. Questi avvisi, che includono avvisi di preinformazione, bandi di gara e aggiudicazioni, vengono pubblicati sulla piattaforma TED (Tenders Electronic Daily), il supplemento online della Gazzetta Ufficiale dell'Unione Europea, tramite interoperabilit\u00E0 della PAD (Piattaforma di Approvvigionamento Digitale) con ANAC",
+    "CARDS-HEADER": "Funzioni principali"
+  },
+  "HOME-ENOTICE-PAGE": {
+    "HEADER-TITLE-CONTENT": "Compilazione eForms",
+    "HEADER-DESCRIPTION": "Le seguenti funzionalit\u00E0 permettono di compilare, modificare e rettificare un formulario europeo, generando il file XML eForms da sottoporre mediante la piattaforma di approvvigionamento digitale ad ANAC",
+    "NUOVA-ENOTICE": "Nuovo eForm",
+    "NUOVA-RETTIFICA-ENOTICE": "Nuovo eForm di rettifica",
+    "MODIFICA-ENOTICE": "Modifica eForm"
+  },
+  "FOOTER": {
+    "SITENAME-TITLE": "Appalti e Contratti",
+    "SITENAME-SUBTITLE": "e-Procurement",
+    "SITENAME-DESCRIPTION": "",
+    "LINK-PRIVACY": "Privacy policy",
+    "LINK-NOTE": "Note legali",
+    "LINK-CONTATTI": "Contatti",
+    "CONTACTS": {
+      "PHONE": "Telefono:",
+      "CODICE-FISCALE": "Codice Fiscale:",
+      "PEC": "PEC:",
+      "CONTATTI-STAMPA": "Contatti Stampa:"
+    },
+    "CONTACTS-TITLE": "Contatti",
+    "VERTICAL-LINKS-TITLE": "Links"
+  },
+  "ENOTICE-SELECTOR": {
+    "DIRETTIVA": "Direttiva",
+    "TIPO": "Tipo",
+    "NUMERO-EFORM": "Numero eForm",
+    "DESCRIZIONE": "Descrizione",
+    "CREAZIONE-AVVISO": "Crea avviso",
+    "CREAZIONE-AVVISO-TITLE": "Crea: {{param}}",
+    "DIRETTIVE": {
+      "32014L0024": "2014/24/UE",
+      "32014L0025": "2014/25/UE",
+      "32009L0081": "2009/81/CE",
+      "32014L0023": "2014/23/UE",
+      "32018R1046": "2018/1046",
+      "32007R1370": "1370/2007",
+      "31985R2137": "2137/85",
+      "32001R2157": "2157/2001"
+    }
+  },
+  "ENOTICE": {
+    "METADATI-TABELLA": "Metadati",
+    "NUMERO-EFORM": "Numero eForm",
+    "DESCRIZIONE": "Descrizione",
+    "NOTICE-UUID": "Notice ID",
+    "VERSIONE-SDK": "Versione SDK",
+    "VERSIONE-AVVISO": "Versione dell'avviso",
+    "SELEZIONA-VOCE": "Si prega di selezionare una voce dalla men\u00F9 laterale per visualizzarla e procedere alla sua compilazione"
+  },
+  "DIALOG": {
+    "BACK-MESSAGE": "Sei sicuro di voler tornare alla pagina precedente? Se abbandoni questa pagina perderai i dati non salvati.",
+    "BACK-HEADER": "Torna alla pagina precedente",
+    "BOZZA-MESSAGE": "Salvataggio della form in bozza. Se si decide di procedere verr\u00E0 avviata la procedura di salvataggio.",
+    "BOZZA-HEADER": "Salva la form in bozza",
+    "DELETE-MESSAGE": "Sei sicuro di voler eliminare questo elemento?",
+    "DELETE-HEADER": "Elimina questo elemento",
+    "ACCEPT-LABEL": "SI",
+    "REJECT-LABEL": "NO"
+  },
+  "BUTTONS": {
+    "ANNULLA": "Indietro",
+    "SHOW-OPTIONAL-FIELDS": "Mostra dati facoltativi",
+    "HIDE-OPTIONAL-FIELDS": "Nascondi dati facoltativi",
+    "ALTRE-AZIONI": "Altre azioni",
+    "GENERA-JSON": "Scarica bozza",
+    "GENERA-XML": "Scarica XML",
+    "MODIFICA-PAGINA": "Modifica",
+    "SAVE-PAGINA": "Salva",
+    "TEST-FORM": "TESTA FORM SOLO PER DEVELOPMENT!",
+    "VALIDAZIONE-INTERNA": "Validazione interna",
+    "VALIDAZIONE-XSD": "Valida XSD",
+    "VALIDAZIONE-CVS": "Valida e crea XML",
+    "DOWNLOAD-JSON": "Scarica JSON",
+    "DOWNLOAD-XML": "Scarica XML",
+    "PREVIEW-PDF": "Anteprima PDF",
+    "CLOSE": "Chiudi",
+    "CANCEL": "Annulla",
+    "SAVE-BOZZA": "Salva in bozza",
+    "MOSTRA-DETTAGLI": "Mostra dettagli",
+    "NASCONDI-DETTAGLI": "Nascondi dettagli",
+    "CONFERMA-CREA-XML": "Conferma, crea e salva XML",
+    "DOWNLOAD-XML-EFORMS": "Scarica XML eForms",
+    "ADD-NEW-LOT": "Aggiungi lotto",
+    "ADD-NEW-PARTE-OFFERENTE": "Aggiungi parte offerente",
+    "ADD-NEW-APPALTO": "Aggiungi appalto",
+    "ADD-NEW-OFFERTA": "Aggiungi offerta",
+    "ADD-NEW-RISULTATO-LOTTO": "Aggiungi risultato del lotto"
+  },
+  "DEBUG": {
+    "JSON-BOX": "Box JSON",
+    "XML-BOX": "Box XML",
+    "XSD-VALIDATION-BOX": "Box validazione XSD",
+    "CVS-VALIDATION-BOX": "Box validazione CVS"
+  },
+  "ENOTICE-VERSION-SELECTOR-PAGE": {
+    "HEADER-TITLE-CONTENT": "Versioni SDK",
+    "HEADER-DESCRIPTION": "Seleziona una versione eForm Sdk da utilizzare"
+  },
+  "JSON-SELECTOR-PAGE": {
+    "HEADER-TITLE-CONTENT": "Carica un file",
+    "HEADER-DESCRIPTION": "Seleziona un file in formato JSON",
+    "CONTENT-LABEL": "Seleziona JSON"
+  },
+  "CVS-VALIDATION-RESULT": {
+    "TITOLO": "Validazione dati mediante CVS (Central Validation Service)",
+    "CONTROLLI-EFFETTUATI": "Controlli effettuati: ",
+    "CONTROLLI-FALLITI": "Controlli falliti: ",
+    "VALIDAZIONE-OK": "La validazione \u00E8 andata a buon fine, proseguire con la conferma e la creazione del file XML."
+  },
+  "CHECK-VISUAL-MODEL": {
+    "CHECK-TITLE": "CONTROLLO DATI",
+    "CHECK-VALIDATION-ERRORS": "Numero errori di validazione:",
+    "CHECK-DESC": "Descrizione",
+    "CHECK-SUCCESS": "Nessun errore di validazione. ",
+    "CHECK-SUCCESS-DESCRIPTION": "Si pu\u00F2 procedere con l'invio dei dati.",
+    "GENERIC-VALIDATION-ERROR": "Sono stati riscontrati degli errori di validazione durante la generazione del modello visuale",
+    "VALIDATION-SUCCESS": "La validazione non ha restituito errori."
+  },
+  "ERRORS": {
+    "ERRORE-VALIDAZIONE-XSD": "Errore durante la validazione CVS: si prega di compilare tutti i campi obbligatori per poter procedere con una nuova validazione",
+    "ERRORE-GENERICO-TED": "Errore durante la comunicazione col servizio TED: ",
+    "ERRORE-GENERICO-ANTEPRIMA-PDF": "Errore durante il download dell'anteprima PDF dal servizio TED",
+    "ERRORE-SUL-FORM": "Si prega di correggere l'errore rilevato in questo elemento.",
+    "ERRORE-DATA-GET": "Si \u00E8 verificato un errore durante il recupero dei dati dall'applicativo di e-procurement."
+  },
+  "BOZZA-JSON-XML": {
+    "SAVE-BOZZA-SUCCESS": "Salvataggio in bozza avvenuto con successo.",
+    "SAVE-BOZZA-FAILURE": "Si \u00E8 verificato un errore durante il salvataggio in bozza.",
+    "SAVE-XML-SUCCESS": "Salvataggio del tracciato XML TED avvenuto con successo. \u00C8 possibile chiudere e procedere nella piattaforma con le operazioni successive.",
+    "SAVE-XML-FAILURE": "Si \u00E8 verificato un errore durante il salvataggio del tracciato XML TED."
+  },
+  "BREADCRUMBS": {
+    "EFORMS": "eForms"
+  },
+  "CANNOT-LOAD-APP": "ATTENZIONE: L'accesso all'applicazione \u00E8 possibile solo tramite gli appositi link presenti nelle applicazioni di backoffice della piattaforma di e-procurement.",
+  "BLOCCO-ACCESSIBILITA-CONTENT": "Vai al contenuto",
+  "noRecords": "Nessun elemento"
+}

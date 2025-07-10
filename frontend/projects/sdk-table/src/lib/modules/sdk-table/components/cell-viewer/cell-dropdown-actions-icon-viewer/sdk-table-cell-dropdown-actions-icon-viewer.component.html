@@ -1,0 +1,9 @@
+<div class="sdk-table-cell-dropdown-actions-icon-viewer-container">
+    <p-splitButton [model]="items" [appendTo]="appendRef" styleClass="p-button-text mr-2 mb-2"
+        menuButtonProps="{'aria-label': this.columnConfig.title | translate}"
+        [expandAriaLabel]="this.columnConfig.title | translate">
+        <ng-template pTemplate="dropdownicon">
+            <i class="mgg-icons-menu-more"></i>
+        </ng-template>
+    </p-splitButton>
+</div>

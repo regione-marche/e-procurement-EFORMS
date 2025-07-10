@@ -1,0 +1,150 @@
+@import 'vars';
+
+.sdk-button-group-container {
+  > .sdk-button-group-left {
+    flex-grow: 1;
+    flex-shrink: 1;
+    @include basis(auto);
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+    @include grid-left;
+    @include grid-ca-center;
+    @include grid-va-center;
+  }
+
+  > .sdk-button-group-right {
+    flex-grow: 1;
+    flex-shrink: 1;
+    @include basis(auto);
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+    @include grid-right;
+    @include grid-ca-center;
+    @include grid-va-center;
+  }
+}
+
+.sdk-button-group-container .sdk-button-group-item {
+  .p-splitbutton.p-buttonset .p-button {
+    border: 1px solid;
+    border-color: $border-sfondo-testo;
+
+    &:not(.p-splitbutton-menubutton) {
+      &:hover {
+        background-color: $background-base;
+        color: $color-sfondo-testo;
+        border: 1px solid;
+        border-color: $border-sfondo-testo;
+        cursor: default;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.buttons-row {
+  padding: 1rem;
+  background-color: $background-base;
+  @include grid;
+  @include grid-row;
+  @include grid-nowrap;
+  @include grid-left;
+  @include grid-ca-stretch;
+  @include grid-va-stretch;
+
+  // width: calc(83.33333333% - 1rem);
+  // left: calc(16.66666667% + 1rem);
+  // margin: 0 0.5rem;
+
+  // @include media-breakpoint-down(md) {
+  //   width: 100%;
+  //   left: 0;
+  //   margin: 0;
+  // }
+
+  border-bottom-left-radius: $std-border-radius;
+  border-bottom-right-radius: $std-border-radius;
+
+  position: sticky;
+  bottom: 0;
+
+  z-index: 10;
+  height: 75px;
+
+  sdk-button-group {
+    width: 100%;
+  }
+
+  button.p-button {
+    border-radius: 360px;
+
+    &.p-splitbutton-defaultbutton {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &.p-splitbutton-menubutton {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+.sdk-button-group-item {
+  padding: 0 0.25rem;
+
+  .sdk-button-group-item-cancel {
+    color: green;
+  }
+}
+
+.sdk-button-responsive {
+  display: none;
+
+  @include media-breakpoint-down(md) {
+    display: flex;
+
+    .p-button-label {
+      display: none;
+    }
+  }
+}
+
+.sdk-button-no-responsive {
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+  }
+}
+
+.sdk-button-icon .p-button-label {
+  display: none;
+}
+
+.sdk-responsive-dropdown-button {
+  border-radius: 360px;
+
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  background-color: $background-base;
+  color: $color-sfondo-testo;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+
+  padding: .5rem;
+  width: 36px;
+  height: 36px;
+  @include grid-center;
+  @include grid-va-center;
+
+  &:hover {
+    color: $color-base;
+    background-color: $background-sfondo-testo;
+  }
+}

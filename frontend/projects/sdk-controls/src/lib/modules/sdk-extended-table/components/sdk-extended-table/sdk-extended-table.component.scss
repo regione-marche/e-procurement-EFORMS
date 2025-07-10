@@ -1,0 +1,41 @@
+table,
+th,
+td {
+    border: 1px solid #a6a6a6;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+    &.legend-table {
+        margin-top: 2rem;
+    }
+}
+
+.cell-value {
+    min-width: 100px;
+
+    .cell-description {
+        padding: 0.5rem 1rem;
+        
+        &.clickable {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cell-description-label {
+            padding-left: 0.5rem;
+        }
+    }
+
+    .cell-text-value {
+        text-align: right;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.icon-rotated-90 {
+    transform: rotate(90deg);
+}

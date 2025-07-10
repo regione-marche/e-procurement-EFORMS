@@ -1,0 +1,12 @@
+<div class="sdk-modal" *ngIf="modalOpened">
+  <sdk-modal-backdrop (onClick)="backdropClick()"></sdk-modal-backdrop>
+  <div [class]="classList(config)" [style.width.%]="width" #modal>
+    <div class="sdk-modal-content">
+      <div #panel tabindex="0" role="dialog"></div>
+      <div class="close-modal" sdkClick (aClick)="manageCloseModal()" [title]="'BUTTONS.CLOSE' | translate"
+        [attr.aria-label]="'BUTTONS.CLOSE' | translate" tabindex="0" role="button">
+        <i class="mgg-icons-crud-cancel icon-24"></i>
+      </div>
+    </div>
+  </div>
+</div>

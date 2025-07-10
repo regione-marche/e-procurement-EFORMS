@@ -1,0 +1,9 @@
+<div class="textbox-messages">
+  <div *ngFor="let level of messagesLevels" [class]="getPanelClass(level)">
+    <ul>
+      <li *ngFor="let m of getMessages(level)">
+        {{ m.text | translate:m.params }}
+      </li>
+    </ul>
+  </div>
+</div>

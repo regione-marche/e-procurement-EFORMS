@@ -1,0 +1,91 @@
+.sdk-detail-table-container{
+    th {
+        color: #fff;
+        padding-bottom: 12px;
+        padding-top: 12px;
+        text-align: left;
+    }
+    
+    thead{
+        tr,th {
+            text-align: left;
+            font-weight: 700;
+            color: rgb(51, 51, 51);
+            padding: 0.571rem 0.857rem;    
+            border-style: solid;
+            border-color: rgb(200, 200, 200);
+            border-image: initial;
+            border-width: 1px;
+            background: rgb(244, 244, 244);
+            transition: background-color 0.2s ease 0s, box-shadow 0.2s ease 0s;           
+        }
+    }
+    .amount-total {
+        text-align: left;
+        font-weight: 700;
+        color: rgb(51, 51, 51);
+        padding: 0.571rem 0.857rem;    
+        border-style: solid;
+        border-color: rgb(200, 200, 200);
+        border-image: initial;
+        border-width: 1px;
+        background: rgb(244, 244, 244);
+        transition: background-color 0.2s ease 0s, box-shadow 0.2s ease 0s;           
+    }
+    td,  th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    .table-sdk-edit-table {
+        border: 1px solid;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+   
+
+    .amount{
+        text-align: end;
+    }
+
+    .icon-clickable {
+        cursor: pointer;
+        padding: 0 0.5rem;
+        color: #06c;
+    }
+
+    .icon-container{
+        display: flex;
+    }       
+
+    .active-sort{
+        background-color: #06c;
+        color: white;
+    }
+
+    .sortable{
+        cursor: pointer;
+    }
+
+    .sort-icon{
+        vertical-align: middle;
+        margin-left: 0.5rem;
+        color: #848484;
+    }
+
+    .sort-icon-active{
+        vertical-align: middle;
+        margin-left: 0.5rem;
+        color: white
+    }
+    
+    .total-title{
+       width: 130px; 
+    }
+
+}
+
+
+
+
+

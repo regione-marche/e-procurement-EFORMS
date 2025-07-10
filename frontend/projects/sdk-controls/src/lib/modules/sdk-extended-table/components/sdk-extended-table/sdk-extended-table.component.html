@@ -1,0 +1,74 @@
+<div *ngIf="isReady" class="sdk-extended-table-container">
+    <table aria-label="extended-table">
+        <thead *ngIf="config.header != null && config.header.length > 0">
+            <tr *ngFor="let row of config.header; trackBy: trackByRowCode">
+                <th *ngFor="let head of row.cells; trackBy: trackByHeaderCode" [attr.colspan]="head.colspan"
+                    [attr.rowspan]="head.rowspan" scope="col">
+                    {{ head.label | translate:head.labelParams }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let r of config.rows; trackBy: trackByRowCode">
+                <ng-container [ngTemplateOutlet]="row" [ngTemplateOutletContext]="{ r }"></ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+    <table *ngIf="config.legend != null && config.legend.length > 0" class="legend-table" aria-label="legend-table">
+        <!-- Per risolvere segnalazione sonarqube -->
+        <thead style="display: none;">
+            <tr *ngFor="let row of config.legend; trackBy: trackByRowCode">
+                <th *ngFor="let cell of row.cells" [attr.colspan]="cell.colspan" [attr.rowspan]="cell.rowspan">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of config.legend; trackBy: trackByRowCode" [class]="getRowClasses(row)">
+                <td *ngFor="let cell of row.cells; let cellIndex = index" [class]="getCellClasses(cell)"
+                    [attr.colspan]="cell.colspan" [attr.rowspan]="cell.rowspan">
+                    <div class="cell-description" *ngIf="cell.label != null">
+                        <!-- cella descrittiva -->
+                        {{ cell.label | translate:cell.labelParams }}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Template Riga -->
+<ng-template #row let-data="r">
+    <tr [class]="getRowClasses(data)">
+        <td *ngFor="let cell of data.cells; let cellIndex = index" [class]="getCellClasses(cell)"
+            [attr.colspan]="cell.colspan" [attr.rowspan]="cell.rowspan">
+            <div class="cell-description clickable"
+                *ngIf="data.children != null && data.children.length > 0 && cellIndex == 0 && cell.label != null"
+                (click)="toggleChildren(data)" tabindex="0" role="cell">
+                <div *ngIf="data.children != null && data.children.length > 0 && cellIndex == 0"
+                    [ngClass]="{'icon-rotated-90': data.rowExpanded === false}">
+                    <i
+                        [ngClass]="{'mgg-icons-navigation-hide': data.rowExpanded === false, 'mgg-icons-navigation-show': data.rowExpanded === true}"></i>
+                </div>
+                <!-- cella descrittiva -->
+                <div class="cell-description-label">
+                    {{ cell.label | translate:cell.labelParams }}
+                </div>
+            </div>
+            <!-- Duplico perche' altrimenti lo screen reader vede la cella cliccabile anche quando non fa nulla -->
+            <div class="cell-description"
+                *ngIf="!(data.children != null && data.children.length > 0 && cellIndex == 0) && cell.label != null">
+                <!-- cella descrittiva -->
+                {{ cell.label | translate:cell.labelParams }}
+            </div>
+            <div class="cell-text-value" *ngIf="cell.value != null">
+                {{ sdkNumberFormatService.formatCurrencyString(cell.value, locale, currency) }}
+            </div>
+            <div class="cell-text-value" *ngIf="cell.label == null && cell.value == null">
+                -
+            </div>
+        </td>
+    </tr>
+    <ng-container *ngIf="data.children != null && data.children.length > 0 && data.rowExpanded === true">
+        <ng-container *ngFor="let child of data.children" [ngTemplateOutlet]="row"
+            [ngTemplateOutletContext]="{ r: child }"></ng-container>
+    </ng-container>
+</ng-template>

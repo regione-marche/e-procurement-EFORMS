@@ -1,0 +1,25 @@
+<div class="sdk-table-filter" *ngIf="isReady">
+    <div class="active-filters" *ngIf="activeFilters && activeFilters.length > 0">
+        <div class="title">
+            {{ config.activeFiltersLabel | translate }}
+        </div>
+        <div class="single-active-filter" *ngFor="let f of activeFilters">
+            <i class="mgg-icons-crud-cancel icon clickable" sdkClick (aClick)="removeFilter(f)" tabindex="0"
+                role="button"></i> {{ f.label | translate:f.labelParams }}
+        </div>
+    </div>
+    <div class="filter">
+        <p-accordion>
+            <p-accordionTab [header]="getFilterLabel(config)">
+                <div class="form">
+                    <sdk-form-builder [config]="formBuilderConfigObs" [data]="formBuilderDataSubject"
+                        (output)="manageFormOutput($event)">
+                    </sdk-form-builder>
+                </div>
+                <div class="buttons-container">
+                    <sdk-button-group [config]="filterButtonsObs" (output)="onButtonClick($event)"></sdk-button-group>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+</div>

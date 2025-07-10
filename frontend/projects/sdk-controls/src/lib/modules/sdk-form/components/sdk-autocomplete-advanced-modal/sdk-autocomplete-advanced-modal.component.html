@@ -1,0 +1,56 @@
+<div class="sdk-autocomplete-advanced-modal-container" *ngIf="isReady">
+    <div class="messages-box" #messages></div>
+    <span class="p-float-label">
+        <textarea [id]="componentRandomId" pInputTextarea [(ngModel)]="searchData"
+            (ngModelChange)="debounce.next($event)" [attr.aria-label]="config.searchLabel | translate"
+            class="textarea-style"></textarea>
+        <label [for]="componentRandomId">{{ config.searchLabel | translate }}</label>
+    </span>
+
+    <div class="sdk-autocomplete-advanced-modal-paginator-info">
+        {{ currentRecordStatus | async }}
+    </div>
+    <p-table [columns]="config.columns" [value]="results" [rows]="10" [showCurrentPageReport]="true"
+        [paginator]="paginationEnabled" [rowsPerPageOptions]="[10,25,50]" [sortField]="defaultSortField"
+        sortMode="single" [sortOrder]="defaultSortDirection" [defaultSortOrder]="defaultSortDirection"
+        [currentPageReportTemplate]="'currentPageReport' | translate" paginatorDropdownAppendTo="body"
+        [totalRecords]="totalRecords" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="loading" #table>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <ng-container *ngFor="let col of columns">
+                    <th *ngIf="col.code !== 'actions'" [pSortableColumn]="col.code"
+                        [ngClass]="{'actions-col': col.code === 'actions'}"
+                        [attr.aria-label]="col.label | translate:col.labelParams" scope="col">
+                        {{ col.label | translate:col.labelParams }}
+                        <p-sortIcon [field]="col.code"></p-sortIcon>
+                    </th>
+                    <th *ngIf="col.code === 'actions'" [ngClass]="{'actions-col': col.code === 'actions'}"
+                        [attr.aria-label]="col.label | translate:col.labelParams" scope="col">
+                        {{ col.label | translate:col.labelParams }}
+                    </th>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    <div *ngIf="col.code === 'actions'" class="actions-cell" tabindex="0" role="button" sdkClick
+                        (aClick)="selectCell(rowData)" [title]="'primeng.choose' | translate"
+                        [attr.aria-label]="'primeng.choose' | translate">
+                        <i [class]="col.icon"></i>
+                    </div>
+                    <div *ngIf="col.code !== 'actions'" class="handle-whitespaces"
+                        [innerHTML]="parseValue(rowData[col.mappingInput])">
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="columns.length">
+                    {{ 'noRecords' | translate }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

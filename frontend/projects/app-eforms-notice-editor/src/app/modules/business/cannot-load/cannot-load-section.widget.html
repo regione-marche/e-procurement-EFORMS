@@ -1,0 +1,9 @@
+<div [class]="config.classNames">
+
+  <div class="messages-box" #messages></div>
+
+  <h1 *ngIf="config.title != null" [class]="config.title.classNames">{{config.title.label | translate}}</h1>
+
+  <div *ngIf="config.body != null" [class]="config.body.classNames">{{config.body.label | translate}}</div>
+</div>
+<div class="mt-auto"></div>

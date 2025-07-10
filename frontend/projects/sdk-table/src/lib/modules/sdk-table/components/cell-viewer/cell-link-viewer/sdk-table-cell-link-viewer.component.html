@@ -1,0 +1,8 @@
+<!-- Senza tooltip -->
+<div *ngIf="fieldValueTooltip == null" [class]="linkClass" sdkClick (aClick)="clickHandler($event, action)" tabindex="0"
+    role="button" [innerHTML]="value">
+</div>
+<!-- Con tooltip -->
+<div *ngIf="fieldValueTooltip != null" [class]="linkClass" sdkClick (aClick)="clickHandler($event, action)" tabindex="0"
+    role="button" [title]="fieldValueTooltip" [innerHTML]="value">
+</div>

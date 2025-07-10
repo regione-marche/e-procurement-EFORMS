@@ -1,0 +1,16 @@
+<p-dialog *ngIf="isReady" [(visible)]="isOpen" [modal]="true" [baseZIndex]="10000" [header]="config.header"
+    styleClass="motivazione-dialog">
+    <div class="motivazione-text">
+        {{config.message}}
+    </div>
+    <div class="motivazione-container">
+        <label class="motivazione-label">
+            {{ config.motivazioneLabel }}
+        </label>
+        <textarea  type="textarea" pInputText class="motivazione-field" [(ngModel)]="motivazione" ></textarea>
+    </div>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-times" sdkClick (aClick)="reject()" [label]="config.rejectLabel"></button>
+        <button type="button" pButton icon="pi pi-check" sdkClick (aClick)="accept()" [label]="config.acceptLabel"></button>
+    </p-footer>
+</p-dialog>

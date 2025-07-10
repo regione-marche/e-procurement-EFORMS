@@ -1,0 +1,46 @@
+.document-checkbox {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+    margin: 1rem 0;
+
+    .document-label-container {
+        flex: 0 1 auto;
+        display: flex;
+        border-radius: 3px;
+
+        .document-label {
+            cursor: pointer;
+            margin: 0.5rem;
+            padding: 0.5rem 3rem;
+            border-radius: 3px;
+        }
+    }
+}
+
+.document-url {
+    padding: 0;
+}
+
+.document-file {
+    padding: 1rem;
+
+    .form-row {
+        padding: 0.5rem 0;
+    }
+
+    .document-file-label {
+        padding: 1rem 0 0.5rem 0;
+    }
+
+    .document-file-input {
+        padding: 0.5rem 0 1rem 0;
+
+        .max-file-size {
+            padding: 0.5rem 0;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<div *ngIf="isReady" class="sdk-input sdk-masked-textbox">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'masked-textbox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <p-inputMask [inputId]="componentRandomId"
+      [styleClass]="getClasses(false, 'masked-textbox-field', config.fieldClasses)" [disabled]="config.disabled"
+      [ariaLabel]="config.label | translate:config.labelParams" [(ngModel)]="data"
+      (ngModelChange)="manageModelChange($event)" [mask]="config.mask" (onComplete)="manageModelChange($event)">
+    </p-inputMask>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.checkbox-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
+.mandatory-box {
+    display: inline;
+    white-space: nowrap;
+}

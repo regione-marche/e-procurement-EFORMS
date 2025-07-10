@@ -1,0 +1,32 @@
+.buttons-container {
+    margin: 1rem 0.5rem;
+    text-align: right;
+
+    sdk-basic-button {
+        padding: 0 0.2rem;
+    }
+}
+
+.icon {
+    padding-right: 0.5rem;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.active-filters {
+    margin: 0.2rem 0;
+    padding: 1rem;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+
+    .title {
+        font-weight: bold;
+        padding: 0.5rem 0;
+    }
+}
+
+.filter .form .sdk-form-builder {
+    padding-top: 1rem;
+}

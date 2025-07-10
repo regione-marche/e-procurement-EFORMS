@@ -1,0 +1,68 @@
+<div *ngIf="isReady" class="sdk-edit-table-container">
+    <table aria-label="edit-table" class="table-sdk-edit-table">
+        <thead *ngIf="config.columns != null && config.columns.length > 0">
+            <tr *ngIf="config.operation === true">
+                <td class="total-title">{{ 'LISTA-TABELLA-SOMMATORIE.TOTALI' | translate }}</td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">
+                    <span *ngIf="row.operation == 'sum'">{{ getSum(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                    <span *ngIf="row.operation == 'sub'">{{ getDiff(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                </td>
+                <td></td>         
+            </tr>
+            <tr>   
+                <th scope="col" *ngIf="config.operation === true"></th>                    
+                <th scope="col" *ngFor="let row of config.columns">{{ row.label | translate }}</th>   
+                <th scope="col"></th>                             
+            </tr>
+        </thead>
+        <tbody>            
+            <tr *ngFor="let cell of config.data; let i = index" >
+                <td *ngIf="config.operation === true"></td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">                   
+
+                    <input *ngIf="row.type === 'TEXTBOX'" type="text" [(ngModel)]="cell[row.mappingInput]" [attr.aria-label]="(row.label | translate) + cellIndex" (ngModelChange)="save()">
+                    
+                    <input *ngIf="row.type === 'TEXTAREA'" type="textarea" [(ngModel)]="cell[row.mappingInput]" [attr.aria-label]="(row.label | translate) + cellIndex" (ngModelChange)="save()">
+
+                    <input *ngIf="row.type === 'NUMERIC-TEXTBOX' && row.decimals === true  && row.subBy === undefined && row.sumBy === undefined" type="textbox" 
+                    [(ngModel)]="cell[row.mappingInput]" [attr.aria-label]="(row.label | translate) + cellIndex" 
+                    (ngModelChange)="save()" appTwoDigitDecimaNumber>         
+                    
+                    <input *ngIf="row.type === 'NUMERIC-TEXTBOX' && row.decimals !== true && row.subBy === undefined && row.sumBy === undefined" type="text" 
+                    [(ngModel)]="cell[row.mappingInput]" [attr.aria-label]="(row.label | translate) + cellIndex" 
+                    (ngModelChange)="save()" [maxlength]="row.maxLength" appAllownumbersonly>
+
+                    <input *ngIf="row.type === 'NUMERIC-TEXTBOX' && row.subBy != undefined" type="text"
+                    (input)="changeValue(i,row.mappingInput,cell[row.subBy[0]],cell[row.subBy[1]])"  [data]="cell[row.subBy[0]] - cell[row.subBy[1]]" disabled ="true" 
+                    [attr.aria-label]="(row.label | translate) + cellIndex" changeD>
+
+                    <input *ngIf="row.type === 'NUMERIC-TEXTBOX' && row.sumBy != undefined" type="text"
+                    (input)="changeValueSum(i,row.mappingInput,cell[row.sumBy[0]],cell[row.sumBy[1]])"  [data]="sum(cell[row.sumBy[0]],cell[row.sumBy[1]])" disabled ="true" 
+                    [attr.aria-label]="(row.label | translate) + cellIndex" changeD>
+                    
+                    <select *ngIf="row.type === 'COMBOBOX'"  [(ngModel)]="cell[row.mappingInput]" (ngModelChange)="save()"  >
+                        <option *ngFor="let v of config.comboList.get(row.listCode)" [ngValue]="v.key">{{v.value}}</option>
+                    </select>
+                    
+                    <input *ngIf="row.type === 'DATEPICKER'" type="date" [(ngModel)]="cell[row.mappingInput]" [attr.aria-label]="(row.label | translate) + cellIndex" (ngModelChange)="save()">
+                                        
+                </td>     
+                <td><i (click)="deleteRow(i)" class="mgg-icons-crud-delete delete-icon" [title]="('LISTA-TABELLA-SOMMATORIE.DELETE-ROW' | translate)"></i></td>
+                
+            </tr> 
+
+            <tr>
+                <td [attr.colspan]="config.columns.length + 2" ><div class="add-icon-container" (click)="addRow()"><i class="mgg-icons-crud-create add-icon" [title]="('LISTA-TABELLA-SOMMATORIE.ADD-ROW' | translate)"></i>{{ 'LISTA-TABELLA-SOMMATORIE.ADD-ROW' | translate }}</div></td>
+            </tr>
+
+            <tr class="amount-total" *ngIf="config.operation === true">
+                <td class="total-title">{{ 'LISTA-TABELLA-SOMMATORIE.TOTALI' | translate }}</td>
+                <td *ngFor="let row of config.columns; let cellIndex = index" [class]="row.operation == 'sum' || row.operation == 'sub' ? 'amount' : ''">
+                    <span *ngIf="row.operation == 'sum'">{{ getSum(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                    <span *ngIf="row.operation == 'sub'">{{ getDiff(row.mappingInput) }} <span *ngIf="row.currency == true ">€</span></span>
+                </td>     
+                <td></td>
+            </tr>
+        </tbody>
+    </table>    
+</div>

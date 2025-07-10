@@ -1,0 +1,22 @@
+<div *ngIf="isReady" class="sdk-button-group-container">
+    <div class="sdk-button-group-left">
+        <div *ngFor="let btn of buttonsLeft" [class]="getButtonClass(btn)">
+            <sdk-basic-button *ngIf="btn.dropdown == null || btn.dropdown === false" [config]="getBtnObs(btn)"
+                (output)="onClick($event)">
+            </sdk-basic-button>
+            <sdk-responsive-dropdown-button *ngIf="btn.dropdown === true" [config]="getBtnObs(btn)"
+                (output)="onClick($event)"></sdk-responsive-dropdown-button>
+        </div>
+    </div>
+    <div class="sdk-button-group-right">
+        <div *ngFor="let btn of buttonsRight" [class]="getButtonClass(btn)">
+            <sdk-basic-button *ngIf="!btn.splitButton && (btn.dropdown == null || btn.dropdown === false)" [config]="getBtnObs(btn)"
+                (output)="onClick($event)">
+            </sdk-basic-button>
+            <sdk-responsive-dropdown-button *ngIf="btn.dropdown === true" [config]="getBtnObs(btn)"
+                (output)="onClick($event)"></sdk-responsive-dropdown-button>
+            <sdk-dropdown-button *ngIf="btn.splitButton === true" [config]="getBtnObs(btn)"
+            (output)="onClick($event)"></sdk-dropdown-button>
+        </div>
+    </div>
+</div>

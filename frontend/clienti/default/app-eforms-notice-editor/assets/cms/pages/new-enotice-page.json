@@ -1,0 +1,69 @@
+{
+  "name": "new-enotice-page",
+  "title": "TITLE.NEW-ENOTICE-PAGE",
+  "layout": "base-menu-tabs-layout",
+  "appName": "app-eforms-notice-editor",
+  "styleUrls": [],
+  "settings": {
+    "page": "new-enotice-page"
+  },
+  "sections": [
+    {
+      "id": "new-enotice-page-content-root-section",
+      "selector": "new-enotice-section",
+      "description": "Componente per l'inserimento di una nuova enotice",
+      "classNames": "new-enotice-section",
+      "settings": {
+        "classNames": "app-eforms-notice-editor-new-enotice",
+        "body": {
+          "buttons": [
+            {
+              "code": "back-to-lista-enotice",
+              "label": "BUTTONS.ANNULLA",
+              "icon": "mgg-icons-paginator-previous",
+              "type": "cancel"
+            },
+            {
+              "code": "toggle-visibility",
+              "label": "BUTTONS.SHOW-OPTIONAL-FIELDS",
+              "icon": "mgg-icons-view-side-by-side",
+              "type": "cancel"
+            },
+            {
+              "code": "preview-pdf",
+              "label": "BUTTONS.PREVIEW-PDF",
+              "icon": "mgg-icons-action-print-preview"
+            },
+            {
+              "code": "validazione-cvs",
+              "label": "BUTTONS.VALIDAZIONE-CVS",
+              "icon": "mgg-icons-action-approval"
+            },
+            {
+              "code": "modifica-pagina",
+              "label": "BUTTONS.MODIFICA-PAGINA",
+              "icon": "mgg-icons-crud-edit"
+            },
+            {
+              "code": "genera-json",
+              "label": "BUTTONS.GENERA-JSON",
+              "icon": "mgg-icons-action-download"
+            }
+          ],
+          "sidebar": {
+            "code": "sidebar",
+            "position": "right",
+            "width": 500,
+            "focusContent": false,
+            "classList": ["validation-internal-sidebar"],
+            "headerImage": "assets/images/app/logo_aec.svg",
+            "component": "output-validation-internal-sidebar-widget",
+            "componentConfig": {
+              "checkSuccessActionDescr": "CHECK-VISUAL-MODEL.CHECK-SUCCESS-DESCRIPTION"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

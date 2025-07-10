@@ -1,0 +1,4 @@
+<div class="sdk-toolbar">
+  <sdk-toolbar-item *ngFor="let btn of config.buttons; trackBy: trackByCode" [config]="getBtnObs(btn)"
+    (output)="onClick($event)"></sdk-toolbar-item>
+</div>

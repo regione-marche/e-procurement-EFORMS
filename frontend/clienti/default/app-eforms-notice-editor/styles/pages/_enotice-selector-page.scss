@@ -1,0 +1,96 @@
+@import 'vars';
+@import 'config/sdk-flex';
+@import 'config/sdk-utility';
+
+.app-eforms-notice-editor-enotice-selector {
+  .enotice-selector-content {
+    @include grid();
+    @include grid-row();
+    @include grid-nowrap();
+    @include grid-center();
+
+    table {
+      border: 1px solid $enotice-selector-table-border-color;
+      border-collapse: collapse;
+      margin: 1rem;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+
+      &.td-numero-eform {
+        background-color: $enotice-selector-cell-numero-eform-background-color;
+      }
+
+      &.td-action button.p-button {
+        border-radius: 50%;
+        padding: 0.25rem;
+      }
+
+      &:not(&.td-descrizione) {
+        text-align: center;
+      }
+    }
+    th {
+      background-color: $enotice-selector-header-background-color;
+    }
+
+    /* Stile per dispositivi piccoli */
+    @include media-breakpoint-down(md) {
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      tr {
+        border-bottom: 1px solid $enotice-selector-row-responsive-border-color;
+      }
+
+      td {
+        display: block;
+        border: none;
+
+        &:not(&.td-descrizione) {
+          text-align: left;
+        }
+
+        &::before {
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: bold;
+          content: attr(data-label); // Usa data-label come contenuto
+        }
+
+        &.td-direttiva {
+          background-color: $enotice-selector-cell-direttiva-responsive-background-color;
+          &:not(&.td-direttiva-first) {
+            border-top: 1px solid $enotice-selector-table-border-color;
+          }
+        }
+
+        &.td-action {
+          @include grid();
+          @include grid-row();
+          @include grid-nowrap();
+          @include grid-va-center();
+        }
+
+        &[rowspan] {
+          padding-top: 16px;
+        }
+      }
+    }
+  }
+}

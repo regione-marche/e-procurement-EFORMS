@@ -1,0 +1,40 @@
+.k-textbox-container {
+    padding-top: 0;
+    width: 100%;
+}
+
+.mandatory-box {
+    display: inline;
+    white-space: nowrap;
+}
+
+table,
+th,
+td {
+    border: 1px solid #a6a6a6;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.hidden {
+    display: none;
+}
+
+.cell-text-value {
+    text-align: right;
+    padding: 0.5rem 1rem;
+}
+
+.cell-description {
+    padding: 0.5rem 1rem;
+}
+
+.cell-value {
+    min-width: 100px;
+}
+
+.sdk-input.sdk-textbox-matrix {
+    overflow-y: auto;
+}

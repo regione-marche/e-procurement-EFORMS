@@ -1,0 +1,209 @@
+// Fonts
+%app-font-family {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+%app-font {
+  @extend %app-font-family;
+  font-size: 18px;
+  line-height: 1.5rem;
+}
+
+// Palette colori applicativo
+
+$sfondo-pagina: rgb(247, 249, 250) !default;
+$background-sfondo-pagina: $sfondo-pagina !default;
+$color-sfondo-pagina: $sfondo-pagina !default;
+$background-sfondo-titolo: rgb(240, 246, 252) !default;
+$base: rgb(0, 102, 204) !default;
+$background-base: $base !default;
+$color-base: $base !default;
+$color-base-form: $base !default;
+$border-base: $base !default;
+$background-risalto: rgb(0, 89, 179) !default;
+$color-risalto: rgb(0, 89, 179) !important;
+$background-footer: rgb(0, 64, 128) !default;
+$background-sfondo-testo: rgb(255, 255, 255) !default;
+$color-sfondo-testo: rgb(255, 255, 255) !default;
+$border-sfondo-testo: rgb(255, 255, 255) !default;
+$color-testo: rgb(69, 91, 113) !default;
+$border-testo: rgb(69, 91, 113) !default;
+$color-titolo-su-sfondo: rgb(23, 50, 77) !default;
+$background-titolo: rgb(28, 32, 36) !default;
+$color-titolo: rgb(28, 32, 36) !default;
+$background-menu-tabs-sidebar: rgb(248, 248, 248) !default;
+$background-menu-active: #e8e8e8 !default;
+
+$sdk-panel-border-color: #a6a6a6 !default;
+$sdk-panel-text-color: rgb(69, 91, 113) !default;
+$sdk-dropdown-background-color: #fff !default;
+$sdk-dropdown-text-color: #333 !default;
+$sdk-dropdown-border-color: #c8c8c8 !default;
+$sdk-dropdown-box-shadow: rgb(0 0 0 / 16%) !default;
+$sdk-dropdown-item-background-color-hover: #eaeaea !default;
+$sdk-dropdown-item-text-color-selected: #fff !default;
+$sdk-dropdown-item-background-color-selected: #007ad9 !default;
+$sdk-baloon-border-color: #bbb !default;
+
+/* Buttons */
+$button-text-color: #ffffff !default;
+$button-background-color: #1068c9 !default;
+$button-hover-background-color: #005980 !default;
+$button-border-color: #1068c9 !default;
+$button-hover-border-color: #005980 !default;
+
+$body-description-text-color: #455b71 !default;
+
+%sdk-layout-header-text-color {
+  color: $color-sfondo-testo;
+}
+
+%sdk-layout-header-top-background {
+  background-color: $background-risalto;
+}
+
+%sdk-layout-header-mid-background {
+  background-color: $background-base;
+}
+
+%sdk-layout-header-bottom-background {
+  background-color: $background-base;
+}
+
+%sdk-layout-header-menu-background {
+  background-color: $background-base;
+}
+
+%sdk-layout-breadcrumbs-background {
+  background-color: $background-sfondo-titolo;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+%sdk-header-sticky-background {
+  background-color: $background-risalto !important;
+}
+
+%menu-sidebar-background {
+  background-color: $background-base !important;
+}
+
+%footer-color {
+  background-color: $background-footer;
+  color: $color-sfondo-testo;
+}
+
+%footer-contacts-item-link-color {
+  color: $color-sfondo-testo;
+}
+
+%go-to-color {
+  color: $color-sfondo-testo;
+  background-color: $background-footer;
+  border-color: $border-sfondo-testo !important;
+}
+
+%footer-link-color {
+  color: $color-sfondo-testo;
+}
+
+%footer-title-border {
+  border-bottom: 1px solid #fff;
+}
+
+%checkbox-background-color {
+  background-color: $background-base;
+}
+
+%checkbox-color {
+  color: $color-base;
+}
+
+$blue-colors: (
+  baseBlue: rgb(0, 102, 204),
+  risaltoBlue: rgb(0, 89, 179),
+  layoutBorder: rgb(51, 133, 214)
+);
+
+$light-colors: (
+  whitePink: #f8d7da,
+  whiteGray: #d4edda,
+  whiteGreen: #c3e6cb,
+  lightgrey: #dee2e6,
+  grey: #dddddd,
+  lightPink: #f5c6cb,
+  veryWhite: #efeded,
+  darkWhite: #dad7d7,
+  white: #ffffff
+);
+
+%green-background {
+  background: #009246; //greenpea
+}
+
+%red-background {
+  background: red;
+}
+
+%white-flag-background {
+  background: white;
+}
+
+%transparent-border {
+  border-color: transparent;
+}
+
+%e8e8e8-background {
+  background-color: #e8e8e8; //e8e8e8
+}
+
+%header-menu-item-color {
+  color: $color-sfondo-testo !important;
+}
+
+%transparent-background {
+  background-color: transparent;
+}
+
+%mainpanel-h2-setup {
+  font-weight: bold;
+  color: $color-titolo;
+}
+
+%check-pubb-sidebar-color {
+  background-color: $background-base !important;
+  color: $color-sfondo-testo;
+}
+
+%check-pubb-sidebar-th-color {
+  background-color: $background-risalto;
+}
+
+$std-border-radius: 10px;
+
+%layout-side-tabs-body-color {
+  background-color: #ffffff;
+  border-left: 1px solid #c8c8c8;
+}
+
+%placeholder-color {
+  color: #c0c0c0;
+}
+
+%login-form-border {
+  border: 1px solid #cccccc;
+}
+
+$enotice-selector-table-border-color: black !default;
+$enotice-selector-cell-numero-eform-background-color: $background-sfondo-titolo !default;
+$enotice-selector-header-background-color: #f2f2f2 !default;
+$enotice-selector-row-responsive-border-color: #ccc !default;
+$enotice-selector-cell-direttiva-responsive-background-color: rgb(229 231 235) !default;
+
+$color-panelmenu-highlight: $color-sfondo-testo !default;
+
+$display-group-background-color: #c3ffbb80 !default;
+$display-section-background-color: #bbe6ff80 !default;
+
+$footer-logo-img-max-width: 100px !default;
+
+$enotice-form-field-divider: #a6a6a6 !default;

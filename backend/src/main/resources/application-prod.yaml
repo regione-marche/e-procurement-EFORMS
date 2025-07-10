@@ -1,0 +1,5 @@
+# Json Logging
+logging:
+  structured:
+    format:
+      console: ecs

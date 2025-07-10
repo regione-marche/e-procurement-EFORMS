@@ -1,0 +1,22 @@
+<div *ngIf="isReady" class="sdk-input sdk-autocomplete">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'autocomplete-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div class="sdk-autocomplete-content">
+      <p-autoComplete [inputId]="componentRandomId"
+        [styleClass]="getClasses(false, 'autocomplete-field', config.fieldClasses)" [(ngModel)]="data"
+        [suggestions]="listItems" [disabled]="config.disabled" [placeholder]="config.placeholder" field="text"
+        [emptyMessage]="getNoDataLabel(config.noDataLabel)" [minLength]="minSearchCharacters"
+        (completeMethod)="debounce.next($event)" (onSelect)="manageSelect($event)" [forceSelection]="true"
+        (onClear)="clearAutocomplete($event)" [multiple]="true" (onUnselect)="manageUnselect($event)">
+      </p-autoComplete>
+    </div>
+  </div>
+</div>

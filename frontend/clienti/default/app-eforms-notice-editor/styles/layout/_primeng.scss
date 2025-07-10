@@ -1,0 +1,501 @@
+@import 'vars';
+@import 'config/sdk-flex';
+
+body {
+  .p-tooltip {
+    min-width: 35rem;
+  }
+
+  .p-button {
+    color: $color-sfondo-testo;
+    background-color: $background-base;
+    border: 1px solid #ffffff;
+    min-width: fit-content;
+  }
+
+  .p-button:enabled:hover {
+    color: $color-base;
+    background-color: $background-sfondo-testo;
+    border-color: $border-base;
+  }
+
+  .p-accordion-header-link {
+    background-color: $background-sfondo-testo;
+  }
+
+  // PrimeNG FIX
+
+  .p-inputtext {
+    @extend %app-font-family;
+  }
+
+  .sdk-layout-header-right .sdk-button-outline {
+    .p-button {
+      background: transparent;
+      border: none;
+      color: $color-sfondo-testo;
+
+      border-radius: 0px;
+
+      &:hover {
+        color: $color-sfondo-testo;
+        background-color: $background-base;
+        border: none;
+      }
+    }
+
+    &.p-button {
+      background: transparent;
+      border: none;
+      color: $color-sfondo-testo;
+
+      border-radius: 0px;
+
+      &:hover {
+        color: $color-sfondo-testo;
+        background-color: $background-base;
+        border: none;
+      }
+    }
+  }
+
+  .p-accordion .p-accordion-header a {
+    @include flex;
+  }
+
+  .p-inputwrapper {
+    width: 100%;
+    border-color: rgb(222, 226, 230);
+    border-radius: 6px;
+  }
+
+  .p-dropdown-items-wrapper {
+    max-height: 35vh;
+    width: 100%;
+  }
+
+  .p-paginator {
+    .p-inputwrapper {
+      width: auto !important;
+      border-color: auto !important;
+    }
+  }
+
+  .p-paginator-rpp-options .p-overlay {
+    max-height: auto !important;
+    width: 63px;
+  }
+
+  .p-dropdown-panel {
+    margin-right: 8vw;
+  }
+
+  ul.p-dropdown-items {
+    padding: 0;
+  }
+
+  .p-tree {
+    width: 100%;
+  }
+
+  .p-treeselect {
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  .p-tree-loading-overlay {
+    align-items: flex-start;
+    padding-top: 14vh;
+  }
+
+  .p-tree-loading-icon.p-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .p-inputwrapper {
+    border-radius: 6px;
+    padding: 0;
+  }
+
+  .p-tree-container {
+    padding-left: 0;
+  }
+
+  .p-treeselect-items-wrapper {
+    min-width: 60vw;
+    height: 35vh;
+  }
+
+  .p-treeselect-panel {
+    margin-right: 8vw;
+  }
+
+  .p-tabview {
+    .p-tabview-panels {
+      border: none;
+      background-color: transparent;
+    }
+
+    .p-tabview-nav {
+      border-bottom: 1px solid #c8c8c8;
+      margin: 0 1rem;
+      border-radius: 0;
+
+      li {
+        margin: 0;
+
+        a {
+          color: $color-testo;
+
+          &:hover {
+            color: $color-base;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        &.p-tabview-selected {
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: 3px solid map-get($blue-colors, baseBlue);
+
+          a {
+            color: $color-base;
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .p-calendar.p-calendar-w-btn .p-datepicker-trigger.p-button {
+    border-color: transparent;
+  }
+
+  .p-datepicker-month,
+  .p-datepicker-year {
+    font-size: 1rem;
+    padding: 0.2rem;
+  }
+
+  .p-datepicker table td > span.p-highlight {
+    background-color: $background-base;
+  }
+
+  .p-tabmenu .p-tabmenu-nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+  }
+
+  .sdk-menu-tabs-config > .father .p-tabmenu .p-tabmenu-nav {
+    padding: 0;
+    background: transparent;
+    border-bottom: 1px solid #c8c8c8;
+
+    .p-tabmenuitem {
+      background-color: transparent;
+      border-left: 1px solid #c8c8c8;
+      border-right: 1px solid #c8c8c8;
+      border-top: 2px solid map-get($blue-colors, risaltoBlue);
+
+      .p-menuitem-link {
+        background: transparent;
+        font-weight: normal;
+
+        .p-menuitem-text {
+          color: $color-testo;
+        }
+      }
+
+      &.p-highlight .p-menuitem-link {
+        background: transparent;
+        border: none;
+
+        .p-menuitem-text {
+          color: $color-base;
+        }
+      }
+
+      &:not(.p-highlight) {
+        border: none;
+
+        .p-menuitem-link {
+          border: none;
+        }
+      }
+    }
+  }
+
+  .sdk-menu-tabs-config > .sdk-menu-tabs-children .p-tabmenu .p-tabmenu-nav {
+    padding: 0;
+    background: transparent;
+    border-bottom: 1px solid #c8c8c8;
+
+    .p-tabmenuitem {
+      border: none;
+      background-color: transparent;
+
+      border-radius: 0;
+
+      &:not(.p-highlight):not(.p-disabled):hover {
+        background-color: transparent;
+        border: none;
+
+        .p-menuitem-link .p-menuitem-text {
+          color: $color-base;
+        }
+      }
+
+      .p-menuitem-link {
+        background: transparent;
+        border-color: transparent;
+        font-weight: normal;
+
+        .p-menuitem-text {
+          color: $color-testo;
+        }
+      }
+
+      &.p-highlight {
+        background-color: transparent;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 3px solid map-get($blue-colors, risaltoBlue);
+
+        .p-menuitem-link .p-menuitem-text {
+          color: $color-base;
+        }
+      }
+    }
+  }
+
+  .p-datatable .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-tbody > tr > td {
+    border: 1px solid #ddd !important;
+    white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    min-width: 6rem;
+  }
+  .p-datatable table {
+    table-layout: auto !important;
+    width: 100%;
+  }
+
+  .p-paginator {
+    border: none;
+    padding: 1rem;
+    background-color: transparent;
+
+    p-dropdown {
+      float: right;
+    }
+
+    .p-paginator-pages .p-paginator-page.p-highlight {
+      color: $color-testo;
+      background-color: transparent;
+      border: 1px solid map-get($blue-colors, baseBlue);
+      border-radius: 3px;
+    }
+
+    .p-dropdown {
+      background-color: transparent;
+
+      border: 1px solid;
+      border-color: $border-testo;
+
+      .p-dropdown-label,
+      .p-dropdown-trigger {
+        color: $color-testo;
+        background-color: transparent;
+      }
+    }
+
+    &.p-paginator-bottom {
+      //position: sticky;
+      //bottom: 75px;
+      z-index: 11;
+      align-self: flex-end;
+      background-color: $background-sfondo-testo;
+    }
+
+    .p-disabled {
+      opacity: 1;
+    }
+
+    .p-dropdown-items {
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .p-panelmenu {
+    .p-panelmenu-header {
+      > a,
+      &.p-highlight > a,
+      &.p-highlight:not(.p-disabled) > a:hover {
+        border: none;
+        background-color: transparent;
+        color: $color-testo;
+
+        .p-panelmenu-icon {
+          color: $color-testo;
+        }
+      }
+
+      &:not(.p-highlight):not(.p-disabled) > a:hover {
+        color: $color-testo;
+
+        .p-panelmenu-icon {
+          color: $color-testo;
+        }
+      }
+    }
+
+    .p-element.p-component.p-panelmenu-header.p-highlight .p-panelmenu-header-action {
+      color: $color-panelmenu-highlight;
+    }
+  }
+
+  .p-menubar {
+    padding-bottom: 0;
+
+    .p-menuitem-link:hover {
+      background-color: $background-risalto;
+    }
+
+    .p-menuitem-link:not(.p-disabled):hover {
+      background-color: $background-risalto;
+      border-radius: 0;
+    }
+
+    .p-menuitem.p-menuitem-active > .p-menuitem-link {
+      background-color: $background-risalto;
+    }
+
+    .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-submenu-icon {
+      color: #fff;
+    }
+  }
+
+  .p-component {
+    @extend %app-font;
+
+    &.p-splitbutton {
+      @include grid;
+      @include grid-nowrap;
+    }
+  }
+
+  .simple-search-container .search-inline {
+    flex: 1 1 100%;
+    display: flex;
+
+    .p-button {
+      background-color: $background-sfondo-testo;
+      border: 1px solid #a6a6a6;
+      border-left: none;
+      color: $color-testo;
+
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &:enabled:hover {
+        border: 1px solid #a6a6a6;
+        border-left: none;
+        color: $color-testo;
+      }
+
+      &:enabled:active {
+        background-color: $background-sfondo-testo;
+        color: $color-testo;
+        border-color: #a6a6a6;
+      }
+    }
+
+    .p-inputtext {
+      flex: 1 1 auto;
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:enabled:hover:not(.ui-state-error),
+      &:enabled:focus:not(.ui-state-error) {
+        border-color: #a6a6a6;
+      }
+    }
+
+    .p-dropdown {
+      height: 100%;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0;
+
+      &:not(.p-disabled):hover,
+      &:not(.p-disabled).p-focus {
+        border-color: #a6a6a6;
+      }
+
+      .p-dropdown-label {
+        font-size: 1rem;
+        color: $color-testo;
+      }
+
+      .p-dropdown-item {
+        color: $color-testo;
+
+        &.p-highlight {
+          color: $color-sfondo-testo;
+          background-color: $background-base;
+        }
+      }
+    }
+  }
+
+  .p-dialog .p-button:enabled:hover {
+    border-color: $border-base;
+  }
+}
+
+// PrimeNG FIX
+
+.p-button.sdk-button-flat {
+  background-color: transparent;
+  color: $color-testo;
+  border: 0px;
+}
+
+.p-button.sdk-button-flat:hover {
+  background-color: $background-risalto;
+  color: $color-sfondo-testo;
+  border: 1px solid map-get($blue-colors, risaltoBlue);
+}
+
+.p-button.sdk-button-outline {
+  background-color: transparent;
+  color: $color-testo;
+}
+
+.p-button.sdk-button-outline:hover {
+  background-color: $background-risalto;
+  color: $color-sfondo-testo;
+}
+
+.p-datepicker-buttonbar .p-button.p-button-text {
+  color: #000000;
+
+  &:enabled:hover {
+    color: #696969;
+  }
+}

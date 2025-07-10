@@ -1,0 +1,5 @@
+<button *ngFor="let act of actions; trackBy: trackByActionCode" [class]="'k-button'" [disabled]="act.disabled"
+    [hidden]="act.hidden" sdkClick (aClick)="clickHandler($event, act)" tabindex="0" role="button">
+    <i *ngIf="act?.icon" [class]="iconClass(act.icon)"></i>
+    {{act.label}}
+</button>

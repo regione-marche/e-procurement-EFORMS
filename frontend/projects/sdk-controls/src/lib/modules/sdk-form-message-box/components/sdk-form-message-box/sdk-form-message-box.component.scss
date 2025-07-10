@@ -1,0 +1,37 @@
+%base-message {
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin: 2px 0;
+
+    ul {
+        margin: 0;
+    }
+}
+
+.success-message {
+    @extend %base-message;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.warning-message {
+    @extend %base-message;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.info-message {
+    @extend %base-message;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.error-message {
+    @extend %base-message;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}

@@ -1,0 +1,40 @@
+<div [class]="getClasses()" #headerMenu>
+    <div class="sdk-layout-header-content">
+        <div *ngIf="menuVisible" class="header-menu">
+            <ng-container *ngIf="canBeFocused == true">
+                <div *ngFor="let item of (menuObs | async)?.items" class="first-level-item"
+                    [title]="item.label | translate" [attr.aria-label]="item.label | translate">
+                    <i *ngIf="item.icon != null" [class]="item.icon" sdkClick (aClick)="toggle($event, item)"
+                        tabindex="0" role="navigation" [attr.aria-label]="item.label | translate"></i>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="canBeFocused == false">
+                <div *ngFor="let item of (menuObs | async)?.items" class="first-level-item"
+                    [title]="item.label | translate" [attr.aria-label]="item.label | translate">
+                    <i *ngIf="item.icon != null" [class]="item.icon" [attr.aria-label]="item.label | translate"></i>
+                </div>
+            </ng-container>
+        </div>
+        <div *ngIf="menuVisible" class="header-menu">
+            <ng-container *ngIf="canBeFocused == true">
+                <div *ngFor="let item of (bottomMenuObs | async)?.items" class="first-level-item"
+                    [title]="item.label | translate" [attr.aria-label]="item.label | translate">
+                    <i *ngIf="item.icon != null" [class]="item.icon" sdkClick (aClick)="toggle($event, item, true)"
+                        tabindex="0" role="navigation" [attr.aria-label]="item.label | translate"></i>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="canBeFocused == false">
+                <div *ngFor="let item of (bottomMenuObs | async)?.items" class="first-level-item"
+                    [title]="item.label | translate" [attr.aria-label]="item.label | translate">
+                    <i *ngIf="item.icon != null" [class]="item.icon" [attr.aria-label]="item.label | translate"></i>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div class="menu-item-content"
+    [@menuContent]="selected ? {value: 'visible', params: {transitionParams: transitionOptions}} : {value: 'hidden', params: {transitionParams: transitionOptions}}"
+    (@menuContent.done)="onToggleDone($event)">
+    <sdk-menu *ngIf="showMenu" [config]="subMenuObs" (output)="manageMenuClick($event, true)"></sdk-menu>
+</div>
+<sdk-modal [config]="modalConfigObs"></sdk-modal>

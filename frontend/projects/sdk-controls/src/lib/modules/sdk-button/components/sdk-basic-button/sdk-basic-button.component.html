@@ -1,0 +1,7 @@
+<button *ngIf="isReady" pButton type="button" (click)="onClick($event)" [disabled]="config.disabled"
+    [ngClass]="getClasses(config)" [icon]="getIcon(config)"
+    [label]="getTranslatedLabel(config.label, config.labelParams, config.look)"
+    [title]="getTranslatedTitle(config.title, config.label, config.labelParams)"></button>
+<button *ngIf="isReady" pButton type="button" (click)="onClick($event)" [disabled]="config.disabled"
+    [ngClass]="getClasses(config, true)" [icon]="getIcon(config)"
+    [title]="getTranslatedTitle(config.title, config.label, config.labelParams)"></button>

@@ -1,0 +1,6 @@
+<p-tabView *ngIf="isReady" (onChange)="onTabSelect($event)">
+  <p-tabPanel *ngFor="let item of config.tabs; trackBy: trackByCode" [header]="item.title"
+    [selected]="item.selected === true" [disabled]="item.disabled">
+    <sdk-tab-item [config]="getItemObs(item)"></sdk-tab-item>
+  </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,8 @@
+<div *ngIf="isReady" [class]="panelClass" tabindex="0" role="dialog" #messagePanel>
+  <ul *ngIf="config.list === true">
+    <li *ngFor="let m of config.messages" [innerText]="m.message | translate:m.messageParams">
+    </li>
+  </ul>
+  <div *ngIf="config.list !== true" [innerHtml]="messageHtml">
+  </div>
+</div>

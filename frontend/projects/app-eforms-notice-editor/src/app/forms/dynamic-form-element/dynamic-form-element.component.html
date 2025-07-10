@@ -1,0 +1,247 @@
+@if(content != null) {
+<div [class]="classes" [class.repeatable]="isRepeatable" [class.hidden-element]="!isVisible"
+    [class.display-group]="content.contentType == 'group' && content.displayType == 'GROUP'"
+    [class.section]="content.contentType == 'group' && content.displayType == 'SECTION'"
+    [class.input-field]="content.contentType == 'field'">
+
+    <div class="row">
+
+        @switch (content.contentType) {
+        @case ('group') {
+        <div [formGroup]="form">
+            <p-accordion [activeIndex]="0">
+                <p-accordionTab>
+                    <ng-template pTemplate="header">
+                        <ng-template *ngTemplateOutlet="groupheader"></ng-template>
+                    </ng-template>
+
+                    @for(child of content.content; track $index) {
+                    @if(child._repeatable == true) {
+                    <ng-container [formArrayName]="child.id">
+                        @for(c of getDynamicFormArray(child.id).controls; track $index; let i = $index) {
+
+                        <ng-container [formGroupName]="i">
+                            <app-dynamic-form-element [content]="child" [form]="c" [editorCount]="i"
+                                [originalFormReactiveContent]="getOriginalFormReactiveContent(child.id)"
+                                [level]="editorLevel + 1" (addElement)="manageAddElement($event, child, i)"
+                                (removeElement)="manageRemoveElement($event, child.id)"
+                                [showRequiredOrSuggestedOnly]="showRequiredOrSuggestedOnly"
+                                (visibilityChange)="onChildVisibilityChange($event, child.id, i)"></app-dynamic-form-element>
+                        </ng-container>
+                        }
+
+
+                    </ng-container>
+                    } @else {
+                    <app-dynamic-form-element [content]="child" [form]="form.controls[child.id]"
+                        [originalFormReactiveContent]="getOriginalFormReactiveContent(child.id)"
+                        [level]="editorLevel + 1" [showRequiredOrSuggestedOnly]="showRequiredOrSuggestedOnly"
+                        (visibilityChange)="onChildVisibilityChange($event, child.id, -1)"></app-dynamic-form-element>
+                    }
+                    }
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+        }
+        @case ('field') {
+        <div class="formcontrol-container">
+            <div class="formcontrol-header">
+                <ng-template *ngTemplateOutlet="inputheader"></ng-template>
+                <!-- Recupera la descrizione dell'elemento nel caso in cui sia un "field" -->
+                <div class="formcontrol-description text-secondary">
+                    {{ retrieveFieldDescription() }}
+                </div>
+            </div>
+            <div class="formcontrol-usercontent">
+                @switch (content.displayType) {
+                @case ('CHECKBOX') {
+                <input [id]="componentRandomId" class="form-control col-auto" type="checkbox"
+                    [formControlName]="content.id" tabindex="0" #inputElem
+                    [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()}" [formControlScroll]
+                    [formControl]="form" [elementRef]="inputElem">
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                }
+                @case ('COMBOBOX') {
+                @if(field.codeList?.value?.type == "hierarchical"){
+                <p-treeSelectCustom [id]="componentRandomId" containerStyleClass="form-control"
+                    [formControlName]="content.id" [options]="nodes" [filter]="true" [filterInputAutoFocus]="false"
+                    [loading]="loading" (onNodeSelect)="onTreeNodeSelect($event)" #inputElem
+                    [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()}" [formControlScroll]
+                    [formControl]="form" [elementRef]="inputElem" />
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                } @else {
+                <p-dropdown [id]="componentRandomId" containerStyleClass="form-control" [formControlName]="content.id"
+                    tabindex="0" #inputElem [ariaLabel]="inputAriaLabel"
+                    [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()} " [formControlScroll]
+                    [formControl]="form" [elementRef]="inputElem" [options]="dropdownOptions" optionLabel="label"
+                    optionValue="key" [filter]="true" [showClear]="true">
+                </p-dropdown>
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                }
+                }
+                @case ('RADIO') {
+                <select [id]="componentRandomId" class="form-control col-auto combobox-element"
+                    [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()}"
+                    [formControlName]="content.id" tabindex="0" #inputElem [formControlScroll] [formControl]="form"
+                    [elementRef]="inputElem">
+                    <option value=""></option>
+                    <option value="true">{{ 'indicator|when-true' | translateLabel }}</option>
+                    <option value="false">{{ 'indicator|when-false' | translateLabel }}</option>
+                </select>
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                }
+                @case ('TEXTAREA') {
+                <textarea [id]="componentRandomId" class="form-control col-auto" [formControlName]="content.id" rows="2"
+                    [value]="content.presentValue ?? null" tabindex="0"
+                    [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()}" #inputElem
+                    [formControlScroll] [formControl]="form" [elementRef]="inputElem"></textarea>
+                @if(!inputElem.disabled && inputElem.getAttribute("maxlength")!= null &&
+                +inputElem.getAttribute("maxlength") != 0){
+                <p class="show-max-length"
+                    [ngClass]="{ 'max-length-reached': +inputElem.value?.length == +inputElem.getAttribute('maxlength') }">
+                    {{inputElem.value?.length +"/"+ inputElem.getAttribute("maxlength")}}
+                </p>
+                }
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                }
+                @case ('TEXTBOX') {
+                <input [id]="componentRandomId" class="form-control col-auto" [formControlName]="content.id"
+                    tabindex="0" [ngClass]="{'formcontrol-custom-invalid': form?.customProperties?.invalid?.()}"
+                    #inputElem [formControlScroll] [formControl]="form" [elementRef]="inputElem">
+                @if(!inputElem.disabled && inputElem.getAttribute("maxlength")!= null &&
+                +inputElem.getAttribute("maxlength") != 0){
+                <p class="show-max-length"
+                    [ngClass]="{ 'max-length-reached': +inputElem.value?.length == +inputElem.getAttribute('maxlength') }">
+                    {{inputElem.value?.length +"/"+ inputElem.getAttribute("maxlength")}}
+                </p>
+                }
+                @if(form?.customProperties?.invalid?.()){
+                <div class="formcontrol-feedback-invalid">{{'ERRORS.ERRORE-SUL-FORM' | translate}}
+                </div>
+                }
+                }
+                @case ('READONLY-TEXT') {
+                <p #inputElem>{{form.getRawValue()}}</p>
+                }
+                }
+            </div>
+        </div>
+        }
+        @case ('notice-metadata') {
+        <div [formGroup]="form">
+            <ng-template *ngTemplateOutlet="groupheader"></ng-template>
+            @for(child of content.content; track $index) {
+            <app-dynamic-form-element [content]="child" [form]="form.controls[child.id]"
+                [originalFormReactiveContent]="getOriginalFormReactiveContent(child.id)" [level]="editorLevel + 1"
+                [showRequiredOrSuggestedOnly]="showRequiredOrSuggestedOnly"
+                (visibilityChange)="onChildVisibilityChange($event, child.id, -1)"></app-dynamic-form-element>
+            }
+        </div>
+        }
+        }
+    </div>
+</div>
+}
+
+
+<ng-template #groupheader>
+    <!-- Header -->
+    <div class="header">
+        @switch (editorLevel + 1) {
+        @case (1) {
+        <h1 class="label">
+            {{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h1>
+        }
+        @case (2) {
+        <h2 class="label">
+            {{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h2>
+        }
+        @case (3) {
+        <h3 class="label">
+            {{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h3>
+        }
+        @case (4) {
+        <h4 class="label">
+            {{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h4>
+        }
+        @case (5) {
+        <h5 class="label">
+            {{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h5>
+        }
+        @default () {
+        <h6 class="label">{{content._label | translateLabel}}
+            @if(content && content.id) {
+            <span>[{{content.id}}]</span>
+            }
+        </h6>
+        }
+        }
+        @if(shouldShowAddandRemoveButtons){
+        @if(isRepeatable && !content.hidden && !isFirstLevel && content.id != 'GR-TenderingParty' &&
+        content.id != 'GR-SettledContract' &&
+        content.id != 'GR-LotTender' &&
+        content.id != 'GR-LotResult') {
+        <button type="button" class="p-button" (click)="addElement($event); $event.stopPropagation()"
+            [attr.aria-label]="('editor.add.more' | translateLabel) + ' ' + (content._label | translateLabel)">
+            {{'editor.add.more' | translateLabel
+            }}</button>
+        @if(editorCount > 1) {
+        <button type="button" class="p-button" (click)="removeElement($event); $event.stopPropagation()"
+            [attr.aria-label]="('editor.remove' | translateLabel) + ' ' + (content._label | translateLabel:content:editorCount)">
+            {{'editor.remove' |
+            translateLabel
+            }}</button>
+        }
+        }
+        }
+    </div>
+
+</ng-template>
+
+<ng-template #inputheader>
+    <!-- Header -->
+    <label class="input-label" [attr.for]="componentRandomId">
+        {{content._label | translateInputLabel}}
+        @if(content && content.id) {
+        <span>[{{content.id}}]</span>
+        }
+        @if(isRequired) {
+        ( * )
+        }
+    </label>
+</ng-template>

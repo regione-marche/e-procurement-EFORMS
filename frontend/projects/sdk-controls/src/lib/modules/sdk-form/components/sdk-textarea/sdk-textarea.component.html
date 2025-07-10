@@ -1,0 +1,20 @@
+<div *ngIf="isReady" class="sdk-input sdk-textarea">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'textarea-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <textarea pInputTextarea [id]="componentRandomId" [class]="getClasses(false, 'textarea-field', config.fieldClasses)"
+      [ngClass]="{'with-help': config.showHelp === true}" [disabled]="config.disabled" [(ngModel)]="data"
+      (ngModelChange)="manageModelChange($event)" [rows]="config.rows" [maxlength]="config.maxLength"></textarea>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+</div>

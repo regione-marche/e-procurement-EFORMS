@@ -1,0 +1,40 @@
+<div [class]="config.classNames" *ngIf="isReady">
+
+    <div class="messages-box" #messages></div>
+
+    <h1 *ngIf="config.title != null" [class]="config.title.classNames">{{config.title.label | translate}}</h1>
+
+    <div *ngIf="config.body != null" [class]="config.body.classNames">{{config.body.label | translate}}</div>
+
+    <!-- BEGIN Boxes -->
+    <div class="boxes">
+        <!-- BEGIN Box -->
+        <div class="box-container-enotice-version">
+            <div class="header-title">
+                <h2 class="header-title-content">{{ 'JSON-SELECTOR-PAGE.HEADER-TITLE-CONTENT' | translate }}
+                </h2>
+                <p class="header-description">
+                    {{ 'JSON-SELECTOR-PAGE.HEADER-DESCRIPTION' | translate }}
+                </p>
+            </div>
+            <div class="box-cards">
+                <div class="cards-container">
+                    @for(card of jsonCard; track $index) {
+                    <div class="item-card" sdkClick (aClick)="manageCardClick()" tabindex="0"
+                        [attr.aria-label]="card.label | translate:card.labelParams">
+                        <div class="item-card-icon">
+                            <i [ngClass]="getIcons(card)"></i>
+                        </div>
+                        <div class="item-card-title">
+                            {{ card.label | translate:card.labelParams }}
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            <input type="file" id="fileInput" accept="application/json" style="display: none;"
+                (change)="onFileSelected($event)">
+        </div>
+        <!-- END Box -->
+    </div>
+</div>

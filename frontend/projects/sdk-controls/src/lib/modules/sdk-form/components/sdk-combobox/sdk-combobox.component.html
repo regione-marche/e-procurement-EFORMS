@@ -1,0 +1,38 @@
+<div *ngIf="isReady" class="sdk-input sdk-combobox">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'combobox-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+      <div *ngIf="config.showLabelHelp" class="help-label-icon" [title]="config.helpLabelDescription | translate"
+        [attr.aria-label]="config.helpLabelDescription | translate">
+        <i class="mgg-icons-help"></i>
+      </div>
+    </label>
+    <p-dropdown p-dropdown [inputId]="componentRandomId" [ngClass]="{'with-help': config.showHelp === true}"
+      [styleClass]="getClasses(false, 'combobox-field', config.fieldClasses)" [options]="listItems"
+      [disabled]="config.disabled === true" [(ngModel)]="data"
+      [placeholder]="config.placeholder ? config.placeholder : '-'" [showClear]="showClear"
+      [emptyMessage]="'ERRORS.NOT-FOUND' | translate" (onChange)="manageModelChange($event)"
+      [virtualScroll]="config.virtualScroll ?? false" [virtualScrollItemSize]="config.virtualScrollItemSize ?? 50"
+      [filter]="config.comboboxFilter ?? true" filterBy="label">
+      <ng-template let-selItm pTemplate="item">
+        <span *ngIf="selItm.title == null" [title]="selItm.label">{{ selItm.label ||
+          'empty' }}</span>
+        <span *ngIf="selItm.title != null" [title]="selItm.title">{{ selItm.label ||
+          'empty' }}</span>
+      </ng-template>
+    </p-dropdown>
+    <div class="combobox-item-description" *ngIf="currentDescription != null">
+      {{ currentDescription | translate }}
+    </div>
+    <div *ngIf="config.showHelp" class="help-icon" [title]="config.helpDescription | translate"
+      [attr.aria-label]="config.helpDescription | translate">
+      <i class="mgg-icons-help"></i>
+    </div>
+  </div>
+</div>

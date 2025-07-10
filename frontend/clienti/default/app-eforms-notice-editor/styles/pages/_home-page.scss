@@ -1,0 +1,128 @@
+@import 'vars';
+@import 'config/sdk-flex';
+@import 'config/sdk-utility';
+
+.app-eforms-notice-editor-index,
+.app-eforms-notice-editor-enotice-version-selector,
+.app-eforms-notice-editor-json-selector {
+  margin: 0 auto;
+  padding: 3rem 0 0 0;
+
+  h2 {
+    @extend %mainpanel-h2-setup;
+  }
+
+  .box-container-main {
+    background-color: #eee;
+
+    .header-title-content-main {
+      margin-top: 1%;
+      font-size: 32px;
+    }
+  }
+
+  .box-container {
+    .header-title {
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+
+      > h2 {
+        text-align: center;
+      }
+
+      > p {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .header-description {
+      color: $color-testo;
+    }
+  }
+
+  .boxes {
+    @include grid;
+    @include grid-row;
+    @include grid-nowrap;
+    @include grid-center;
+    @include grid-ca-stretch;
+    @include grid-va-stretch;
+
+    .box-container-enotice,
+    .box-container-enotice-version {
+      background-color: $background-sfondo-testo;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      flex: 0 1 calc(50% - 1rem);
+      margin: 1rem;
+      padding: 2rem;
+      display: table-cell;
+
+      .header-title {
+        min-height: 180px;
+        text-align: center;
+      }
+
+      .box-cards .cards-container {
+        @include grid;
+        @include grid-column;
+        @include grid-nowrap;
+
+        .item-card {
+          @include grid;
+          @include grid-row;
+          @include grid-nowrap;
+          @include grid-center;
+          @include grid-va-center;
+          background-color: $background-base;
+          color: $color-sfondo-testo;
+          transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          padding: 0.6rem;
+          border-radius: 4px;
+          text-align: center;
+          cursor: pointer;
+          size: 30px;
+          height: calc(40px + 1.2rem);
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          margin-bottom: 1rem;
+
+          &:hover {
+            background-color: $background-risalto;
+          }
+
+          .item-card-icon {
+            font-size: 2rem;
+          }
+
+          .item-card-title {
+            margin: 0.75rem 1rem;
+            font-size: 20px;
+            font-weight: 500;
+          }
+
+          .item-card-title:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .app-eforms-notice-editor-index {
+    .boxes {
+      @include grid-column;
+    }
+  }
+}
+
+@include media-breakpoint-only(sm) {
+  .box-cards {
+    padding: 0;
+  }
+}

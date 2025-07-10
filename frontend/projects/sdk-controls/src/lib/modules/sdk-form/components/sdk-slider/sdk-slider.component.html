@@ -1,0 +1,13 @@
+<div *ngIf="isReady" class="sdk-input sdk-slider">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <label [class]="getClasses(true, 'slider-label', config.labelClasses, config.infoBox)"
+    (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams">{{ config.label |
+    translate:config.labelParams }}
+    <div class="mandatory-box" *ngIf="mandatory">
+      ( * )
+    </div>
+  </label>
+  <p-slider [styleClass]="getClasses(false, 'slider-field', config.fieldClasses)" [min]="config.min" [max]="config.max"
+    [step]="config.step" [orientation]="config.vertical === true ? 'vertical' : 'horizontal'"
+    [disabled]="config.disabled" [(ngModel)]="data" (onSlideEnd)="manageModelChange($event)"></p-slider>
+</div>

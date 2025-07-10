@@ -1,0 +1,52 @@
+@import 'vars';
+@import 'config/sdk-flex';
+@import 'config/sdk-utility';
+
+.new-page-table {
+  @include grid();
+  @include grid-row();
+  @include grid-nowrap();
+  @include grid-right();
+
+  table {
+    width: 100%;
+    border: 1px solid $enotice-selector-table-border-color;
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+  }
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+
+    &.td-numero-eform {
+      background-color: $enotice-selector-cell-numero-eform-background-color;
+    }
+
+    &.td-action {
+      @include clickable(none);
+    }
+
+    &:not(&.td-descrizione) {
+      text-align: center;
+    }
+  }
+  th {
+    background-color: $enotice-selector-header-background-color;
+  }
+}
+
+.tooltip-div {
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .right {
+    text-align: right;
+  }
+}

@@ -1,0 +1,42 @@
+.sdk-form-group-list {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 0.5rem;
+
+    &.empty {
+        font-weight: bold;
+        color: rgb(69, 91, 113);
+        font-size: 1rem;
+    }
+}
+
+
+.add-button {
+    width: 100px;
+    height: 24px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pulsantiera .remove-button {
+    width: 100px;
+    height: 24px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form-group-divider {
+    border-bottom: 1px solid lightgray;
+    margin: 1rem 0;
+}
+
+.hidden {
+    padding: 0 !important;
+    border: none !important;
+}

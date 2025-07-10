@@ -1,0 +1,36 @@
+@if(isReady) {
+<div class="output-rest-modal">
+    <div class="messages-box" #messages></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <label for="output-box">
+                    @switch (config.type) {
+                    @case ('JSON') {
+                    {{'DEBUG.JSON-BOX' | translate}}
+                    }
+                    @case ('XML') {
+                    {{'DEBUG.XML-BOX' | translate}}
+                    }
+                    @case ('XSD-VALIDATION') {
+                    {{'DEBUG.XSD-VALIDATION-BOX' | translate}}
+                    }
+                    @case ('CVS-VALIDATION') {
+                    {{'DEBUG.CVS-VALIDATION-BOX' | translate}}
+                    }
+                    }
+                </label>
+                <textarea id="output-box" name="output-box" class="output-box" rows="10" pInputTextarea
+                    [(ngModel)]="config.content"></textarea>
+                @if(downloadButton){
+                <div class="buttons-row">
+                    <sdk-button-group [config]="buttonsSubj" (output)="onButtonClick($event)"></sdk-button-group>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+}

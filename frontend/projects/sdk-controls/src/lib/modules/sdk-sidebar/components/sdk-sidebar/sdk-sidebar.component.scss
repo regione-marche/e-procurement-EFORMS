@@ -1,0 +1,65 @@
+.sdk-sidebar-container {
+    position: fixed;
+    z-index: 15;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    overflow-x: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.left {
+    left: 0;
+    animation: animateleft 0.3s;
+}
+
+.right {
+    right: 0;
+    animation: animateright 0.3s;
+}
+
+.sdk-sidebar-content {
+    padding: 0.571rem 1rem;
+    position: relative;
+}
+
+@keyframes animateleft {
+    from {
+        left: -50vh;
+        opacity: 0
+    }
+
+    to {
+        left: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animateright {
+    from {
+        right: -50vh;
+        opacity: 0
+    }
+
+    to {
+        right: 0;
+        opacity: 1
+    }
+}
+
+.sidebar-header-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.sdk-sidebar-close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 24px;
+    cursor: pointer;
+}

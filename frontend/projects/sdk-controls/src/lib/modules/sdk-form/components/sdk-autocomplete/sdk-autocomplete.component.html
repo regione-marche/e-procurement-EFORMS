@@ -1,0 +1,43 @@
+<div *ngIf="isReady" class="sdk-input sdk-autocomplete">
+  <sdk-form-message-box [messagesLevels]="messagesLevels" [messagesMap]="messagesMap"></sdk-form-message-box>
+  <div class="form-row">
+    <label [class]="getClasses(true, 'autocomplete-label', config.labelClasses, config.infoBox)"
+      (dblclick)="handleInfoBoxDblClick($event)" [title]="config.label | translate:config.labelParams"
+      [for]="componentRandomId">{{ config.label |
+      translate:config.labelParams }}
+      <div class="mandatory-box" *ngIf="mandatory">
+        ( * )
+      </div>
+    </label>
+    <div class="sdk-autocomplete-content" *ngIf="advancedAvailable == false">
+      <p-autoComplete [inputId]="componentRandomId"
+        [styleClass]="getClasses(false, 'autocomplete-field', config.fieldClasses)" [(ngModel)]="data"
+        [suggestions]="listItems" [disabled]="config.disabled" [placeholder]="config.placeholder" field="text"
+        [emptyMessage]="getNoDataLabel(config.noDataLabel)" [minLength]="minSearchCharacters"
+        (completeMethod)="debounce.next($event)" [forceSelection]="permitCustomElement === false"
+        (onSelect)="manageModelChange($event?.value)" (onClear)="clearAutocomplete($event)">
+        <ng-template let-data pTemplate="item">
+          <span *ngIf="data != null && data.text != null" [innerHTML]="getFieldData(data.text)"></span>
+        </ng-template>
+      </p-autoComplete>
+      <sdk-basic-button *ngIf="newEditAvailable && selectedItem == null && showNew" [config]="newItemButtonObs"
+        (output)="manageNewEditButtonClick($event)">
+      </sdk-basic-button>
+      <sdk-basic-button *ngIf="newEditAvailable && selectedItem != null" [config]="editItemButtonObs"
+        (output)="manageNewEditButtonClick($event)">
+      </sdk-basic-button>
+    </div>
+    <div class="sdk-autocomplete-content" *ngIf="advancedAvailable == true">
+      <input type="text" [id]="componentRandomId" pInputText
+        [class]="getClasses(false, 'autocomplete-field', config.fieldClasses)" [disabled]="config.disabled"
+        [(ngModel)]="dataValue" (ngModelChange)="debounceAdvanced.next($event)"
+        [placeholder]="config.placeholder != null ? config.placeholder : ''" [maxlength]="config.maxLength" sdkBlur
+        [blurEnabled]="config.advancedBlurEnabled" (onBlur)="onBlur($event)" />
+      <sdk-basic-button [config]="advancedButtonObs" (output)="manageAdvancedButtonClick()">
+      </sdk-basic-button>
+    </div>
+  </div>
+  <sdk-modal *ngIf="newEditAvailable" [config]="modalConfigObs" (output)="manageModalOutput($event)"></sdk-modal>
+  <sdk-modal *ngIf="advancedAvailable" [config]="advancedModalConfigObs"
+    (output)="manageAdvancedModalOutput($event)"></sdk-modal>
+</div>

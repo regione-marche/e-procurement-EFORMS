@@ -1,0 +1,2 @@
+<div *ngIf="fieldValueTooltip == null" [innerHTML]="value"></div>
+<div *ngIf="fieldValueTooltip != null" [innerHTML]="value" [title]="fieldValueTooltip"></div>

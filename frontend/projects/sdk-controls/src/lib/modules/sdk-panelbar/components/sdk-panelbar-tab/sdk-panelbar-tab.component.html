@@ -1,0 +1,39 @@
+<div class="accordion-header" [ngClass]="{'state-active': config.selected,'state-disabled': config.disabled}">
+  <a [attr.tabindex]="config.disabled ? -1 : 0" [attr.id]="id" [attr.aria-controls]="id + '-content'" role="tab"
+    [attr.aria-expanded]="config.selected" sdkClick (aClick)="toggle($event)" tabindex="0" role="group">
+    <span class="accordion-toggle-icon" [ngClass]="config.selected ? collapseIcon : expandIcon"></span>
+    <div class="panelbar-icons-container">
+      <i [class]="getIcon(config)"></i>
+      <img *ngIf="config.testataImageUrl != null" class="panelbar-testata-image" [src]="config.testataImageUrl"
+        [alt]="config.testataImageTooltip | translate" [title]="config.testataImageTooltip | translate">
+    </div>
+    <div [class]="getHeaderClass(config)">{{config.text}}</div>
+  </a>
+</div>
+<div [attr.id]="id + '-content'" class="accordion-content-wrapper"
+  [@tabContent]="config.selected ? {value: 'visible', params: {transitionParams: transitionOptions}} : {value: 'hidden', params: {transitionParams: transitionOptions}}"
+  (@tabContent.done)="onToggleDone($event)"
+  [ngClass]="{'accordion-content-wrapper-overflown': !config.selected||animating}" role="tabpanel"
+  [attr.aria-hidden]="!config.selected" [attr.aria-labelledby]="id">
+  <div class="accordion-content" *ngIf="loaded">
+    <div *ngIf="config.children != null && config.children.length > 0">
+      <div class="panel-child" *ngFor="let child of config.children">
+        <div class="child-text" sdkClick (aClick)="manageAccordionClick(child)" tabindex="0" role="group">
+          <i [class]="getIcon(child)" [title]="child.iconTooltip"></i>
+          {{child.text}}
+        </div>
+        <div class="child-buttons">
+          <!-- Pulsante "Elimina" -->
+          <sdk-basic-button *ngIf="child.showElimina" [config]="getEliminaButtonObs(eliminaButtonConfig)"
+            (output)="manageEliminaButtonClick($event, child)"></sdk-basic-button>
+        </div>
+      </div>
+    </div>
+    <div class="nuovo-button">
+      <!-- Pulsante "Nuovo" -->
+      <sdk-basic-button *ngIf="config.showNuovo" [config]="getNuovoButtonObs(nuovoButtonConfig)"
+        (output)="manageNuovoButtonClick($event)">
+      </sdk-basic-button>
+    </div>
+  </div>
+</div>

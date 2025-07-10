@@ -1,0 +1,76 @@
+/**
+ * Mixins
+*/
+
+@mixin clickable($text-decoration: underline) {
+  cursor: pointer;
+  text-decoration: $text-decoration;
+}
+
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+// TODO: creare mixin => esempio: @mixin grid-row() { flex-direction: row }
+.sticky {
+  position: fixed;
+  top: 0;
+  transition: all 2s ease;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Varie dimensioni per le icone  */
+
+.icon-18 {
+  font-size: 18px;
+  /* Sets icon size to 18px */
+}
+
+.icon-24 {
+  font-size: 24px;
+  /* Sets icon size to 24px */
+}
+
+.icon-32 {
+  font-size: 32px;
+  /* Sets icon size to 32px */
+}
+
+.icon-48 {
+  font-size: 48px;
+  /* Sets icon size to 48px */
+}
+
+.icon-64 {
+  font-size: 64px;
+  /* Sets icon size to 64px */
+}
+
+.div-link {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.div-link:hover {
+  text-decoration: none;
+}
+
+.messages-box {
+  margin: 1rem;
+}
+
+@mixin IE() {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+.text-center {
+  text-align: center;
+}

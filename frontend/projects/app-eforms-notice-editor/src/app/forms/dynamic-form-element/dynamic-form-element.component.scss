@@ -1,0 +1,88 @@
+.header {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.header .label,
+.header .p-button {
+  margin: 0;
+}
+
+.p-button {
+  border-radius: 3px;
+}
+
+p-treeselect.form-control {
+  padding: 0;
+}
+
+.hidden-element {
+  display: none;
+}
+
+.formcontrol-description {
+  line-height: 1rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  width: 95%;
+}
+
+.formcontrol-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form-control {
+  margin-bottom: 0.25rem;
+}
+
+.formcontrol-header {
+  width: calc((5 / 12) * 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.formcontrol-label {
+  width: 95%;
+  margin-bottom: 0.15rem;
+}
+
+.formcontrol-usercontent {
+  width: calc((7 / 12) * 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+div.formcontrol-feedback-invalid {
+  color: red !important;
+  line-height: 1rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.formcontrol-custom-invalid {
+  border: 2px solid red !important;
+  background-color: rgba(255, 0, 0, 0.05) !important;
+}
+
+.show-max-length {
+  font-size: 0.8rem;
+  transition: font-size 0.4s ease-in-out;
+  margin-left: auto;
+  margin-bottom: 0.25rem;
+}
+
+.max-length-reached {
+  color: red !important;
+}
+
+.show-max-length.max-length-reached {
+  font-size: 1rem;
+  font-weight: 600;
+}
