@@ -1,66 +1,65 @@
-# This repository adheres to the publiccode.yml standard by including this 
-# metadata file that makes public software easily discoverable.
-# More info at https://github.com/italia/publiccode.yml
-
-publiccodeYmlVersion: '0.2'
+publiccodeYmlVersion: 0.4.0
+name: eForms
 applicationSuite: e-procurement GT-SUAM
+url: https://github.com/regione-marche/e-procurement-EFORMS.git
+releaseDate: 2025-02-28
+platforms:
+  - web
 categories:
   - procurement
-dependsOn:
-  open:
-    - name: Java
-      optional: false
-      version: Eclipse Temurin 21
-      versionMax: '21'
-      versionMin: '21'
-    - name: Netty
-      optional: false
-      version: 4.1.119
-      versionMax: '4'
-      versionMin: '4'
-description:
-  it:
-    features:
-      - Compilazione
-      - Generazione XML
-    genericName: e-procurement platform
-    longDescription: |
-      Compilazione dei dati e generazione del file XML eForms per la pubblicazione sul TED tramite ANAC
-    shortDescription: Modulo per la generazione di file XML eForms
 usedBy:
   - Regione Marche
 developmentStatus: stable
-it:
-  conforme:
-    gdpr: false
-    lineeGuidaDesign: false
-    misureMinimeSicurezza: true
-    modelloInteroperabilita: false
-  countryExtensionVersion: '0.2'
-  piattaforme:
-    anpr: false
-    cie: false
-    pagopa: false
-    spid: false
-  riuso:
-    codiceIPA: r_marche
+softwareType: standalone/web
+description:
+  it:
+    genericName: e-procurement platform
+    shortDescription: Modulo per la generazione di file XML eForms
+    longDescription: >
+      Compilazione, verifica e validazione dei dati e generazione del file XML
+      eForms per la pubblicazione sul TED tramite interoperabilità con i servizi
+      PCP di ANAC
+    features:
+      - Compilazione
+      - Generazione XML
 legal:
-  license: Apache-2.0
+  license: EUPL-1.2
   mainCopyrightOwner: Maggioli S.p.A.
   repoOwner: Regione Marche
-localisation:
-  availableLanguages:
-    - it
-  localisationReady: false
 maintenance:
+  type: contract
   contractors:
     - name: MAGGIOLI SPA
-      until: '2025-12-31'
-      website: 'https://www.maggioli.com'
-  type: contract
-name: DBScheduler
-platforms:
-  - web
-releaseDate: '2025-02-28'
-softwareType: standalone/web
-url: 'https://github.com/regione-marche/e-procurement-EFORMS.git'
+      until: 2027-06-30
+      email: appalti.eprocurement@maggioli.it
+      website: https://www.maggioli.com
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+dependsOn:
+  open:
+    - name: Java
+      versionMin: "21"
+      versionMax: "21"
+      version: Eclipse Temurin 21
+      optional: false
+    - name: Netty
+      versionMin: "4"
+      versionMax: "4"
+      version: 4.1.119
+      optional: false
+it:
+  countryExtensionVersion: "0.2"
+  conforme:
+    lineeGuidaDesign: false
+    modelloInteroperabilita: false
+    misureMinimeSicurezza: true
+    gdpr: false
+  piattaforme:
+    spid: false
+    cie: false
+    anpr: false
+    pagopa: false
+  riuso:
+    codiceIPA: r_marche
