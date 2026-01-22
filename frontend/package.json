@@ -37,7 +37,7 @@
     "friendly-challenge": "^0.9.18",
     "hash-sum": "^2.0.0",
     "jwt-decode": "^4.0.0",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.23",
     "ngx-toastr": "^19.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.9",
